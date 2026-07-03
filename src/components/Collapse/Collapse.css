@@ -1,0 +1,45 @@
+.pixel-collapse {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+  border: 2px solid #000;
+}
+
+.pixel-collapse-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pixel-collapse-item:last-child {
+  border-bottom: none;
+}
+
+.pixel-collapse-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.05s ease;
+}
+
+.pixel-collapse-header:hover {
+  background: #f5f5f5;
+}
+
+.pixel-collapse-arrow {
+  font-size: 10px;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.pixel-collapse-body {
+  padding: 10px 12px 12px 34px;
+  border-top: 1px solid #e0e0e0;
+  text-transform: none;
+  font-size: 11px;
+  color: #333;
+}

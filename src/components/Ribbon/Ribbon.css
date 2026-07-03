@@ -1,0 +1,45 @@
+.pixel-ribbon-wrapper {
+  position: relative;
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+.pixel-ribbon {
+  position: absolute;
+  top: 8px;
+  z-index: 1;
+  padding: 2px 8px;
+  font-family: monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.pixel-ribbon--default {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-ribbon--red {
+  background: #c00;
+  color: #fff;
+}
+
+.pixel-ribbon--blue {
+  background: #00a;
+  color: #fff;
+}
+
+.pixel-ribbon--green {
+  background: #0a0;
+  color: #000;
+}
+
+.pixel-ribbon--start {
+  left: -4px;
+}
+
+.pixel-ribbon--end {
+  right: -4px;
+}

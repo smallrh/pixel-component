@@ -1,0 +1,43 @@
+.pixel-mentions {
+  position: relative;
+  align-self: flex-start;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-mentions-textarea {
+  width: 100%;
+  padding: 6px 10px;
+  border: 2px solid #000;
+  background: #fff;
+  font-family: monospace;
+  font-size: 12px;
+  outline: none;
+  resize: vertical;
+  text-transform: none;
+}
+
+.pixel-mentions-dropdown {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  right: 0;
+  z-index: 920;
+  background: #fff;
+  border: 2px solid #000;
+  border-top: none;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.pixel-mentions-option {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.pixel-mentions-option:hover {
+  background: #f0f0f0;
+}

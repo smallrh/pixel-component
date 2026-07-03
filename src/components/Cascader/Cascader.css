@@ -1,0 +1,48 @@
+.pixel-cascader {
+  position: relative;
+  align-self: flex-start;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+  min-width: 160px;
+}
+
+.pixel-cascader-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.pixel-cascader-placeholder { color: #999; }
+
+.pixel-cascader-arrow { font-size: 10px; }
+
+.pixel-cascader-dropdown {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  z-index: 920;
+  background: #fff;
+  border: 2px solid #000;
+  border-top: none;
+  min-width: 160px;
+}
+
+.pixel-cascader-option {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.pixel-cascader-option:hover,
+.pixel-cascader-option--hover {
+  background: #f0f0f0;
+}

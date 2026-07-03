@@ -1,0 +1,78 @@
+.pixel-dropdown {
+  position: relative;
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+.pixel-dropdown-trigger {
+  cursor: pointer;
+}
+
+/* ── Menu ── */
+.pixel-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 930;
+  min-width: 160px;
+  margin: 4px 0 0 0;
+  padding: 4px 0;
+  list-style: none;
+  background: #fff;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Item ── */
+.pixel-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.05s ease;
+}
+
+.pixel-dropdown-item:hover {
+  background: #e8e8e8;
+}
+
+.pixel-dropdown-item:active {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-dropdown-item--disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.pixel-dropdown-item--disabled:hover {
+  background: none;
+}
+
+.pixel-dropdown-item--danger {
+  color: #000;
+}
+
+.pixel-dropdown-item--danger:hover {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-dropdown-item-icon {
+  display: inline-flex;
+  width: 16px;
+  justify-content: center;
+}
+
+/* ── Divider ── */
+.pixel-dropdown-divider {
+  height: 1px;
+  background: #000;
+  margin: 4px 8px;
+}

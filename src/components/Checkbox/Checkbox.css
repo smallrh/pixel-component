@@ -1,0 +1,49 @@
+.pixel-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.pixel-checkbox--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pixel-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pixel-checkbox-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #000;
+  background: #fff;
+  flex-shrink: 0;
+  transition: background 0.05s ease;
+}
+
+.pixel-checkbox-inner--checked {
+  background: #000;
+}
+
+.pixel-checkbox-mark {
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.pixel-checkbox-label {
+  user-select: none;
+}

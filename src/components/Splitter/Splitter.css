@@ -1,0 +1,43 @@
+.pixel-splitter {
+  display: flex;
+  image-rendering: pixelated;
+}
+
+.pixel-splitter--horizontal {
+  flex-direction: row;
+}
+
+.pixel-splitter--vertical {
+  flex-direction: column;
+}
+
+.pixel-splitter-pane {
+  overflow: hidden;
+  border: 1px solid #000;
+}
+
+.pixel-splitter-handle {
+  flex-shrink: 0;
+  background: #000;
+  z-index: 1;
+  cursor: col-resize;
+  transition: background 0.05s ease;
+}
+
+.pixel-splitter-handle--horizontal {
+  width: 4px;
+  cursor: col-resize;
+}
+
+.pixel-splitter-handle--vertical {
+  height: 4px;
+  cursor: row-resize;
+}
+
+.pixel-splitter-handle:hover {
+  background: #666;
+}
+
+.pixel-splitter-handle:active {
+  background: #999;
+}

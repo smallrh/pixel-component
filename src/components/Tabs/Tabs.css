@@ -1,0 +1,59 @@
+.pixel-tabs {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+/* ── Tab Bar ── */
+.pixel-tabs-bar {
+  display: flex;
+  border-bottom: 2px solid #000;
+  position: relative;
+}
+
+.pixel-tabs-tab {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  color: #999;
+  margin-bottom: -2px;
+  transition: all 0.05s ease;
+}
+
+.pixel-tabs-tab:hover {
+  color: #000;
+  background: #f0f0f0;
+}
+
+.pixel-tabs-tab--active {
+  color: #000;
+  background: #fff;
+  border-bottom: 2px solid #000;
+  font-weight: bold;
+}
+
+.pixel-tabs-tab--disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.pixel-tabs-tab--disabled:hover {
+  color: #ccc;
+  background: none;
+}
+
+/* ── Content ── */
+.pixel-tabs-content {
+  padding: 16px 0;
+  font-family: monospace;
+  font-size: 13px;
+  color: #000;
+}

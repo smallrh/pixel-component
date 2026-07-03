@@ -1,0 +1,63 @@
+import { useState } from "react";
+import Playground from "./playground";
+import Docs from "./docs/Docs";
+import ConfigProvider from "./components/ConfigProvider";
+import AppProvider from "./components/App";
+import Theme from "./components/Theme";
+import LocaleProvider from "./components/LocaleProvider";
+
+export default function App() {
+  const [page, setPage] = useState<"playground" | "docs">("playground");
+
+  return (
+    <ConfigProvider
+      theme={{
+        primaryColor: "#000",
+        fontFamily: "monospace",
+      }}
+      locale="en"
+    >
+      <Theme>
+        <LocaleProvider locale={{ locale: "en", messages: {} }}>
+          <AppProvider>
+            <div style={{ position: "fixed", top: 8, right: 8, zIndex: 9999, display: "flex", gap: 4 }}>
+              <button
+                onClick={() => setPage("playground")}
+                style={{
+                  fontFamily: "monospace",
+                  fontSize: 11,
+                  padding: "4px 10px",
+                  border: `2px solid #000`,
+                  background: page === "playground" ? "#000" : "#fff",
+                  color: page === "playground" ? "#fff" : "#000",
+                  cursor: "pointer",
+                  textTransform: "uppercase",
+                  letterSpacing: 1,
+                }}
+              >
+                Playground
+              </button>
+              <button
+                onClick={() => setPage("docs")}
+                style={{
+                  fontFamily: "monospace",
+                  fontSize: 11,
+                  padding: "4px 10px",
+                  border: `2px solid #000`,
+                  background: page === "docs" ? "#000" : "#fff",
+                  color: page === "docs" ? "#fff" : "#000",
+                  cursor: "pointer",
+                  textTransform: "uppercase",
+                  letterSpacing: 1,
+                }}
+              >
+                Docs
+              </button>
+            </div>
+            {page === "playground" ? <Playground /> : <Docs />}
+          </AppProvider>
+        </LocaleProvider>
+      </Theme>
+    </ConfigProvider>
+  );
+}

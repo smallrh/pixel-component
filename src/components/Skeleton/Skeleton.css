@@ -1,0 +1,21 @@
+.pixel-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  image-rendering: pixelated;
+}
+
+.pixel-skeleton-line {
+  height: 12px;
+  border: 1px solid #000;
+  background: #e8e8e8;
+}
+
+.pixel-skeleton--active .pixel-skeleton-line {
+  animation: pixel-skeleton-pulse 1s steps(2) infinite;
+}
+
+@keyframes pixel-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

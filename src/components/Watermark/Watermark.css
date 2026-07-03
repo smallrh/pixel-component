@@ -1,0 +1,28 @@
+.pixel-watermark {
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-watermark-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.pixel-watermark-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transform: rotate(-30deg);
+  user-select: none;
+}

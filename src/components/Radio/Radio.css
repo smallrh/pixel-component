@@ -1,0 +1,49 @@
+.pixel-radio-group {
+  display: flex;
+  gap: 16px;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-radio-group--vertical {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pixel-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.pixel-radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pixel-radio-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #000;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.pixel-radio-dot {
+  width: 6px;
+  height: 6px;
+  background: #000;
+}
+
+.pixel-radio-label {
+  user-select: none;
+}

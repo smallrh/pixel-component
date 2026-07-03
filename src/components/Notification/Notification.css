@@ -1,0 +1,53 @@
+.pixel-notification-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 360px;
+}
+
+.pixel-notification {
+  padding: 12px 16px;
+  border: 2px solid #000;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+  background: #fff;
+}
+
+.pixel-notification--info { border-color: #00a; }
+.pixel-notification--success { border-color: #0a0; }
+.pixel-notification--error { border-color: #c00; }
+.pixel-notification--warning { border-color: #a60; }
+
+.pixel-notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pixel-notification-title {
+  font-weight: bold;
+}
+
+.pixel-notification-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+  line-height: 1;
+}
+
+.pixel-notification-desc {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #666;
+  text-transform: none;
+}

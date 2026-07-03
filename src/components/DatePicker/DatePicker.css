@@ -1,0 +1,72 @@
+.pixel-datepicker {
+  position: relative;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-datepicker-input {
+  padding: 6px 10px;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 12px;
+  width: 140px;
+  outline: none;
+}
+
+.pixel-datepicker-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 920;
+  background: #fff;
+  border: 2px solid #000;
+  margin-top: 4px;
+  padding: 8px;
+  width: 210px;
+}
+
+.pixel-datepicker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.pixel-datepicker-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.pixel-datepicker-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.pixel-datepicker-weekday {
+  font-size: 10px;
+  color: #999;
+  padding: 4px 0;
+}
+
+.pixel-datepicker-day {
+  padding: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.pixel-datepicker-day:hover {
+  background: #f0f0f0;
+  border-color: #000;
+}

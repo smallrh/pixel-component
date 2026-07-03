@@ -1,0 +1,46 @@
+.pixel-tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1090;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-tour-card {
+  max-width: 360px;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 20px;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-tour-step {
+  font-size: 10px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.pixel-tour-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.pixel-tour-desc {
+  text-transform: none;
+  color: #333;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.pixel-tour-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

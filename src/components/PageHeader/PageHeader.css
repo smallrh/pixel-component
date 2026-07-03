@@ -1,0 +1,67 @@
+.pixel-page-header {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #000;
+  margin-bottom: 16px;
+}
+
+.pixel-page-header-breadcrumb {
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: #999;
+}
+
+.pixel-page-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pixel-page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pixel-page-header-back {
+  background: none;
+  border: 2px solid #000;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-page-header-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pixel-page-header-subtitle {
+  font-size: 12px;
+  color: #999;
+  margin-left: 8px;
+  text-transform: none;
+}
+
+.pixel-page-header-extra {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pixel-page-header-footer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}

@@ -1,0 +1,26 @@
+.pixel-form {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-form-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+.pixel-form-label {
+  min-width: 80px;
+  padding-top: 6px;
+  font-weight: bold;
+  color: #000;
+  text-align: right;
+}
+
+.pixel-form-control {
+  flex: 1;
+}

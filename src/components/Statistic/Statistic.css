@@ -1,0 +1,30 @@
+.pixel-statistic {
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-statistic-title {
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.pixel-statistic-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  line-height: 1.2;
+}
+
+.pixel-statistic-prefix {
+  margin-right: 4px;
+  font-size: 16px;
+}
+
+.pixel-statistic-suffix {
+  margin-left: 4px;
+  font-size: 14px;
+  color: #666;
+}

@@ -1,0 +1,36 @@
+.pixel-image {
+  display: inline-flex;
+  image-rendering: pixelated;
+  cursor: pointer;
+}
+
+.pixel-image-img {
+  display: block;
+  max-width: 100%;
+  border: 2px solid #000;
+  transition: opacity 0.05s ease;
+}
+
+.pixel-image-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.pixel-image-preview-wrap {
+  max-width: 80%;
+  max-height: 80%;
+  border: 2px solid #fff;
+  background: #000;
+}
+
+.pixel-image-preview-img {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+}

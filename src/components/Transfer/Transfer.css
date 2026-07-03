@@ -1,0 +1,57 @@
+.pixel-transfer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-transfer-panel {
+  flex: 1;
+  border: 2px solid #000;
+  background: #fff;
+  min-height: 180px;
+  min-width: 160px;
+}
+
+.pixel-transfer-header {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f5f5f5;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.pixel-transfer-list {
+  padding: 4px 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.pixel-transfer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.pixel-transfer-item:hover {
+  background: #f0f0f0;
+}
+
+.pixel-transfer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pixel-transfer-empty {
+  padding: 20px 12px;
+  text-align: center;
+  color: #999;
+  font-size: 11px;
+}

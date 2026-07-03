@@ -1,0 +1,38 @@
+.pixel-divider {
+  border-top: 2px solid #000;
+  margin: 16px 0;
+  image-rendering: pixelated;
+}
+
+/* With text */
+.pixel-divider--with-text {
+  display: flex;
+  align-items: center;
+  border-top: none;
+}
+
+.pixel-divider--with-text::before,
+.pixel-divider--with-text::after {
+  content: "";
+  flex: 1;
+  border-top: 2px solid #000;
+}
+
+.pixel-divider-text {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+/* Text orientations */
+.pixel-divider--text-left::before {
+  flex: 0 0 24px;
+}
+
+.pixel-divider--text-right::after {
+  flex: 0 0 24px;
+}

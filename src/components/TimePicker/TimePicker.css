@@ -1,0 +1,71 @@
+.pixel-timepicker {
+  position: relative;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-timepicker-input {
+  padding: 6px 10px;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 12px;
+  width: 100px;
+  outline: none;
+}
+
+.pixel-timepicker-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 920;
+  background: #fff;
+  border: 2px solid #000;
+  margin-top: 4px;
+  padding: 8px;
+}
+
+.pixel-timepicker-selectors {
+  display: flex;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.pixel-timepicker-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pixel-timepicker-opt {
+  padding: 2px 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.pixel-timepicker-opt:hover {
+  background: #f0f0f0;
+}
+
+.pixel-timepicker-opt--sel {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-timepicker-ok {
+  width: 100%;
+  margin-top: 8px;
+  padding: 4px;
+  border: 2px solid #000;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 11px;
+}

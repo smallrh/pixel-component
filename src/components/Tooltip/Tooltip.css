@@ -1,0 +1,50 @@
+.pixel-tooltip {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  image-rendering: pixelated;
+}
+
+.pixel-tooltip-content {
+  position: absolute;
+  z-index: 950;
+  padding: 6px 10px;
+  background: #000;
+  color: #fff;
+  font-family: monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border: 1px solid #fff;
+  pointer-events: none;
+}
+
+/* Placement */
+.pixel-tooltip--top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+}
+
+.pixel-tooltip--bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6px;
+}
+
+.pixel-tooltip--left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 6px;
+}
+
+.pixel-tooltip--right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 6px;
+}

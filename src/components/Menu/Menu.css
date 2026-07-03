@@ -1,0 +1,120 @@
+.pixel-menu {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+  border: 2px solid #000;
+  background: #fff;
+}
+
+/* ── Mode: horizontal ── */
+.pixel-menu--horizontal .pixel-menu-list {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pixel-menu--horizontal .pixel-menu-item {
+  position: relative;
+}
+
+.pixel-menu--horizontal .pixel-menu-submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 920;
+  background: #fff;
+  border: 2px solid #000;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  min-width: 160px;
+}
+
+/* ── Mode: vertical ── */
+.pixel-menu--vertical .pixel-menu-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.pixel-menu--vertical .pixel-menu-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+
+/* ── Item ── */
+.pixel-menu-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  color: #000;
+  text-align: left;
+  transition: all 0.05s ease;
+}
+
+.pixel-menu-item-btn:hover {
+  background: #e8e8e8;
+}
+
+.pixel-menu-item--selected > .pixel-menu-item-btn {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-menu-item--selected > .pixel-menu-item-btn:hover {
+  background: #333;
+}
+
+.pixel-menu-item--disabled .pixel-menu-item-btn {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.pixel-menu-item--disabled .pixel-menu-item-btn:hover {
+  background: none;
+}
+
+.pixel-menu-item-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-menu-arrow {
+  margin-left: auto;
+  transition: transform 0.05s ease;
+  font-size: 10px;
+}
+
+.pixel-menu-arrow--open {
+  transform: rotate(90deg);
+}
+
+/* Submenu items */
+.pixel-menu-item--sub .pixel-menu-item-btn {
+  padding-left: 32px;
+  font-size: 11px;
+}
+
+.pixel-menu-item--sub.pixel-menu-item--selected > .pixel-menu-item-btn {
+  background: #000;
+  color: #fff;
+}

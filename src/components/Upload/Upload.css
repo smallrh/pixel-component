@@ -1,0 +1,44 @@
+.pixel-upload {
+  font-family: monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  image-rendering: pixelated;
+}
+
+.pixel-upload-trigger {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.pixel-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #000;
+  background: #fafafa;
+  gap: 4px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pixel-upload-placeholder:hover {
+  background: #f0f0f0;
+}
+
+.pixel-upload-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.pixel-upload-item {
+  padding: 4px 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 4px;
+  font-size: 11px;
+  text-transform: none;
+}

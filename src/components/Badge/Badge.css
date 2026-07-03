@@ -1,0 +1,35 @@
+.pixel-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  image-rendering: pixelated;
+}
+
+.pixel-badge-sup {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: #000;
+  color: #fff;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: bold;
+  border: 1px solid #fff;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.pixel-badge-sup--dot {
+  min-width: 8px;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 0;
+}

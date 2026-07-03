@@ -1,0 +1,29 @@
+.pixel-space {
+  display: flex;
+  image-rendering: pixelated;
+}
+
+.pixel-space--horizontal {
+  flex-direction: row;
+}
+
+.pixel-space--vertical {
+  flex-direction: column;
+}
+
+.pixel-space--wrap {
+  flex-wrap: wrap;
+}
+
+/* Sizes - gap */
+.pixel-space--sm {
+  gap: 4px;
+}
+
+.pixel-space--md {
+  gap: 8px;
+}
+
+.pixel-space--lg {
+  gap: 16px;
+}

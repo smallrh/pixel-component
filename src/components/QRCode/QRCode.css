@@ -1,0 +1,9 @@
+.pixel-qrcode {
+  display: inline-block;
+  border: 4px solid #000;
+  image-rendering: pixelated;
+}
+
+.pixel-qrcode svg {
+  display: block;
+}
