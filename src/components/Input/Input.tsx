@@ -1,8 +1,9 @@
-import { type InputHTMLAttributes, type TextareaHTMLAttributes, useState } from "react";
+import { type InputHTMLAttributes, type TextareaHTMLAttributes, useRef, useState } from "react";
 import clsx from "clsx";
+import Icon from "../Icon";
 import "./Input.css";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: "outlined" | "filled";
   size?: "sm" | "md" | "lg";
 }
@@ -40,7 +41,7 @@ function TextArea({
 }
 
 // --- Password ---
-interface PasswordProps extends InputHTMLAttributes<HTMLInputElement> {
+interface PasswordProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: "outlined" | "filled";
   size?: "sm" | "md" | "lg";
 }
@@ -64,15 +65,16 @@ function Password({
         className="pixel-input-password-toggle"
         onClick={() => setVisible((v) => !v)}
         tabIndex={-1}
+        aria-label={visible ? "隐藏密码" : "显示密码"}
       >
-        {visible ? "hide" : "show"}
+        <Icon name={visible ? "eye" : "eye-off"} size="sm" />
       </button>
     </span>
   );
 }
 
 // --- Search ---
-interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: "outlined" | "filled";
   size?: "sm" | "md" | "lg";
   onSearch?: (value: string) => void;
@@ -86,9 +88,11 @@ function Search({
   style,
   ...props
 }: SearchProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <span className="pixel-input-search-wrapper">
       <input
+        ref={inputRef}
         type="search"
         className={clsx("pixel-input", `pixel-input--${variant}`, `pixel-input--${size}`, className)}
         style={style}
@@ -97,9 +101,10 @@ function Search({
       <button
         type="button"
         className="pixel-input-search-btn"
-        onClick={() => onSearch?.((props.value as string) ?? "")}
+        onClick={() => onSearch?.(inputRef.current?.value ?? "")}
+        aria-label="搜索"
       >
-        🔍
+        <Icon name="search" size="sm" />
       </button>
     </span>
   );

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, type ReactNode, useCallback } from "react";
+import { createContext, useContext, type ReactNode, useCallback } from "react";
 
 interface AppContextValue {
   message: (content: string, type?: "info" | "success" | "error" | "warning") => void;

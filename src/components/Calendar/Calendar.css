@@ -1,0 +1,119 @@
+.pixel-calendar {
+  display: inline-block;
+  background: #fff;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  font-family: monospace;
+  image-rendering: pixelated;
+  user-select: none;
+}
+
+.pixel-calendar--fullscreen {
+  display: block;
+  width: 100%;
+}
+
+.pixel-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 2px solid #000;
+  background: #000;
+  color: #fff;
+}
+
+.pixel-calendar-title {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pixel-calendar-nav {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-family: monospace;
+  font-size: 10px;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-calendar-nav:hover {
+  background: #fff;
+  color: #000;
+}
+
+.pixel-calendar-nav:active {
+  transform: translate(1px, 1px);
+}
+
+.pixel-calendar-body {
+  padding: 8px;
+}
+
+.pixel-calendar-week,
+.pixel-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.pixel-calendar-week {
+  margin-bottom: 4px;
+}
+
+.pixel-calendar-week-cell {
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+  padding: 2px 0;
+  text-transform: uppercase;
+}
+
+.pixel-calendar-cell {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: monospace;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.pixel-calendar-cell--empty {
+  visibility: hidden;
+  border-color: transparent;
+  background: transparent;
+}
+
+.pixel-calendar-cell:hover {
+  background: #eee;
+}
+
+.pixel-calendar-cell--today {
+  border-style: dashed;
+  border-color: #000;
+  font-weight: bold;
+}
+
+.pixel-calendar-cell--selected {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-calendar-cell--selected:hover {
+  background: #000;
+}

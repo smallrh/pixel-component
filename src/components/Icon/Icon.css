@@ -1,0 +1,25 @@
+.pixel-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  line-height: 0;
+  image-rendering: pixelated;
+}
+
+.pixel-icon svg {
+  display: block;
+}
+
+.pixel-icon--spin svg {
+  animation: pixel-icon-spin 0.9s steps(8) infinite;
+}
+
+@keyframes pixel-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,3 +1,9 @@
+.pixel-input-number-wrapper {
+  position: relative;
+  display: inline-flex;
+  image-rendering: pixelated;
+}
+
 .pixel-input-number {
   font-family: monospace;
   font-size: 12px;
@@ -8,8 +14,8 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   outline: none;
-  image-rendering: pixelated;
   width: 120px;
+  padding-right: 26px;
 }
 
 .pixel-input-number:focus {
@@ -22,9 +28,57 @@
   cursor: not-allowed;
 }
 
-/* Remove default number input spinners */
+/* Hide default browser spinners; custom pixel steppers used instead */
 .pixel-input-number::-webkit-inner-spin-button,
 .pixel-input-number::-webkit-outer-spin-button {
-  opacity: 1;
-  height: 24px;
+  -webkit-appearance: none;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pixel-input-number-controls {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  width: 22px;
+  border-left: 2px solid #000;
+  box-sizing: border-box;
+}
+
+.pixel-input-number-control {
+  flex: 1;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 8px;
+  font-family: monospace;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  image-rendering: pixelated;
+}
+
+.pixel-input-number-control:hover:not(:disabled) {
+  background: #000;
+  color: #fff;
+}
+
+.pixel-input-number-control:active:not(:disabled) {
+  background: #333;
+}
+
+.pixel-input-number-control:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pixel-input-number-down {
+  border-top: 2px solid #000;
 }

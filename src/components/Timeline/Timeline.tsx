@@ -13,13 +13,6 @@ interface TimelineProps {
   style?: React.CSSProperties;
 }
 
-const colorDotMap: Record<string, string> = {
-  default: "#000",
-  red: "#000",
-  green: "#000",
-  blue: "#000",
-};
-
 export default function Timeline({
   items,
   className,

@@ -11,12 +11,6 @@ interface SpaceProps {
   children?: ReactNode;
 }
 
-const sizeMap = {
-  sm: 4,
-  md: 8,
-  lg: 16,
-};
-
 export default function Space({
   direction = "horizontal",
   size = "md",

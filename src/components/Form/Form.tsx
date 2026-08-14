@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import clsx from "clsx";
 import "./Form.css";
 
@@ -14,7 +14,6 @@ interface FormItemProps {
 export function FormItem({
   label,
   children,
-  rules,
   className,
   style,
 }: FormItemProps) {
@@ -37,7 +36,6 @@ interface FormProps {
 export default function Form({
   children,
   onFinish,
-  onFinishFailed,
   className,
   style,
 }: FormProps) {

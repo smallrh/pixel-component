@@ -19,7 +19,6 @@ interface DescriptionsProps {
 export default function Descriptions({
   items,
   bordered = true,
-  column = 3,
   title,
   className,
   style,

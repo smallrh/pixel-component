@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import "./Table.css";
 
-interface Column {
+export interface TableColumn {
   key: string;
   title: string;
   dataIndex: string;
@@ -9,7 +9,7 @@ interface Column {
 }
 
 interface TableProps {
-  columns: Column[];
+  columns: TableColumn[];
   dataSource: Record<string, unknown>[];
   rowKey?: string;
   bordered?: boolean;

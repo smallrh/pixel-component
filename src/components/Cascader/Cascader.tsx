@@ -38,12 +38,6 @@ export default function Cascader({
 
   const [hovered, setHovered] = useState<string[]>([]);
 
-  // Simple single-level cascader (expand on hover)
-  const currentLevel = hovered.reduce<CascaderOption[]>(
-    (list, val) => list.find((o) => o.value === val)?.children ?? [],
-    options
-  );
-
   return (
     <div ref={ref} className={clsx("pixel-cascader", className)} style={style}>
       <div className="pixel-cascader-trigger" onClick={() => setOpen((v) => !v)}>

@@ -19,22 +19,23 @@ export default function Toast({
   variant = "default",
   action,
 }: ToastProps) {
-  const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
 
   useEffect(() => {
     if (open) {
-      setVisible(true);
-      setClosing(false);
-      const timer = setTimeout(() => {
-        setClosing(true);
-        setTimeout(onClose, 200);
-      }, duration);
+      const timer = setTimeout(() => setClosing(true), duration);
       return () => clearTimeout(timer);
     }
-  }, [open, duration, onClose]);
+  }, [open, duration]);
 
-  if (!open && !visible) return null;
+  useEffect(() => {
+    if (closing) {
+      const timer = setTimeout(onClose, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [closing, onClose]);
+
+  if (!open) return null;
 
   return (
     <div
@@ -44,12 +45,17 @@ export default function Toast({
         closing && "pixel-toast--closing"
       )}
       onAnimationEnd={() => {
-        if (closing) setVisible(false);
+        if (closing) onClose();
       }}
     >
       <span className="pixel-toast-message">{message}</span>
       {action && <div className="pixel-toast-action">{action}</div>}
-      <button className="pixel-toast-close" onClick={() => { setClosing(true); setTimeout(onClose, 200); }}>
+      <button
+        className="pixel-toast-close"
+        onClick={() => {
+          if (!closing) setClosing(true);
+        }}
+      >
         ✕
       </button>
     </div>

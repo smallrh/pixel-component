@@ -62,6 +62,11 @@ import ColorPicker from "../components/ColorPicker";
 import Segmented from "../components/Segmented";
 import Anchor from "../components/Anchor";
 import EditableTable from "../components/EditableTable";
+import Icon from "../components/Icon";
+import Rate from "../components/Rate";
+import Calendar from "../components/Calendar";
+import Flex from "../components/Flex";
+import Empty from "../components/Empty";
 import { message, useMessage, MessageContainer } from "../components/Message";
 import { notification, useNotification, NotificationContainer } from "../components/Notification";
 import PageHeader from "../components/PageHeader";
@@ -85,6 +90,8 @@ export default function Playground() {
   const [datePickerValue, setDatePickerValue] = useState("");
   const [timePickerValue, setTimePickerValue] = useState("");
   const [progressPercent, setProgressPercent] = useState(65);
+  const [rateValue, setRateValue] = useState(3);
+  const [calendarValue, setCalendarValue] = useState<Date | undefined>(undefined);
   const [editableData, setEditableData] = useState<Record<string, unknown>[]>([
     { key: "1", name: "Alice", age: "28", role: "Designer" },
     { key: "2", name: "Bob", age: "34", role: "Developer" },
@@ -92,6 +99,7 @@ export default function Playground() {
   ]);
   const { items: msgItems, remove: removeMsg } = useMessage();
   const { items: notifItems, remove: removeNotif } = useNotification();
+  const [countdownTarget] = useState(() => Date.now() + 10 * 60 * 1000);
 
   const showToast = (message: string, variant?: "default" | "success" | "error" | "warning") => {
     setToast({ open: true, message, variant });
@@ -165,6 +173,33 @@ export default function Playground() {
           <div style={{ padding: 8, fontFamily: "monospace", fontSize: 12 }}>Top Panel</div>
           <div style={{ padding: 8, fontFamily: "monospace", fontSize: 12 }}>Bottom Panel</div>
         </Splitter>
+      </section>
+
+      {/* Flex */}
+      <section className="playground-section">
+        <h2 className="playground-title">Flex</h2>
+        <Text strong>Basic row</Text>
+        <div style={{ height: 4 }} />
+        <Flex gap={8} style={{ border: "2px solid #000", padding: 8, marginBottom: 12 }}>
+          <div style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 12px", fontSize: 12 }}>Item A</div>
+          <div style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 12px", fontSize: 12 }}>Item B</div>
+          <div style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 12px", fontSize: 12 }}>Item C</div>
+        </Flex>
+        <Text strong>Vertical + justify</Text>
+        <div style={{ height: 4 }} />
+        <Flex vertical gap={8} justify="space-between" align="center" style={{ border: "2px solid #000", padding: 8, height: 110 }}>
+          <div style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 12px", fontSize: 12 }}>Top</div>
+          <div style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 12px", fontSize: 12 }}>Middle</div>
+          <div style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 12px", fontSize: 12 }}>Bottom</div>
+        </Flex>
+        <div style={{ height: 8 }} />
+        <Text strong>Wrap</Text>
+        <div style={{ height: 4 }} />
+        <Flex wrap gap={[8, 8]} style={{ border: "2px solid #000", padding: 8, width: 260 }}>
+          {Array.from({ length: 8 }, (_, i) => (
+            <div key={i} style={{ background: "#e8e8e8", border: "1px solid #000", padding: "4px 10px", fontSize: 12 }}>{i + 1}</div>
+          ))}
+        </Flex>
       </section>
 
       {/* Menu */}
@@ -364,6 +399,59 @@ export default function Playground() {
         </Space>
       </section>
 
+      {/* Icon */}
+      <section className="playground-section">
+        <h2 className="playground-title">Icon</h2>
+        <div className="playground-row">
+          <Icon name="star" />
+          <Icon name="heart" />
+          <Icon name="home" />
+          <Icon name="setting" />
+          <Icon name="user" />
+          <Icon name="bell" />
+          <Icon name="mail" />
+          <Icon name="search" />
+          <Icon name="close" />
+          <Icon name="check" />
+          <Icon name="plus" />
+          <Icon name="minus" />
+        </div>
+        <div className="playground-row">
+          <Icon name="arrow-up" />
+          <Icon name="arrow-down" />
+          <Icon name="arrow-left" />
+          <Icon name="arrow-right" />
+          <Icon name="chevron-up" />
+          <Icon name="chevron-down" />
+          <Icon name="chevron-left" />
+          <Icon name="chevron-right" />
+          <Icon name="edit" />
+          <Icon name="trash" />
+          <Icon name="download" />
+          <Icon name="upload" />
+        </div>
+        <div className="playground-row">
+          <Icon name="info" />
+          <Icon name="warning" />
+          <Icon name="error" />
+          <Icon name="success" />
+          <Icon name="refresh" spin />
+          <Icon name="menu" />
+          <Icon name="more" />
+          <Icon name="eye" />
+          <Icon name="eye-off" />
+          <Icon name="copy" />
+          <Icon name="external" />
+        </div>
+        <div className="playground-row">
+          <Icon name="star" size="sm" />
+          <Icon name="star" size="md" />
+          <Icon name="star" size="lg" />
+          <Icon name="heart" color="#c00" size="lg" />
+          <Icon name="info" color="#00c" size="lg" />
+        </div>
+      </section>
+
       {/* Button */}
       <section className="playground-section">
         <h2 className="playground-title">Button</h2>
@@ -392,6 +480,13 @@ export default function Playground() {
           <FloatButton variant="primary" position="bottom-right">↑</FloatButton>
         </Space>
         <Text type="secondary" style={{ display: "block", marginTop: 8 }}>实际使用可设置 position 定位到四角</Text>
+        <div style={{ marginTop: 8 }}>
+          <Text strong>FloatButton.BackTop</Text>
+          <Text type="secondary" style={{ marginLeft: 8, fontSize: 11 }}>（visibilityHeight=1 立即显示，点击回到顶部）</Text>
+        </div>
+        <div style={{ marginTop: 4 }}>
+          <FloatButton.BackTop visibilityHeight={1} size="sm">↑</FloatButton.BackTop>
+        </div>
       </section>
 
       {/* Input */}
@@ -426,6 +521,34 @@ export default function Playground() {
           <Card variant="inset" size="md" style={{ flex: 1 }}>
             <div className="pixel-card-header">Inset</div>
             <div className="pixel-card-body">Pressed-in look with inner shadow.</div>
+          </Card>
+        </div>
+        <div style={{ height: 12 }} />
+        <div className="playground-row" style={{ alignItems: "stretch" }}>
+          <Card title="Meta Card" extra={<Tag>NEW</Tag>} style={{ width: 260 }}>
+            <Card.Meta
+              avatar={<Avatar size="sm">PX</Avatar>}
+              title="Pixel UI"
+              description="A retro-styled component library with hard shadows and monospace."
+            />
+            <div style={{ marginTop: 12, fontSize: 12 }}>
+              Card body content with Meta and actions below.
+            </div>
+          </Card>
+          <Card
+            title="Actions"
+            style={{ width: 260 }}
+            actions={[
+              <span key="like">♥</span>,
+              <span key="share">↗</span>,
+              <span key="more">⋯</span>,
+            ]}
+          >
+            <Card.Meta
+              avatar={<Avatar size="sm" style={{ background: "#e8e8e8" }}>🖼</Avatar>}
+              title="Actions Demo"
+              description="Hover the bottom actions to see pixel highlight."
+            />
           </Card>
         </div>
       </section>
@@ -501,6 +624,51 @@ export default function Playground() {
             { key: "3", title: "Documentation", description: "Read the docs for usage examples", avatar: <span>📄</span> },
           ]}
         />
+        <div style={{ height: 12 }} />
+        <Text strong>Composition API (List.Item / List.Item.Meta)</Text>
+        <div style={{ height: 4 }} />
+        <List bordered>
+          <List.Item
+            avatar={<Avatar size="sm">PX</Avatar>}
+            extra={<Tag>v1.0</Tag>}
+            actions={[
+              <Button size="sm" key="edit">Edit</Button>,
+              <Button size="sm" variant="secondary" key="more">More</Button>,
+            ]}
+          >
+            <List.ItemMeta
+              title="Composed Item"
+              description="Using List.Item with ItemMeta and actions slots."
+            />
+          </List.Item>
+          <List.Item
+            avatar={<Avatar size="sm">UX</Avatar>}
+            actions={[<Button size="sm" key="edit">Edit</Button>]}
+          >
+            <List.ItemMeta
+              title="Second Item"
+              description="Item meta description for the second composed row."
+            />
+          </List.Item>
+        </List>
+      </section>
+
+      {/* Empty */}
+      <section className="playground-section">
+        <h2 className="playground-title">Empty</h2>
+        <div className="playground-row" style={{ alignItems: "flex-start" }}>
+          <div style={{ border: "2px solid #000", width: 220 }}>
+            <Empty />
+          </div>
+          <div style={{ border: "2px solid #000", width: 220 }}>
+            <Empty
+              description="No data found"
+              image={<span style={{ fontSize: 32, lineHeight: 1 }}>📭</span>}
+            >
+              <Button size="sm">Refresh</Button>
+            </Empty>
+          </div>
+        </div>
       </section>
 
       {/* Descriptions */}
@@ -587,6 +755,15 @@ export default function Playground() {
             <Statistic title="Downloads" value="12,345" prefix="📦" />
             <Statistic title="Users" value="8,901" suffix="+1" />
           </Space>
+          <div>
+            <Text strong>Statistic.Countdown</Text>
+            <div style={{ height: 4 }} />
+            <Statistic.Countdown
+              title="Deploy Time"
+              value={countdownTarget}
+              format="HH:mm:ss"
+              suffix="remaining"
+            />          </div>
         </Space>
       </section>
 
@@ -686,6 +863,28 @@ export default function Playground() {
         </Space>
       </section>
 
+      {/* Rate */}
+      <section className="playground-section">
+        <h2 className="playground-title">Rate</h2>
+        <div className="playground-row">
+          <Rate value={rateValue} onChange={setRateValue} />
+        </div>
+        <div className="playground-row">
+          <Rate defaultValue={2} allowHalf />
+        </div>
+        <div className="playground-row">
+          <Rate defaultValue={4} disabled />
+        </div>
+      </section>
+
+      {/* Calendar */}
+      <section className="playground-section">
+        <h2 className="playground-title">Calendar</h2>
+        <div className="playground-row">
+          <Calendar value={calendarValue} onChange={setCalendarValue} />
+        </div>
+      </section>
+
       {/* Form */}
       <section className="playground-section">
         <h2 className="playground-title">Form</h2>
@@ -723,6 +922,18 @@ export default function Playground() {
               <Button size="sm" onClick={() => setProgressPercent(p => Math.min(100, p + 10))}>+10%</Button>
             </Space>
             <Skeleton rows={3} style={{ width: 200 }} />
+            <Space direction="vertical" size="sm">
+              <Skeleton avatar title paragraph={{ rows: 2 }} style={{ width: 240 }} />
+              <Space wrap>
+                <Skeleton.Avatar shape="circle" />
+                <Skeleton.Avatar shape="square" size="lg" />
+                <Skeleton.Button size="sm" />
+                <Skeleton.Button shape="circle" />
+                <Skeleton.Input size="sm" />
+                <Skeleton.Input />
+                <Skeleton.Image />
+              </Space>
+            </Space>
           </Space>
           <Space wrap>
             <DrawerDemo />
@@ -846,6 +1057,21 @@ export default function Playground() {
             ]}
             defaultExpandAll
           />
+          <Tree
+            treeData={[
+              { title: "Root", key: "c0", children: [
+                { title: "Child 1", key: "c0-0" },
+                { title: "Child 2", key: "c0-1", children: [
+                  { title: "Grandchild", key: "c0-1-0" },
+                ]},
+                { title: "Child 3 (disabled)", key: "c0-2", disabled: true },
+              ]},
+            ]}
+            defaultExpandAll
+            checkable
+            defaultCheckedKeys={["c0-1-0"]}
+            onCheck={(keys) => showToast(`checked: ${keys.length}`)}
+          />
           <TreeSelect
             treeData={[
               { title: "Option 1", value: "1" },
@@ -877,6 +1103,32 @@ export default function Playground() {
               { label: "Day", value: "day" },
               { label: "Week", value: "week" },
               { label: "Month", value: "month" },
+            ]}
+          />
+          <Segmented
+            size="sm"
+            defaultValue="basic"
+            options={[
+              { label: "Basic", value: "basic" },
+              { label: "Pro", value: "pro", disabled: true },
+              { label: "Ultra", value: "ultra" },
+            ]}
+          />
+          <Segmented
+            block
+            options={[
+              { label: "All", value: "all" },
+              { label: "Draft", value: "draft" },
+              { label: "Published", value: "published" },
+            ]}
+            onChange={(v) => showToast(`segmented: ${v}`)}
+          />
+          <Segmented
+            disabled
+            defaultValue="locked"
+            options={[
+              { label: "Locked", value: "locked" },
+              { label: "Unavailable", value: "no" },
             ]}
           />
         </Space>

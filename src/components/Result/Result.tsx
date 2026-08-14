@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import Button from "../Button";
 import "./Result.css";
 
 interface ResultProps {

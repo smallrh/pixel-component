@@ -24,7 +24,7 @@ export default function Anchor({
 }: AnchorProps) {
   const [activeKey, setActiveKey] = useState<string>("");
   const isScrolling = useRef(false);
-  const scrollTimer = useRef<ReturnType<typeof setTimeout>>();
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const handleScroll = () => {

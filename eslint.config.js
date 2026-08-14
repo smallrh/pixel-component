@@ -15,6 +15,16 @@ export default defineConfig([
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
+    rules: {
+      'react-refresh/only-export-components': ['error', {
+        allowExportNames: [
+          'useApp', 'useConfig', 'useLocale', 'useTheme',
+          'useMessage', 'useNotification',
+          'message', 'notification', 't',
+          'LocaleContext', 'ThemeContext', 'AppContext',
+        ],
+      }],
+    },
     languageOptions: {
       globals: globals.browser,
     },

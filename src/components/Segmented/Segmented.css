@@ -8,11 +8,34 @@
   image-rendering: pixelated;
 }
 
+.pixel-segmented--block {
+  display: flex;
+}
+
+.pixel-segmented--block .pixel-segmented-item {
+  flex: 1;
+  text-align: center;
+}
+
+.pixel-segmented--sm .pixel-segmented-item {
+  padding: 3px 10px;
+  font-size: 11px;
+}
+
+.pixel-segmented--lg .pixel-segmented-item {
+  padding: 9px 20px;
+  font-size: 14px;
+}
+
 .pixel-segmented-item {
   padding: 6px 14px;
   cursor: pointer;
   border-right: 1px solid #e0e0e0;
   transition: background 0.05s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .pixel-segmented-item:last-child {
@@ -26,4 +49,28 @@
 .pixel-segmented-item--active {
   background: #000;
   color: #fff;
+}
+
+.pixel-segmented-item--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pixel-segmented-item--disabled:hover {
+  background: transparent;
+}
+
+.pixel-segmented--disabled .pixel-segmented-item {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pixel-segmented--disabled .pixel-segmented-item--active {
+  background: #999;
+  color: #fff;
+}
+
+.pixel-segmented-item-icon {
+  display: inline-flex;
+  align-items: center;
 }

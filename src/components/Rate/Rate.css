@@ -1,0 +1,59 @@
+.pixel-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: monospace;
+  image-rendering: pixelated;
+}
+
+.pixel-rate-star {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: #ccc;
+  text-shadow: 1px 1px 0 #000;
+  user-select: none;
+  transition: none;
+}
+
+.pixel-rate-star:hover {
+  color: #000;
+}
+
+.pixel-rate-glyph {
+  display: inline-block;
+}
+
+.pixel-rate-glyph--filled {
+  color: #000;
+}
+
+.pixel-rate-half {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pixel-rate-half .pixel-rate-glyph {
+  color: #000;
+}
+
+.pixel-rate-star--disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.pixel-rate-star--disabled:hover {
+  color: #ccc;
+}
+
+.pixel-rate-value {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #666;
+}

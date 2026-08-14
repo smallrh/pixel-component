@@ -56,6 +56,11 @@ import TimePicker from "../components/TimePicker";
 import Upload from "../components/Upload";
 import InputNumber from "../components/InputNumber";
 import Ribbon from "../components/Ribbon";
+import Icon from "../components/Icon";
+import Rate from "../components/Rate";
+import Calendar from "../components/Calendar";
+import Flex from "../components/Flex";
+import Empty from "../components/Empty";
 import ConfigProvider from "../components/ConfigProvider";
 import LocaleProvider from "../components/LocaleProvider";
 import "./Docs.css";
@@ -72,7 +77,7 @@ const CATEGORIES: { title: string; items: ComponentInfo[] }[] = [
     items: [
       { name: "Button", desc: "按钮 — variant / size / disabled" },
       { name: "Typography", desc: "排版 — Title / Text / Paragraph" },
-      { name: "Icon", desc: "图标（规划中）" },
+      { name: "Icon", desc: "图标 — 像素点阵风格图标库" },
     ],
   },
   {
@@ -80,6 +85,7 @@ const CATEGORIES: { title: string; items: ComponentInfo[] }[] = [
     items: [
       { name: "Layout", desc: "页面布局 — Header / Sider / Content / Footer" },
       { name: "Grid", desc: "栅格 — Row / Col" },
+      { name: "Flex", desc: "弹性布局 — vertical / gap / justify / align" },
       { name: "Space", desc: "间距 — direction / size / wrap" },
       { name: "Splitter", desc: "分割面板 — 水平/垂直拖拽" },
     ],
@@ -106,6 +112,7 @@ const CATEGORIES: { title: string; items: ComponentInfo[] }[] = [
       { name: "Checkbox", desc: "复选框" },
       { name: "Switch", desc: "开关" },
       { name: "Slider", desc: "滑动输入条" },
+      { name: "Rate", desc: "评分 — 星形打分" },
       { name: "Form", desc: "表单 — FormItem + 验证" },
       { name: "DatePicker", desc: "日期选择器" },
       { name: "TimePicker", desc: "时间选择器" },
@@ -123,18 +130,20 @@ const CATEGORIES: { title: string; items: ComponentInfo[] }[] = [
     title: "数据展示",
     items: [
       { name: "Table", desc: "表格 — columns / dataSource" },
-      { name: "List", desc: "列表" },
+      { name: "List", desc: "列表 — items / Item / ItemMeta" },
+      { name: "Empty", desc: "空状态 — description / image" },
       { name: "Descriptions", desc: "描述列表" },
-      { name: "Card", desc: "卡片 — outlined / elevated / inset" },
+      { name: "Card", desc: "卡片 — outlined / elevated / inset / Meta / actions" },
       { name: "Tag", desc: "标签 — closable / color" },
       { name: "Badge", desc: "徽标 — count / dot" },
       { name: "Avatar", desc: "头像" },
       { name: "Ribbon", desc: "缎带" },
       { name: "Collapse", desc: "折叠面板" },
       { name: "Timeline", desc: "时间线" },
-      { name: "Statistic", desc: "统计数值" },
+      { name: "Statistic", desc: "统计数值 — value / Countdown" },
       { name: "Image", desc: "图片" },
       { name: "Carousel", desc: "轮播" },
+      { name: "Calendar", desc: "日历" },
       { name: "Tree", desc: "树形控件" },
       { name: "QRCode", desc: "二维码" },
     ],
@@ -199,6 +208,17 @@ const CODE_EXAMPLES: Record<string, string> = {
 </Card>
 <Card title="Inset" variant="inset">
   Inset style
+</Card>
+
+<Card
+  title="Meta"
+  actions={[<Button size="sm">Like</Button>]}
+>
+  <Card.Meta
+    avatar={<Avatar>PX</Avatar>}
+    title="Pixel UI"
+    description="Retro styled card with Meta"
+  />
 </Card>`,
 
   Switch: `import Switch from "pixel-ui/Switch";
@@ -234,6 +254,28 @@ const CODE_EXAMPLES: Record<string, string> = {
 <Paragraph>Paragraph with multiple lines of text for reading.</Paragraph>
 <Link href="#">Link</Link>`,
 
+  Icon: `import Icon from "pixel-ui/Icon";
+
+<Icon name="star" />
+<Icon name="heart" />
+<Icon name="search" />
+<Icon name="setting" />
+<Icon name="refresh" spin />
+<Icon name="arrow-right" size="lg" color="#c00" />`,
+
+  Rate: `import Rate from "pixel-ui/Rate";
+
+<Rate defaultValue={3} />
+<Rate defaultValue={2.5} allowHalf />
+<Rate defaultValue={4} disabled />`,
+
+  Calendar: `import Calendar from "pixel-ui/Calendar";
+
+<Calendar
+  value={new Date()}
+  onChange={(date) => console.log(date)}
+/>`,
+
   Layout: `import { Header, Sider, Content, Footer } from "pixel-ui/Layout";
 
 <Layout>
@@ -260,6 +302,31 @@ const CODE_EXAMPLES: Record<string, string> = {
   <Button>2</Button>
   <Button>3</Button>
 </Space>`,
+
+  Flex: `import Flex from "pixel-ui/Flex";
+
+<Flex vertical gap={8}>
+  <Button>Item 1</Button>
+  <Button>Item 2</Button>
+  <Button>Item 3</Button>
+</Flex>
+
+<Flex gap={16} justify="space-between" wrap>
+  <span>Left</span>
+  <span>Center</span>
+  <span>Right</span>
+</Flex>`,
+
+  Empty: `import Empty from "pixel-ui/Empty";
+
+<Empty />
+<Empty description="No data found">
+  <Button>Refresh</Button>
+</Empty>
+<Empty
+  description="Custom image"
+  image={<span>📭</span>}
+/>`,
 
   Menu: `import Menu from "pixel-ui/Menu";
 
@@ -359,7 +426,8 @@ toast.warning("Check input");`,
 
   FloatButton: `import FloatButton from "pixel-ui/FloatButton";
 
-<FloatButton variant="primary" position="bottom-right" />`,
+<FloatButton variant="primary" position="bottom-right" />
+<FloatButton.BackTop visibilityHeight={400} />`,
 
   Tooltip: `import Tooltip from "pixel-ui/Tooltip";
 
@@ -456,7 +524,14 @@ toast.warning("Check input");`,
   Statistic: `import Statistic from "pixel-ui/Statistic";
 
 <Statistic title="Users" value={12345} />
-<Statistic title="Revenue" value={9999} prefix="$" suffix=".00" />`,
+<Statistic title="Revenue" value={9999} prefix="$" suffix=".00" />
+
+<Statistic.Countdown
+  title="Deploy Time"
+  value={Date.now() + 600000}
+  format="mm:ss"
+  onFinish={() => console.log("done")}
+/>`,
 
   Breadcrumb: `import Breadcrumb from "pixel-ui/Breadcrumb";
 
@@ -484,7 +559,14 @@ toast.warning("Check input");`,
   Skeleton: `import Skeleton from "pixel-ui/Skeleton";
 
 <Skeleton rows={3} />
-<Skeleton rows={5} />`,
+<Skeleton rows={5} />
+
+<Skeleton avatar title paragraph={{ rows: 2 }} />
+
+<Skeleton.Avatar shape="circle" size="lg" />
+<Skeleton.Button shape="round" />
+<Skeleton.Input size="sm" />
+<Skeleton.Image />`,
 
   Result: `import Result from "pixel-ui/Result";
 
@@ -536,7 +618,20 @@ const [open, setOpen] = useState(false);
     { key: "1", title: "Item 1", description: "Description 1" },
     { key: "2", title: "Item 2", description: "Description 2" },
   ]}
-/>`,
+/>
+
+<List bordered>
+  <List.Item
+    avatar={<Avatar size="sm">PX</Avatar>}
+    extra={<Tag>v1</Tag>}
+    actions={[<Button size="sm">Edit</Button>]}
+  >
+    <List.ItemMeta
+      title="Composed Item"
+      description="Using the composition API"
+    />
+  </List.Item>
+</List>`,
 
   QRCode: `import QRCode from "pixel-ui/QRCode";
 
@@ -560,6 +655,10 @@ const [open, setOpen] = useState(false);
     { label: "Weekly", value: "weekly" },
     { label: "Monthly", value: "monthly" },
   ]}
+/>
+
+<Segmented block size="sm" defaultValue="daily"
+  options={[{ label: "Daily", value: "daily" }, { label: "Weekly", value: "weekly" }]}
 />`,
 
   Transfer: `import Transfer from "pixel-ui/Transfer";
@@ -581,6 +680,18 @@ const [open, setOpen] = useState(false);
     ]},
   ]}
   defaultExpandAll
+/>
+
+<Tree
+  checkable
+  defaultExpandAll
+  treeData={[
+    { key: "a", title: "Root", children: [
+      { key: "a-1", title: "Leaf A" },
+      { key: "a-2", title: "Leaf B" },
+    ]},
+  ]}
+  onCheck={(keys) => console.log(keys)}
 />`,
 
   TreeSelect: `import TreeSelect from "pixel-ui/TreeSelect";
@@ -710,6 +821,71 @@ const PROPS_DATA: Record<string, { prop: string; type: string; default: string; 
     { prop: "dot", type: "boolean", default: "false", desc: "是否显示为小圆点" },
     { prop: "overflowCount", type: "number", default: "99", desc: "溢出计数" },
   ],
+  Icon: [
+    { prop: "name", type: "IconName", default: "-", desc: "图标名称（40+ 内置）" },
+    { prop: "size", type: "'sm' | 'md' | 'lg'", default: "'md'", desc: "图标尺寸" },
+    { prop: "color", type: "string", default: "currentColor", desc: "图标颜色" },
+    { prop: "spin", type: "boolean", default: "false", desc: "是否旋转" },
+  ],
+  Rate: [
+    { prop: "value", type: "number", default: "-", desc: "当前评分（受控）" },
+    { prop: "defaultValue", type: "number", default: "0", desc: "默认评分（非受控）" },
+    { prop: "count", type: "number", default: "5", desc: "星星总数" },
+    { prop: "allowHalf", type: "boolean", default: "false", desc: "是否允许半星" },
+    { prop: "allowClear", type: "boolean", default: "true", desc: "点击已选星是否清零" },
+    { prop: "disabled", type: "boolean", default: "false", desc: "是否禁用" },
+    { prop: "onChange", type: "(v: number) => void", default: "-", desc: "评分变化回调" },
+  ],
+  Calendar: [
+    { prop: "value", type: "Date", default: "-", desc: "选中日期（受控）" },
+    { prop: "defaultValue", type: "Date", default: "今天", desc: "默认选中日期" },
+    { prop: "onChange", type: "(date: Date) => void", default: "-", desc: "日期变化回调" },
+    { prop: "fullscreen", type: "boolean", default: "false", desc: "是否全屏展示" },
+  ],
+  Flex: [
+    { prop: "vertical", type: "boolean", default: "false", desc: "是否纵向布局" },
+    { prop: "wrap", type: "'wrap' | 'nowrap' | 'wrap-reverse' | boolean", default: "false", desc: "是否换行" },
+    { prop: "justify", type: "'start' | 'center' | 'end' | 'space-between' ...", default: "-", desc: "主轴对齐" },
+    { prop: "align", type: "'start' | 'center' | 'end' | 'stretch' | 'baseline'", default: "-", desc: "交叉轴对齐" },
+    { prop: "gap", type: "number | string | [gap, gap]", default: "-", desc: "间距（支持行列分别设置）" },
+    { prop: "flex", type: "string", default: "-", desc: "作为子项时的 flex 值" },
+  ],
+  Empty: [
+    { prop: "description", type: "ReactNode", default: "'No data'", desc: "空状态描述" },
+    { prop: "image", type: "ReactNode", default: "-", desc: "自定义图片" },
+    { prop: "children", type: "ReactNode", default: "-", desc: "底部操作区" },
+  ],
+  Skeleton: [
+    { prop: "active", type: "boolean", default: "true", desc: "是否显示脉冲动画" },
+    { prop: "loading", type: "boolean", default: "false", desc: "为 false 时渲染 children" },
+    { prop: "title", type: "boolean", default: "true", desc: "是否显示标题占位" },
+    { prop: "avatar", type: "boolean", default: "false", desc: "是否显示头像占位" },
+    { prop: "paragraph", type: "boolean | { rows?, width? }", default: "true", desc: "段落占位配置" },
+    { prop: "rows", type: "number", default: "3", desc: "段落行数（快捷方式）" },
+    { prop: "width", type: "string | number", default: "100%", desc: "段落宽度" },
+    { prop: "Skeleton.Avatar", type: "size/size2/shape/active", default: "-", desc: "头像骨架（circle/square/round）" },
+    { prop: "Skeleton.Button", type: "size/shape/block/active", default: "-", desc: "按钮骨架" },
+    { prop: "Skeleton.Input", type: "size/active", default: "-", desc: "输入框骨架" },
+    { prop: "Skeleton.Image", type: "active", default: "-", desc: "图片骨架" },
+  ],
+  Tree: [
+    { prop: "treeData", type: "TreeNode[]", default: "-", desc: "树数据（title/key/children/disabled）" },
+    { prop: "defaultExpandAll", type: "boolean", default: "false", desc: "默认展开全部节点" },
+    { prop: "checkable", type: "boolean", default: "false", desc: "节点前显示复选框" },
+    { prop: "defaultCheckedKeys", type: "string[]", default: "[]", desc: "默认勾选的节点" },
+    { prop: "defaultSelectedKeys", type: "string[]", default: "[]", desc: "默认选中节点" },
+    { prop: "onSelect", type: "(key, selected) => void", default: "-", desc: "节点选择回调" },
+    { prop: "onCheck", type: "(checkedKeys) => void", default: "-", desc: "勾选变化回调（含父子级联）" },
+  ],
+  Segmented: [
+    { prop: "options", type: "SegmentedOption[]", default: "-", desc: "选项（label/value/disabled/icon）" },
+    { prop: "value", type: "string", default: "-", desc: "当前值（受控）" },
+    { prop: "defaultValue", type: "string", default: "首项", desc: "默认值（非受控）" },
+    { prop: "onChange", type: "(value) => void", default: "-", desc: "切换回调" },
+    { prop: "block", type: "boolean", default: "false", desc: "撑满整行" },
+    { prop: "size", type: "'sm' | 'md' | 'lg'", default: "'md'", desc: "尺寸" },
+    { prop: "disabled", type: "boolean", default: "false", desc: "整体禁用" },
+  ],
 };
 
 /* ===== 组件预览渲染 ===== */
@@ -796,6 +972,48 @@ function ComponentPreview({ name }: { name: string }) {
           <Link href="#">Link</Link>
         </div>
       );
+    case "Icon":
+      return (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+          <Icon name="star" />
+          <Icon name="heart" />
+          <Icon name="home" />
+          <Icon name="setting" />
+          <Icon name="user" />
+          <Icon name="bell" />
+          <Icon name="mail" />
+          <Icon name="search" />
+          <Icon name="close" />
+          <Icon name="check" />
+          <Icon name="plus" />
+          <Icon name="minus" />
+          <Icon name="arrow-up" />
+          <Icon name="arrow-down" />
+          <Icon name="arrow-left" />
+          <Icon name="arrow-right" />
+          <Icon name="chevron-up" />
+          <Icon name="chevron-down" />
+          <Icon name="edit" />
+          <Icon name="trash" />
+          <Icon name="download" />
+          <Icon name="upload" />
+          <Icon name="refresh" spin />
+          <Icon name="info" />
+          <Icon name="warning" />
+          <Icon name="error" />
+          <Icon name="success" />
+          <Icon name="menu" />
+          <Icon name="more" />
+          <Icon name="eye" />
+          <Icon name="eye-off" />
+          <Icon name="copy" />
+          <Icon name="external" />
+          <Icon name="star" size="sm" />
+          <Icon name="star" size="lg" />
+          <Icon name="heart" color="#c00" size="lg" />
+          <Icon name="info" color="#00c" size="lg" />
+        </div>
+      );
     case "Layout":
       return (
         <Layout style={{ width: "100%", height: 200, border: "2px solid #000" }}>
@@ -824,6 +1042,25 @@ function ComponentPreview({ name }: { name: string }) {
           <Button size="sm">2</Button>
           <Button size="sm">3</Button>
         </Space>
+      );
+    case "Flex":
+      return (
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 12 }}>
+          <Flex gap={8}>
+            <Button size="sm">Item A</Button>
+            <Button size="sm">Item B</Button>
+            <Button size="sm">Item C</Button>
+          </Flex>
+          <Flex vertical gap={8}>
+            <Button size="sm">Vertical 1</Button>
+            <Button size="sm">Vertical 2</Button>
+          </Flex>
+          <Flex justify="space-between" gap={8}>
+            <Tag>Left</Tag>
+            <Tag>Center</Tag>
+            <Tag>Right</Tag>
+          </Flex>
+        </div>
       );
     case "Menu":
       return (
@@ -920,6 +1157,14 @@ function ComponentPreview({ name }: { name: string }) {
       );
     case "Slider":
       return <Slider min={0} max={100} value={50} style={{ width: 200 }} />;
+    case "Rate":
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" }}>
+          <Rate defaultValue={3} />
+          <Rate defaultValue={2.5} allowHalf />
+          <Rate defaultValue={4} disabled />
+        </div>
+      );
     case "Divider":
       return (
         <div style={{ width: "100%" }}>
@@ -1080,8 +1325,16 @@ function ComponentPreview({ name }: { name: string }) {
       );
     case "Skeleton":
       return (
-        <div style={{ width: "100%" }}>
-          <Skeleton rows={3} />
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 12 }}>
+          <Skeleton avatar title paragraph={{ rows: 2 }} />
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Skeleton.Avatar shape="circle" />
+            <Skeleton.Avatar shape="square" size="lg" />
+            <Skeleton.Button size="sm" />
+            <Skeleton.Button shape="circle" />
+            <Skeleton.Input size="sm" />
+            <Skeleton.Image />
+          </div>
         </div>
       );
     case "Result":
@@ -1102,6 +1355,12 @@ function ComponentPreview({ name }: { name: string }) {
       );
     case "Image":
       return <Image src="https://picsum.photos/200" alt="Random" width={120} />;
+    case "Calendar":
+      return (
+        <div style={{ width: "100%" }}>
+          <Calendar fullscreen={false} />
+        </div>
+      );
     case "Carousel":
       return (
         <div style={{ width: "100%", maxWidth: 300 }}>
@@ -1138,6 +1397,19 @@ function ComponentPreview({ name }: { name: string }) {
           />
         </div>
       );
+    case "Empty":
+      return (
+        <div style={{ width: "100%", display: "flex", gap: 16, justifyContent: "center" }}>
+          <div style={{ border: "2px solid #000", width: 200 }}>
+            <Empty />
+          </div>
+          <div style={{ border: "2px solid #000", width: 200 }}>
+            <Empty description="No data" image={<span style={{ fontSize: 32, lineHeight: 1 }}>📭</span>}>
+              <Button size="sm">Refresh</Button>
+            </Empty>
+          </div>
+        </div>
+      );
     case "QRCode":
       return <QRCode value="https://example.com" size={96} />;
     case "Watermark":
@@ -1152,13 +1424,24 @@ function ComponentPreview({ name }: { name: string }) {
       return <ColorPicker value="#000" onChange={(v) => console.log(v)} />;
     case "Segmented":
       return (
-        <Segmented
-          options={[
-            { label: "Daily", value: "daily" },
-            { label: "Weekly", value: "weekly" },
-            { label: "Monthly", value: "monthly" },
-          ]}
-        />
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 8 }}>
+          <Segmented
+            options={[
+              { label: "Daily", value: "daily" },
+              { label: "Weekly", value: "weekly" },
+              { label: "Monthly", value: "monthly" },
+            ]}
+          />
+          <Segmented
+            block
+            size="sm"
+            options={[
+              { label: "All", value: "all" },
+              { label: "Draft", value: "draft" },
+              { label: "Published", value: "published" },
+            ]}
+          />
+        </div>
       );
     case "Transfer":
       return (
@@ -1174,18 +1457,34 @@ function ComponentPreview({ name }: { name: string }) {
       );
     case "Tree":
       return (
-        <div style={{ width: "100%" }}>
-          <Tree
-            treeData={[
-              {
-                key: "1", title: "Parent", children: [
-                  { key: "1-1", title: "Child 1" },
-                  { key: "1-2", title: "Child 2" },
-                ],
-              },
-            ]}
-            defaultExpandAll
-          />
+        <div style={{ width: "100%", display: "flex", gap: 16 }}>
+          <div style={{ flex: 1 }}>
+            <Tree
+              treeData={[
+                {
+                  key: "1", title: "Parent", children: [
+                    { key: "1-1", title: "Child 1" },
+                    { key: "1-2", title: "Child 2" },
+                  ],
+                },
+              ]}
+              defaultExpandAll
+            />
+          </div>
+          <div style={{ flex: 1 }}>
+            <Tree
+              checkable
+              defaultExpandAll
+              treeData={[
+                {
+                  key: "a", title: "Root", children: [
+                    { key: "a-1", title: "Leaf A" },
+                    { key: "a-2", title: "Leaf B" },
+                  ],
+                },
+              ]}
+            />
+          </div>
         </div>
       );
     case "TreeSelect":
