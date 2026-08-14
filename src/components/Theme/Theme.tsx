@@ -14,7 +14,7 @@ const defaultTokens: TokenMap = {
   colorBg: "#fff",
   colorText: "#000",
   borderRadius: 0,
-  fontFamily: "monospace",
+  fontFamily: "var(--pixel-font)",
   spacing: 4,
 };
 

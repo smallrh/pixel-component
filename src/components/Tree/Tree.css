@@ -1,5 +1,5 @@
 .pixel-tree {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

@@ -1,5 +1,5 @@
 .pixel-menu {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -58,7 +58,7 @@
   padding: 8px 16px;
   background: none;
   border: none;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

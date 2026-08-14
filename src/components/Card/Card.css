@@ -1,5 +1,5 @@
 .pixel-card {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   border: 2px solid #000;
   background: #fff;
   color: #000;

@@ -1,6 +1,6 @@
 .pixel-button {
   position: relative;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;

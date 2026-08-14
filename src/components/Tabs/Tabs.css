@@ -1,5 +1,5 @@
 .pixel-tabs {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -18,7 +18,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -53,7 +53,7 @@
 /* ── Content ── */
 .pixel-tabs-content {
   padding: 16px 0;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   color: #000;
 }

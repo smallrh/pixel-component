@@ -13,7 +13,7 @@ export default function App() {
     <ConfigProvider
       theme={{
         primaryColor: "#000",
-        fontFamily: "monospace",
+        fontFamily: "var(--pixel-font)",
       }}
       locale="en"
     >
@@ -24,7 +24,7 @@ export default function App() {
               <button
                 onClick={() => setPage("playground")}
                 style={{
-                  fontFamily: "monospace",
+                  fontFamily: "var(--pixel-font)",
                   fontSize: 11,
                   padding: "4px 10px",
                   border: `2px solid #000`,
@@ -40,7 +40,7 @@ export default function App() {
               <button
                 onClick={() => setPage("docs")}
                 style={{
-                  fontFamily: "monospace",
+                  fontFamily: "var(--pixel-font)",
                   fontSize: 11,
                   padding: "4px 10px",
                   border: `2px solid #000`,

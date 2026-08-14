@@ -1,6 +1,6 @@
 /* ── Title ── */
 .pixel-title {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #000;
@@ -17,7 +17,7 @@
 
 /* ── Text ── */
 .pixel-text {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   color: #000;
   image-rendering: pixelated;
@@ -53,7 +53,7 @@
 }
 
 .pixel-text-code {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   background: #e8e8e8;
   border: 1px solid #999;
   padding: 1px 4px;
@@ -62,7 +62,7 @@
 
 /* ── Paragraph ── */
 .pixel-paragraph {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   line-height: 1.8;
   color: #000;
@@ -73,7 +73,7 @@
 
 /* ── Link ── */
 .pixel-link {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   color: #000;
   text-decoration: underline;

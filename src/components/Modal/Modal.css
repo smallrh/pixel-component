@@ -12,7 +12,7 @@
 
 /* Modal */
 .pixel-modal {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   background: #fff;
   border: 2px solid #000;
   box-shadow: 6px 6px 0px #000;
@@ -51,7 +51,7 @@
 }
 
 .pixel-modal-close {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   background: none;
   border: 1px solid #fff;
   color: #fff;

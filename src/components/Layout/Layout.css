@@ -17,7 +17,7 @@
   padding: 8px 16px;
   background: #000;
   color: #fff;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -31,7 +31,7 @@
   background: #e8e8e8;
   border-right: 2px solid #000;
   padding: 8px 0;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   overflow: hidden;
   transition: width 0.1s ease;
@@ -45,7 +45,7 @@
 .pixel-layout-content {
   flex: 1;
   padding: 16px;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 13px;
   color: #000;
   background: #fff;
@@ -58,7 +58,7 @@
   justify-content: center;
   padding: 8px 16px;
   background: #f0f0f0;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;

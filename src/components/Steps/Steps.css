@@ -1,6 +1,6 @@
 .pixel-steps {
   display: flex;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;

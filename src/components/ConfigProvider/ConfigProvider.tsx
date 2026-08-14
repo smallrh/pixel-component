@@ -13,7 +13,7 @@ interface ConfigContextValue {
 
 const defaultTheme: PixelTheme = {
   primaryColor: "#000",
-  fontFamily: "monospace",
+  fontFamily: "var(--pixel-font)",
 };
 
 const ConfigContext = createContext<ConfigContextValue>({

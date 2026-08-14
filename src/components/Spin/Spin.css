@@ -43,7 +43,7 @@
 }
 
 .pixel-spin-tip {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

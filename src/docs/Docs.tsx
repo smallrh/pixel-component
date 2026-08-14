@@ -252,7 +252,9 @@ const CODE_EXAMPLES: Record<string, string> = {
 <Title>Heading</Title>
 <Text>Text content</Text>
 <Paragraph>Paragraph with multiple lines of text for reading.</Paragraph>
-<Link href="#">Link</Link>`,
+<Link href="#">Link</Link>
+
+<Paragraph>像素字体同样支持中文排版：你好，世界！</Paragraph>`,
 
   Icon: `import Icon from "pixel-ui/Icon";
 
@@ -770,7 +772,7 @@ const [open, setOpen] = useState(false);
   ConfigProvider: `import ConfigProvider from "pixel-ui/ConfigProvider";
 
 <ConfigProvider
-  theme={{ primaryColor: "#000", fontFamily: "monospace" }}
+  theme={{ primaryColor: "#000", fontFamily: "var(--pixel-font)" }}
   locale="en"
 >
   {/* Your app */}
@@ -1560,7 +1562,7 @@ function ComponentPreview({ name }: { name: string }) {
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <span style={{ fontSize: 12, color: "#999" }}>ConfigProvider 包裹应用提供全局配置</span>
-          <ConfigProvider theme={{ primaryColor: "#000", fontFamily: "monospace" }} locale="en">
+          <ConfigProvider theme={{ primaryColor: "#000", fontFamily: "var(--pixel-font)" }} locale="en">
             <Button size="sm">Wrapped Button</Button>
           </ConfigProvider>
         </div>

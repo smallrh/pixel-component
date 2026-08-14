@@ -1,7 +1,7 @@
 .pixel-table-wrapper {
   overflow-x: auto;
   image-rendering: pixelated;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
 }
 
@@ -51,7 +51,7 @@
   color: #999;
   border: 1px solid #000;
   border-top: none;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
 }

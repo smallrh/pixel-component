@@ -154,7 +154,7 @@ export default function Playground() {
       <section className="playground-section" id="affix-demo" style={{ position: "relative", minHeight: 120 }}>
         <h2 className="playground-title">Affix</h2>
         <Affix offsetTop={60}>
-          <div style={{ background: "#000", color: "#fff", padding: "8px 16px", fontFamily: "monospace", fontSize: 12 }}>
+          <div style={{ background: "#000", color: "#fff", padding: "8px 16px", fontFamily: "var(--pixel-font)", fontSize: 12 }}>
             ⬆ I am affixed when scrolled past (offsetTop=60)
           </div>
         </Affix>
@@ -165,13 +165,13 @@ export default function Playground() {
       <section className="playground-section">
         <h2 className="playground-title">Splitter</h2>
         <Splitter style={{ height: 120 }}>
-          <div style={{ padding: 8, fontFamily: "monospace", fontSize: 12 }}>Left Panel<br />Drag the black bar</div>
-          <div style={{ padding: 8, fontFamily: "monospace", fontSize: 12 }}>Right Panel</div>
+          <div style={{ padding: 8, fontFamily: "var(--pixel-font)", fontSize: 12 }}>Left Panel<br />Drag the black bar</div>
+          <div style={{ padding: 8, fontFamily: "var(--pixel-font)", fontSize: 12 }}>Right Panel</div>
         </Splitter>
         <div style={{ height: 8 }} />
         <Splitter direction="vertical" style={{ height: 120 }}>
-          <div style={{ padding: 8, fontFamily: "monospace", fontSize: 12 }}>Top Panel</div>
-          <div style={{ padding: 8, fontFamily: "monospace", fontSize: 12 }}>Bottom Panel</div>
+          <div style={{ padding: 8, fontFamily: "var(--pixel-font)", fontSize: 12 }}>Top Panel</div>
+          <div style={{ padding: 8, fontFamily: "var(--pixel-font)", fontSize: 12 }}>Bottom Panel</div>
         </Splitter>
       </section>
 
@@ -367,6 +367,9 @@ export default function Playground() {
           <Text code>code</Text>
         </Space>
         <Paragraph>This is a paragraph with pixel style. Every line follows the 8px grid and monospace font. Perfect for retro UI.</Paragraph>
+        <Paragraph style={{ background: "#f5f5f5", padding: 8, border: "1px solid #000" }}>
+          像素字体支持中文：你好，世界！这是复古像素风格的简体中文排版，每个汉字都遵循像素网格绘制。
+        </Paragraph>
         <Link href="https://github.com">Pixel Link</Link>
       </section>
 

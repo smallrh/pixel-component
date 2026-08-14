@@ -4,7 +4,7 @@
   border: 2px solid #000;
   background: #fff;
   image-rendering: pixelated;
-  font-family: monospace;
+  font-family: var(--pixel-font);
 }
 
 .pixel-carousel-track {

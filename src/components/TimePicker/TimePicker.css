@@ -1,7 +1,7 @@
 .pixel-timepicker {
   position: relative;
   display: inline-block;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -13,7 +13,7 @@
   border: 2px solid #000;
   background: #fff;
   cursor: pointer;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 12px;
   width: 100px;
   outline: none;
@@ -66,6 +66,6 @@
   background: #000;
   color: #fff;
   cursor: pointer;
-  font-family: monospace;
+  font-family: var(--pixel-font);
   font-size: 11px;
 }

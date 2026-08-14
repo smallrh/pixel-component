@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/press-start-2p-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fusion Pixel";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/fusion-pixel-zh-hans.woff2") format("woff2");
+}
+
+:root {
+  --pixel-font: "Press Start 2P", "Fusion Pixel", monospace;
+}
+
 * {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -5,6 +25,6 @@
 }
 
 body {
-  font-family: monospace;
+  font-family: var(--pixel-font);
   background: #f0f0f0;
 }
