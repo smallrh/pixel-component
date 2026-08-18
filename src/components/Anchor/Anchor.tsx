@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import "./Anchor.css";
 
@@ -9,11 +9,11 @@ interface AnchorItem {
   children?: AnchorItem[];
 }
 
-interface AnchorProps {
+export interface AnchorProps {
   items: AnchorItem[];
   offsetTop?: number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Anchor({

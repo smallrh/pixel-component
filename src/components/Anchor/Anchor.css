@@ -1,8 +1,8 @@
-.pixel-anchor {
+﻿.pixel-anchor {
   font-family: var(--pixel-font);
   font-size: 12px;
   image-rendering: pixelated;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   padding: 8px 0;
 }
@@ -28,7 +28,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -41,7 +41,7 @@
 }
 
 .pixel-anchor-link--active {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
