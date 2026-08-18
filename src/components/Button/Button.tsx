@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes } from "react";
 import clsx from "clsx";
 import "./Button.css";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger";
   size?: "sm" | "md" | "lg";
 }
@@ -10,12 +10,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   variant = "primary",
   size = "md",
+  type = "button",
   className,
   children,
   ...props
 }: ButtonProps) {
   return (
     <button
+      type={type}
       className={clsx("pixel-button", `pixel-button--${variant}`, `pixel-button--${size}`, className)}
       {...props}
     >
