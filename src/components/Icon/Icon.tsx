@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Icon.css";
 
@@ -39,13 +40,13 @@ export type IconName =
   | "copy"
   | "external";
 
-interface IconProps {
+export interface IconProps {
   name: IconName;
   size?: "sm" | "md" | "lg";
   color?: string;
   spin?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 /* 每个图标用 "像素矩阵" 定义：字符串中 '.' 为空，'#' 为填充像素 */

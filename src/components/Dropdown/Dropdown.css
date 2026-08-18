@@ -19,8 +19,8 @@
   padding: 4px 0;
   list-style: none;
   background: #fff;
-  border: 2px solid #000;
-  box-shadow: 4px 4px 0px #000;
+  border: 2px solid var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
   font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
@@ -42,7 +42,7 @@
 }
 
 .pixel-dropdown-item:active {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
@@ -56,11 +56,11 @@
 }
 
 .pixel-dropdown-item--danger {
-  color: #000;
+  color: var(--pixel-color-text, #000);
 }
 
 .pixel-dropdown-item--danger:hover {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
@@ -73,6 +73,6 @@
 /* ── Divider ── */
 .pixel-dropdown-divider {
   height: 1px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   margin: 4px 8px;
 }

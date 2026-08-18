@@ -19,7 +19,7 @@ export default defineConfig([
       'react-refresh/only-export-components': ['error', {
         allowExportNames: [
           'useApp', 'useConfig', 'useLocale', 'useTheme',
-          'useMessage', 'useNotification',
+          'useMessage', 'useNotification', 'useForm',
           'message', 'notification', 't',
           'LocaleContext', 'ThemeContext', 'AppContext',
         ],

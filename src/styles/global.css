@@ -16,12 +16,25 @@
 
 :root {
   --pixel-font: "Press Start 2P", "Fusion Pixel", monospace;
+  /* 主题 Token（默认值，可被 ConfigProvider / Theme 覆盖） */
+  --pixel-color-primary: #000;
+  --pixel-color-bg: #fff;
+  --pixel-color-text: #000;
+  --pixel-border-radius: 0px;
+  --pixel-font-family: var(--pixel-font);
+  --pixel-spacing: 4px;
 }
 
 * {
+  box-sizing: border-box;
+}
+
+/* 仅对位图类元素启用像素渲染，避免全局污染普通图片 */
+img,
+canvas,
+video {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  box-sizing: border-box;
 }
 
 body {

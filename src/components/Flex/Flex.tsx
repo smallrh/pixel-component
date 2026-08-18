@@ -7,7 +7,7 @@ type FlexWrap = "nowrap" | "wrap" | "wrap-reverse";
 type FlexJustify = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly";
 type FlexAlign = "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 
-interface FlexProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
+export interface FlexProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
   vertical?: boolean;
   wrap?: FlexWrap | boolean;
   justify?: FlexJustify;

@@ -1,4 +1,4 @@
-.pixel-form {
+﻿.pixel-form {
   font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
@@ -17,10 +17,27 @@
   min-width: 80px;
   padding-top: 6px;
   font-weight: bold;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   text-align: right;
 }
 
 .pixel-form-control {
   flex: 1;
+}
+
+.pixel-form-item--error .pixel-input,
+.pixel-form-item--error .pixel-select-trigger,
+.pixel-form-item--error .pixel-datepicker-input,
+.pixel-form-item--error .pixel-timepicker-input,
+.pixel-form-item--error .pixel-cascader-trigger {
+  border-color: #d93025;
+  box-shadow: 4px 4px 0px #d93025;
+}
+
+.pixel-form-error {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #d93025;
+  text-transform: none;
+  letter-spacing: 0;
 }

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import "./Image.css";
 
-interface ImageProps {
+export interface ImageProps {
   src: string;
   alt?: string;
   width?: number | string;
@@ -10,7 +10,7 @@ interface ImageProps {
   preview?: boolean;
   fallback?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Image({

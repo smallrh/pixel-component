@@ -1,14 +1,14 @@
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Grid.css";
 
 /* ── Row ── */
-interface RowProps {
+export interface RowProps {
   gutter?: number | [number, number];
   align?: "top" | "middle" | "bottom";
   justify?: "start" | "end" | "center" | "space-around" | "space-between";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
 }
 
@@ -46,11 +46,11 @@ export function Row({
 /* ── Col ── */
 type ColSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24;
 
-interface ColProps {
+export interface ColProps {
   span?: ColSpan;
   offset?: ColSpan;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
 }
 

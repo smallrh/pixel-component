@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { type CSSProperties, type ReactNode, useState } from "react";
 import Table, { type TableColumn } from "../Table";
 import Input from "../Input";
 import Button from "../Button";
 import "./EditableTable.css";
 
-interface EditableTableProps {
+export interface EditableTableProps {
   columns: TableColumn[];
   dataSource: Record<string, unknown>[];
   onSave?: (data: Record<string, unknown>[]) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function EditableTable({
@@ -46,7 +46,7 @@ export default function EditableTable({
     ...columns.map((col) => ({
       ...col,
       render: (val: unknown, record: Record<string, unknown>) => {
-        if (editingKey !== record.key) return val as React.ReactNode;
+        if (editingKey !== record.key) return val as ReactNode;
         return (
           <Input
             value={(editData[col.dataIndex as string] as string) ?? ""}

@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes, useEffect, useState } from "react";
 import clsx from "clsx";
 import "./FloatButton.css";
 
-interface FloatButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface FloatButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger";
   size?: "sm" | "md" | "lg";
   position?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
@@ -18,6 +18,7 @@ export function FloatButton({
 }: FloatButtonProps) {
   return (
     <button
+      type="button"
       className={clsx(
         "pixel-float-button",
         `pixel-float-button--${variant}`,
@@ -32,7 +33,7 @@ export function FloatButton({
   );
 }
 
-interface BackTopProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
+export interface BackTopProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   visibilityHeight?: number;
   position?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
   size?: "sm" | "md" | "lg";
@@ -65,6 +66,7 @@ export function BackTop({
 
   return (
     <button
+      type="button"
       className={clsx(
         "pixel-float-button",
         `pixel-float-button--${variant}`,

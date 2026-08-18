@@ -9,10 +9,10 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  border: 2px solid #000;
-  box-shadow: 4px 4px 0px #000;
+  border: 2px solid var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   transition: all 0.05s ease;
   image-rendering: pixelated;
   user-select: none;
@@ -57,7 +57,7 @@
 /* Variants */
 .pixel-float-button--primary {
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
 }
 
 .pixel-float-button--secondary {
@@ -68,16 +68,16 @@
 }
 
 .pixel-float-button--danger {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
-  border-color: #000;
-  box-shadow: 4px 4px 0px #000;
+  border-color: var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
 }
 
 /* Hover: 上浮1px */
 .pixel-float-button:hover {
   transform: translateY(-2px);
-  box-shadow: 4px 6px 0px #000;
+  box-shadow: 4px 6px 0px var(--pixel-color-primary, #000);
   animation: blink-border 0.15s steps(2) 3;
 }
 
@@ -86,13 +86,13 @@
 }
 
 .pixel-float-button--danger:hover {
-  box-shadow: 4px 6px 0px #000;
+  box-shadow: 4px 6px 0px var(--pixel-color-primary, #000);
 }
 
 /* Active: 下沉 */
 .pixel-float-button:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px #000;
+  box-shadow: 2px 2px 0px var(--pixel-color-primary, #000);
 }
 
 .pixel-float-button--secondary:active {
@@ -100,12 +100,12 @@
 }
 
 .pixel-float-button--danger:active {
-  box-shadow: 2px 2px 0px #000;
+  box-shadow: 2px 2px 0px var(--pixel-color-primary, #000);
 }
 
 /* Focus */
 .pixel-float-button:focus-visible {
-  outline: 2px solid #000;
+  outline: 2px solid var(--pixel-color-primary, #000);
   outline-offset: 2px;
 }
 
@@ -114,12 +114,12 @@
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
-  box-shadow: 4px 4px 0px #000;
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
   animation: none;
 }
 
 @keyframes blink-border {
-  0% { border-color: #000; }
+  0% { border-color: var(--pixel-color-primary, #000); }
   50% { border-color: transparent; }
-  100% { border-color: #000; }
+  100% { border-color: var(--pixel-color-primary, #000); }
 }

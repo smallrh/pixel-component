@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { type CSSProperties, useState, useRef, useEffect, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Dropdown.css";
 
@@ -11,12 +11,12 @@ interface DropdownItem {
   divider?: boolean;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
   items: DropdownItem[];
   children: ReactNode;
   trigger?: "hover" | "click";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onSelect?: (key: string) => void;
 }
 

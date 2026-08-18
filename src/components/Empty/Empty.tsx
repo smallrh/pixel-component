@@ -1,13 +1,13 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Empty.css";
 
-interface EmptyProps {
+export interface EmptyProps {
   description?: ReactNode;
   image?: ReactNode;
   children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function DefaultImage() {
