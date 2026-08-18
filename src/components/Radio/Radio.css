@@ -33,7 +33,7 @@
   justify-content: center;
   width: 14px;
   height: 14px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   flex-shrink: 0;
 }
@@ -41,7 +41,7 @@
 .pixel-radio-dot {
   width: 6px;
   height: 6px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
 }
 
 .pixel-radio-label {

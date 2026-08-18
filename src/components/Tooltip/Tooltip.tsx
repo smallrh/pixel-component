@@ -1,13 +1,13 @@
-import { useState, useRef } from "react";
+import { type CSSProperties, type ReactNode, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import "./Tooltip.css";
 
-interface TooltipProps {
-  title: React.ReactNode;
-  children: React.ReactNode;
+export interface TooltipProps {
+  title: ReactNode;
+  children: ReactNode;
   placement?: "top" | "bottom" | "left" | "right";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Tooltip({
@@ -26,8 +26,14 @@ export default function Tooltip({
   };
 
   const hide = () => {
+    clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setVisible(false), 100);
   };
+
+  // 卸载时清理定时器，避免内存泄漏
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
 
   return (
     <span
@@ -35,10 +41,13 @@ export default function Tooltip({
       style={style}
       onMouseEnter={show}
       onMouseLeave={hide}
+      onFocus={show}
+      onBlur={hide}
     >
       {children}
       {visible && (
         <span
+          role="tooltip"
           className={clsx(
             "pixel-tooltip-content",
             `pixel-tooltip--${placement}`

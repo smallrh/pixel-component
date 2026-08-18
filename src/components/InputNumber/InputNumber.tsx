@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { type ChangeEvent, type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import "./InputNumber.css";
 
-interface InputNumberProps {
+export interface InputNumberProps {
   value?: number;
   defaultValue?: number;
   onChange?: (value: number | null) => void;
@@ -12,7 +12,7 @@ interface InputNumberProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function InputNumber({
@@ -43,7 +43,7 @@ export default function InputNumber({
     onChange?.(next);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
     if (raw === "") {
       emit(null);

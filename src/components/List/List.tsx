@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./List.css";
 
@@ -6,11 +6,11 @@ interface ListItem {
   key: string;
   title: string;
   description?: string;
-  avatar?: React.ReactNode;
-  extra?: React.ReactNode;
+  avatar?: ReactNode;
+  extra?: ReactNode;
 }
 
-interface ListProps {
+export interface ListProps {
   items?: ListItem[];
   children?: ReactNode;
   bordered?: boolean;
@@ -18,7 +18,7 @@ interface ListProps {
   footer?: ReactNode;
   split?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function List({
@@ -61,13 +61,13 @@ export function List({
   );
 }
 
-interface ItemProps {
+export interface ItemProps {
   avatar?: ReactNode;
   extra?: ReactNode;
   actions?: ReactNode[];
   children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Item({ avatar, extra, actions, children, className, style }: ItemProps) {
@@ -91,12 +91,12 @@ export function Item({ avatar, extra, actions, children, className, style }: Ite
   );
 }
 
-interface ItemMetaProps {
+export interface ItemMetaProps {
   avatar?: ReactNode;
   title?: ReactNode;
   description?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function ItemMeta({ avatar, title, description, className, style }: ItemMetaProps) {

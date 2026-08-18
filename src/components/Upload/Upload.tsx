@@ -1,24 +1,31 @@
-import { useRef, useState } from "react";
+import { type ChangeEvent, type CSSProperties, type ReactNode, useRef, useState } from "react";
 import clsx from "clsx";
 import "./Upload.css";
 
-interface UploadFile {
+export interface UploadFile {
   name: string;
   size: number;
   url?: string;
+  status?: "uploading" | "done" | "error";
 }
 
-interface UploadProps {
+export interface UploadProps {
+  action?: string;
   onUpload?: (file: File) => void;
+  onSuccess?: (file: File, response: unknown) => void;
+  onError?: (file: File, error: unknown) => void;
   accept?: string;
   multiple?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Upload({
+  action,
   onUpload,
+  onSuccess,
+  onError,
   accept,
   multiple = false,
   children,
@@ -32,16 +39,57 @@ export default function Upload({
     inputRef.current?.click();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadFile = async (file: File) => {
+    // 本地状态：标记上传中
+    setFiles((prev) => [...prev, { name: file.name, size: file.size, status: "uploading" }]);
+    onUpload?.(file);
+
+    if (!action) {
+      // 无 action：仅本地展示
+      setFiles((prev) =>
+        prev.map((f) =>
+          f.name === file.name && f.size === file.size
+            ? { ...f, status: "done" as const }
+            : f
+        )
+      );
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const resp = await fetch(action, { method: "POST", body: formData });
+      const data = await resp.json().catch(() => null);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      setFiles((prev) =>
+        prev.map((f) =>
+          f.name === file.name && f.size === file.size
+            ? { ...f, status: "done" as const, url: data?.url }
+            : f
+        )
+      );
+      onSuccess?.(file, data);
+    } catch (err) {
+      setFiles((prev) =>
+        prev.map((f) =>
+          f.name === file.name && f.size === file.size
+            ? { ...f, status: "error" as const }
+            : f
+        )
+      );
+      onError?.(file, err);
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files ?? []);
-    selected.forEach((file) => {
-      onUpload?.(file);
-      setFiles((prev) => [
-        ...prev,
-        { name: file.name, size: file.size },
-      ]);
-    });
+    selected.forEach(uploadFile);
     e.target.value = "";
+  };
+
+  const removeFile = (name: string, size: number) => {
+    setFiles((prev) => prev.filter((f) => !(f.name === name && f.size === size)));
   };
 
   return (
@@ -65,8 +113,25 @@ export default function Upload({
       {files.length > 0 && (
         <ul className="pixel-upload-list">
           {files.map((f, i) => (
-            <li key={i} className="pixel-upload-item">
-              {f.name}
+            <li key={`${f.name}-${i}`} className="pixel-upload-item">
+              <span
+                className={clsx(
+                  "pixel-upload-item-name",
+                  f.status === "error" && "pixel-upload-item-name--error"
+                )}
+              >
+                {f.name}
+              </span>
+              {f.status === "uploading" && <span className="pixel-upload-status">…</span>}
+              {f.status === "error" && <span className="pixel-upload-status">✕</span>}
+              <button
+                type="button"
+                className="pixel-upload-remove"
+                onClick={() => removeFile(f.name, f.size)}
+                aria-label={`Remove ${f.name}`}
+              >
+                ✕
+              </button>
             </li>
           ))}
         </ul>

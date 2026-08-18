@@ -13,13 +13,13 @@
   font-size: 18px;
   line-height: 1;
   color: #ccc;
-  text-shadow: 1px 1px 0 #000;
+  text-shadow: 1px 1px 0 var(--pixel-color-primary, #000);
   user-select: none;
   transition: none;
 }
 
 .pixel-rate-star:hover {
-  color: #000;
+  color: var(--pixel-color-primary, #000);
 }
 
 .pixel-rate-glyph {
@@ -27,7 +27,7 @@
 }
 
 .pixel-rate-glyph--filled {
-  color: #000;
+  color: var(--pixel-color-primary, #000);
 }
 
 .pixel-rate-half {
@@ -40,7 +40,7 @@
 }
 
 .pixel-rate-half .pixel-rate-glyph {
-  color: #000;
+  color: var(--pixel-color-primary, #000);
 }
 
 .pixel-rate-star--disabled {

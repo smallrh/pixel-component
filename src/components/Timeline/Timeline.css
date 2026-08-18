@@ -24,9 +24,9 @@
   top: 2px;
   width: 10px;
   height: 10px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   border: 2px solid #fff;
-  box-shadow: 0 0 0 1px #000;
+  box-shadow: 0 0 0 1px var(--pixel-color-primary, #000);
 }
 
 .pixel-timeline-item--red .pixel-timeline-dot {
@@ -48,7 +48,7 @@
   top: 12px;
   bottom: -8px;
   width: 2px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
 }
 
 .pixel-timeline-item:last-child::before {

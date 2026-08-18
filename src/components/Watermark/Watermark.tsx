@@ -1,11 +1,12 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Watermark.css";
 
-interface WatermarkProps {
+export interface WatermarkProps {
   text?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Watermark({

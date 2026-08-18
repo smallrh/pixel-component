@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import "./Statistic.css";
 
-interface StatisticProps {
-  title?: React.ReactNode;
-  value: React.ReactNode;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+export interface StatisticProps {
+  title?: ReactNode;
+  value: ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Statistic({
@@ -31,15 +31,15 @@ export function Statistic({
   );
 }
 
-interface CountdownProps {
-  title?: React.ReactNode;
+export interface CountdownProps {
+  title?: ReactNode;
   value?: number | Date;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
   format?: string;
   onFinish?: () => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 interface TimeParts {

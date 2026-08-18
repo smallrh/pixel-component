@@ -13,12 +13,12 @@
 
 .pixel-splitter-pane {
   overflow: hidden;
-  border: 1px solid #000;
+  border: 1px solid var(--pixel-color-primary, #000);
 }
 
 .pixel-splitter-handle {
   flex-shrink: 0;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   z-index: 1;
   cursor: col-resize;
   transition: background 0.05s ease;

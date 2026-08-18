@@ -14,10 +14,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   cursor: pointer;
   gap: 8px;
+}
+
+.pixel-treeselect-trigger:focus-visible {
+  outline: 2px solid var(--pixel-color-primary, #000);
+  outline-offset: 1px;
 }
 
 .pixel-treeselect-placeholder { color: #999; }
@@ -30,7 +35,7 @@
   right: 0;
   z-index: 920;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   border-top: none;
   max-height: 180px;
   overflow-y: auto;
@@ -46,6 +51,11 @@
 }
 
 .pixel-treeselect-option--selected {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
+}
+
+.pixel-treeselect-option--highlighted {
+  outline: 2px dashed var(--pixel-color-primary, #000);
+  outline-offset: -2px;
 }

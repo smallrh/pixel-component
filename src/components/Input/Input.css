@@ -1,15 +1,15 @@
 .pixel-input {
   font-family: var(--pixel-font);
   font-size: 14px;
-  border: 2px solid #000;
-  box-shadow: 4px 4px 0px #000;
+  border: 2px solid var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   padding: 8px 12px;
   outline: none;
   image-rendering: pixelated;
   transition: all 0.05s ease;
-  caret-color: #000;
+  caret-color: var(--pixel-color-text, #000);
 }
 
 /* Sizes */
@@ -26,21 +26,21 @@
 /* Variants */
 .pixel-input--filled {
   background: #e8e8e8;
-  box-shadow: inset 2px 2px 0px #ccc, 4px 4px 0px #000;
+  box-shadow: inset 2px 2px 0px #ccc, 4px 4px 0px var(--pixel-color-primary, #000);
 }
 
 /* Focus: 像素感高亮 - 背景反色 */
 .pixel-input:focus {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
-  box-shadow: 4px 4px 0px #000, inset 0 0 0 2px #fff;
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000), inset 0 0 0 2px #fff;
   caret-color: #fff;
 }
 
 .pixel-input--filled:focus {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
-  box-shadow: 4px 4px 0px #000, inset 0 0 0 2px #fff;
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000), inset 0 0 0 2px #fff;
 }
 
 /* Placeholder */
@@ -79,14 +79,14 @@
   width: 20px;
   height: 20px;
   padding: 0;
-  border: 1px solid #000;
+  border: 1px solid var(--pixel-color-primary, #000);
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 0 #000;
+  box-shadow: 2px 2px 0 var(--pixel-color-primary, #000);
 }
 
 .pixel-input-password-toggle:hover {
@@ -95,7 +95,7 @@
 
 .pixel-input-password-toggle:active {
   transform: translateY(-50%) translate(1px, 1px);
-  box-shadow: 1px 1px 0 #000;
+  box-shadow: 1px 1px 0 var(--pixel-color-primary, #000);
 }
 
 /* --- Search wrapper --- */
@@ -117,15 +117,15 @@
   height: 24px;
   min-width: 28px;
   padding: 0 6px;
-  border: 2px solid #000;
-  background: #000;
+  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-color-primary, #000);
   color: #fff;
   cursor: pointer;
   font-family: var(--pixel-font);
-  box-shadow: 2px 2px 0 #000;
+  box-shadow: 2px 2px 0 var(--pixel-color-primary, #000);
 }
 
 .pixel-input-search-btn:hover {
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
 }

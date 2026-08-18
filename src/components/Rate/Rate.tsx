@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import "./Rate.css";
 
-interface RateProps {
+export interface RateProps {
   value?: number;
   defaultValue?: number;
   count?: number;
@@ -11,7 +11,7 @@ interface RateProps {
   disabled?: boolean;
   onChange?: (value: number) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function StarGlyph({ filled }: { filled: boolean }) {

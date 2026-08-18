@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type CSSProperties, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Tabs.css";
 
@@ -9,11 +9,11 @@ interface TabItem {
   children?: ReactNode;
 }
 
-interface TabsProps {
+export interface TabsProps {
   items: TabItem[];
   defaultActiveKey?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onChange?: (key: string) => void;
 }
 
@@ -39,6 +39,7 @@ export default function Tabs({
       <div className="pixel-tabs-bar">
         {items.map((item) => (
           <button
+            type="button"
             key={item.key}
             className={clsx(
               "pixel-tabs-tab",
@@ -47,6 +48,8 @@ export default function Tabs({
             )}
             disabled={item.disabled}
             onClick={() => handleSelect(item.key, item.disabled)}
+            role="tab"
+            aria-selected={activeKey === item.key}
           >
             {item.label}
           </button>

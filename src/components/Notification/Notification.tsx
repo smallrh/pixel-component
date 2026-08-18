@@ -1,57 +1,63 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import "./Notification.css";
 
-interface NotificationConfig {
+export interface NotificationConfig {
   message: string;
   description?: string;
   type?: "info" | "success" | "error" | "warning";
   duration?: number;
 }
 
-let notifQueue: NotificationConfig[] = [];
-let notifListeners: Array<() => void> = [];
+export interface NotificationItem extends NotificationConfig {
+  id: number;
+}
 
-function emit() {
-  notifListeners.forEach((fn) => fn());
+/* ===== 模块级单例 store：任意位置调用 notification() 都安全 ===== */
+
+let nextId = 1;
+let items: NotificationItem[] = [];
+const listeners = new Set<() => void>();
+
+function notify() {
+  listeners.forEach((fn) => fn());
+}
+
+function push(config: NotificationConfig) {
+  items = [...items, { ...config, id: nextId++ }];
+  notify();
+}
+
+function remove(id: number) {
+  items = items.filter((i) => i.id !== id);
+  notify();
 }
 
 export function notification(config: NotificationConfig) {
-  notifQueue.push(config);
-  emit();
+  push(config);
 }
 
+/* ===== Hook：订阅同一份全局状态 ===== */
+
 export function useNotification() {
-  const [items, setItems] = useState<
-    (NotificationConfig & { id: number })[]
-  >([]);
+  const [snapshot, setSnapshot] = useState<NotificationItem[]>(items);
 
   useEffect(() => {
-    const fn = () => {
-      const copy = [...notifQueue];
-      notifQueue = [];
-      if (copy.length > 0) {
-        setItems((prev) => [
-          ...prev,
-          ...copy.map((c, i) => ({ ...c, id: Date.now() + i })),
-        ]);
-      }
-    };
-    notifListeners.push(fn);
+    const fn = () => setSnapshot(items);
+    listeners.add(fn);
     return () => {
-      notifListeners = notifListeners.filter((l) => l !== fn);
+      listeners.delete(fn);
     };
   }, []);
 
-  const remove = (id: number) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+  return {
+    items: snapshot,
+    remove,
+    push,
   };
-
-  return { items, remove };
 }
 
-interface NotificationContainerProps {
-  items: (NotificationConfig & { id: number })[];
+export interface NotificationContainerProps {
+  items: NotificationItem[];
   onRemove: (id: number) => void;
 }
 
@@ -60,7 +66,7 @@ export function NotificationContainer({
   onRemove,
 }: NotificationContainerProps) {
   return (
-    <div className="pixel-notification-container">
+    <div className="pixel-notification-container" role="status" aria-live="polite">
       {items.map((item) => (
         <NotificationItem
           key={item.id}
@@ -90,7 +96,12 @@ function NotificationItem({
     <div className={clsx("pixel-notification", `pixel-notification--${type}`)}>
       <div className="pixel-notification-header">
         <span className="pixel-notification-title">{message}</span>
-        <button className="pixel-notification-close" onClick={onClose}>
+        <button
+          type="button"
+          className="pixel-notification-close"
+          onClick={onClose}
+          aria-label="Close"
+        >
           ✕
         </button>
       </div>

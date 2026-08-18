@@ -51,7 +51,7 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   font-size: 12px;
   font-weight: bold;
@@ -59,13 +59,13 @@
 }
 
 .pixel-step--completed .pixel-step-indicator {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
 .pixel-step--active .pixel-step-indicator {
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   animation: step-pulse 0.5s steps(2) infinite;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .pixel-step-line--completed {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
 }
 
 /* ── Content ── */
@@ -102,7 +102,7 @@
 
 .pixel-step-title {
   font-size: 12px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   margin-bottom: 2px;
 }
 

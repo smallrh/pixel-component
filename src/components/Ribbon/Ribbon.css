@@ -1,4 +1,4 @@
-.pixel-ribbon-wrapper {
+﻿.pixel-ribbon-wrapper {
   position: relative;
   display: inline-block;
   image-rendering: pixelated;
@@ -17,7 +17,7 @@
 }
 
 .pixel-ribbon--default {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
@@ -33,7 +33,7 @@
 
 .pixel-ribbon--green {
   background: #0a0;
-  color: #000;
+  color: var(--pixel-color-text, #000);
 }
 
 .pixel-ribbon--start {

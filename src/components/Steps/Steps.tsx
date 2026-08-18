@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Steps.css";
 
@@ -6,12 +7,12 @@ interface StepItem {
   description?: string;
 }
 
-interface StepsProps {
+export interface StepsProps {
   current: number;
   items: StepItem[];
   direction?: "horizontal" | "vertical";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Steps({

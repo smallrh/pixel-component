@@ -18,7 +18,7 @@
   justify-content: center;
   width: 100px;
   height: 100px;
-  border: 2px dashed #000;
+  border: 2px dashed var(--pixel-color-primary, #000);
   background: #fafafa;
   gap: 4px;
   font-size: 24px;
@@ -36,9 +36,36 @@
 }
 
 .pixel-upload-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding: 4px 8px;
   border: 1px solid #e0e0e0;
   margin-bottom: 4px;
   font-size: 11px;
   text-transform: none;
+}
+
+.pixel-upload-item-name--error {
+  color: #d93025;
+}
+
+.pixel-upload-status {
+  color: #999;
+}
+
+.pixel-upload-remove {
+  background: none;
+  border: 1px solid #999;
+  color: #666;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1;
+  padding: 2px 4px;
+}
+
+.pixel-upload-remove:hover {
+  border-color: var(--pixel-color-primary, #000);
+  color: var(--pixel-color-primary, #000);
 }

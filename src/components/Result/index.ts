@@ -1,1 +1,2 @@
-export { default } from "./Result";
+﻿export { default } from "./Result";
+export type { ResultProps } from "./Result";

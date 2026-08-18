@@ -1,7 +1,8 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Slider.css";
 
-interface SliderProps {
+export interface SliderProps {
   value?: number;
   onChange?: (value: number) => void;
   min?: number;
@@ -9,7 +10,7 @@ interface SliderProps {
   step?: number;
   disabled?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Slider({

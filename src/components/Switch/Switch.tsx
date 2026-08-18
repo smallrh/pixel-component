@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import "./Switch.css";
 
-interface SwitchProps {
+export interface SwitchProps {
   checked?: boolean;
   defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
   disabled?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Switch({
@@ -25,6 +25,7 @@ export default function Switch({
 
   return (
     <button
+      type="button"
       className={clsx(
         "pixel-switch",
         isChecked && "pixel-switch--checked",

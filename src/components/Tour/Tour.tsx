@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type CSSProperties, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import Button from "../Button";
 import "./Tour.css";
@@ -9,12 +9,12 @@ interface TourStep {
   target?: string; // CSS selector
 }
 
-interface TourProps {
+export interface TourProps {
   steps: TourStep[];
   open?: boolean;
   onClose?: () => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Tour({

@@ -1,1 +1,2 @@
-export { default } from "./Watermark";
+﻿export { default } from "./Watermark";
+export type { WatermarkProps } from "./Watermark";

@@ -1,1 +1,2 @@
-export { default } from "./Spin";
+﻿export { default } from "./Spin";
+export type { SpinProps } from "./Spin";

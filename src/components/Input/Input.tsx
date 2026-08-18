@@ -1,9 +1,10 @@
 import { type InputHTMLAttributes, type TextareaHTMLAttributes, useRef, useState } from "react";
 import clsx from "clsx";
 import Icon from "../Icon";
+import { useLocale, t } from "../LocaleProvider";
 import "./Input.css";
 
-interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: "outlined" | "filled";
   size?: "sm" | "md" | "lg";
 }
@@ -23,7 +24,7 @@ function InputBase({
 }
 
 // --- TextArea ---
-interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: "outlined" | "filled";
 }
 
@@ -41,7 +42,7 @@ function TextArea({
 }
 
 // --- Password ---
-interface PasswordProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface PasswordProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: "outlined" | "filled";
   size?: "sm" | "md" | "lg";
 }
@@ -53,6 +54,7 @@ function Password({
   ...props
 }: PasswordProps) {
   const [visible, setVisible] = useState(false);
+  const { messages } = useLocale();
   return (
     <span className="pixel-input-password-wrapper">
       <input
@@ -65,7 +67,7 @@ function Password({
         className="pixel-input-password-toggle"
         onClick={() => setVisible((v) => !v)}
         tabIndex={-1}
-        aria-label={visible ? "隐藏密码" : "显示密码"}
+        aria-label={visible ? t("input.hidePassword", messages) : t("input.showPassword", messages)}
       >
         <Icon name={visible ? "eye" : "eye-off"} size="sm" />
       </button>
@@ -74,7 +76,7 @@ function Password({
 }
 
 // --- Search ---
-interface SearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface SearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   variant?: "outlined" | "filled";
   size?: "sm" | "md" | "lg";
   onSearch?: (value: string) => void;
@@ -89,6 +91,7 @@ function Search({
   ...props
 }: SearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { messages } = useLocale();
   return (
     <span className="pixel-input-search-wrapper">
       <input
@@ -102,7 +105,7 @@ function Search({
         type="button"
         className="pixel-input-search-btn"
         onClick={() => onSearch?.(inputRef.current?.value ?? "")}
-        aria-label="搜索"
+        aria-label={t("input.search", messages)}
       >
         <Icon name="search" size="sm" />
       </button>

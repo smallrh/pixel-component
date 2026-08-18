@@ -1,13 +1,13 @@
-import { type ReactNode, type AnchorHTMLAttributes } from "react";
+import { type CSSProperties, type ReactNode, type AnchorHTMLAttributes } from "react";
 import clsx from "clsx";
 import "./Typography.css";
 
 /* ── Title ── */
-interface TitleProps {
+export interface TitleProps {
   level?: 1 | 2 | 3 | 4 | 5;
   children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Title({ level = 1, children, className, style }: TitleProps) {
@@ -20,7 +20,7 @@ export function Title({ level = 1, children, className, style }: TitleProps) {
 }
 
 /* ── Text ── */
-interface TextProps {
+export interface TextProps {
   type?: "default" | "secondary" | "disabled";
   strong?: boolean;
   code?: boolean;
@@ -29,7 +29,7 @@ interface TextProps {
   underline?: boolean;
   children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Text({
@@ -64,10 +64,10 @@ export function Text({
 }
 
 /* ── Paragraph ── */
-interface ParagraphProps {
+export interface ParagraphProps {
   children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Paragraph({ children, className, style }: ParagraphProps) {
@@ -79,7 +79,7 @@ export function Paragraph({ children, className, style }: ParagraphProps) {
 }
 
 /* ── Link ── */
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: ReactNode;
   className?: string;
 }

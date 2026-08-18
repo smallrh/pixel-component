@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Result.css";
 
-interface ResultProps {
+export interface ResultProps {
   status?: "success" | "error" | "info" | "warning" | "404" | "500";
-  title: React.ReactNode;
-  subTitle?: React.ReactNode;
-  extra?: React.ReactNode;
+  title: ReactNode;
+  subTitle?: ReactNode;
+  extra?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 const iconMap: Record<string, string> = {

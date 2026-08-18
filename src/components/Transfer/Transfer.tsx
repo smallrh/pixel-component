@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import Button from "../Button";
 import "./Transfer.css";
@@ -8,12 +8,12 @@ interface TransferItem {
   title: string;
 }
 
-interface TransferProps {
+export interface TransferProps {
   dataSource: TransferItem[];
   targetKeys?: string[];
   onChange?: (targetKeys: string[]) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Transfer({

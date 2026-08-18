@@ -1,10 +1,10 @@
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Layout.css";
 
-interface LayoutProps {
+export interface LayoutProps {
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
   hasSider?: boolean;
 }
@@ -36,7 +36,7 @@ export function Header({
   children,
 }: {
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
 }) {
   return (
@@ -47,9 +47,9 @@ export function Header({
 }
 
 /* ── Sider ── */
-interface SiderProps {
+export interface SiderProps {
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
   width?: number;
   collapsed?: boolean;
@@ -83,7 +83,7 @@ export function Content({
   children,
 }: {
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
 }) {
   return (

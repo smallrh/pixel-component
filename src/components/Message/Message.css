@@ -12,7 +12,7 @@
 
 .pixel-message {
   padding: 8px 16px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
@@ -22,7 +22,7 @@
   white-space: nowrap;
 }
 
-.pixel-message--info { background: #e8f0fe; color: #000; }
-.pixel-message--success { background: #e6f7e6; color: #000; }
-.pixel-message--error { background: #ffe6e6; color: #000; }
-.pixel-message--warning { background: #fff7e6; color: #000; }
+.pixel-message--info { background: #e8f0fe; color: var(--pixel-color-text, #000); }
+.pixel-message--success { background: #e6f7e6; color: var(--pixel-color-text, #000); }
+.pixel-message--error { background: #ffe6e6; color: var(--pixel-color-text, #000); }
+.pixel-message--warning { background: #fff7e6; color: var(--pixel-color-text, #000); }

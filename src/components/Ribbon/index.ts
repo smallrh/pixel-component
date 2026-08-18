@@ -1,1 +1,2 @@
-export { default } from "./Ribbon";
+﻿export { default } from "./Ribbon";
+export type { RibbonProps } from "./Ribbon";

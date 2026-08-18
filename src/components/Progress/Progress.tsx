@@ -1,12 +1,13 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Progress.css";
 
-interface ProgressProps {
+export interface ProgressProps {
   percent: number;
   showInfo?: boolean;
   strokeColor?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Progress({

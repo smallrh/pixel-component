@@ -1,3 +1,4 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Table.css";
 
@@ -5,16 +6,16 @@ export interface TableColumn {
   key: string;
   title: string;
   dataIndex: string;
-  render?: (value: unknown, record: Record<string, unknown>, index: number) => React.ReactNode;
+  render?: (value: unknown, record: Record<string, unknown>, index: number) => ReactNode;
 }
 
-interface TableProps {
+export interface TableProps {
   columns: TableColumn[];
   dataSource: Record<string, unknown>[];
   rowKey?: string;
   bordered?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Table({
@@ -44,7 +45,7 @@ export default function Table({
                 <td key={col.key} className="pixel-table-td">
                   {col.render
                     ? col.render(record[col.dataIndex], record, rowIndex)
-                    : (record[col.dataIndex] as React.ReactNode)}
+                    : (record[col.dataIndex] as ReactNode)}
                 </td>
               ))}
             </tr>

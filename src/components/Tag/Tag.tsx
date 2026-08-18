@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Tag.css";
 
-interface TagProps {
-  children: React.ReactNode;
+export interface TagProps {
+  children: ReactNode;
   closable?: boolean;
   onClose?: () => void;
   color?: "default" | "red" | "green" | "blue" | "yellow";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 const colorMap: Record<string, { bg: string; text: string }> = {
@@ -41,12 +42,13 @@ export default function Tag({
       {children}
       {closable && (
         <button
+          type="button"
           className="pixel-tag-close"
           onClick={(e) => {
             e.stopPropagation();
             onClose?.();
           }}
-          aria-label="close"
+          aria-label="Close"
         >
           ✕
         </button>

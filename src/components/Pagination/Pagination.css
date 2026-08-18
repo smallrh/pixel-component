@@ -22,11 +22,11 @@
   height: 32px;
   padding: 0 8px;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   font-family: var(--pixel-font);
   font-size: 12px;
   cursor: pointer;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   transition: all 0.05s ease;
 }
 
@@ -39,9 +39,9 @@
 }
 
 .pixel-pagination-btn--active {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
-  border-color: #000;
+  border-color: var(--pixel-color-primary, #000);
 }
 
 .pixel-pagination-btn:disabled {

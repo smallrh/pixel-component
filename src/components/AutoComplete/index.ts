@@ -1,1 +1,2 @@
-export { default } from "./AutoComplete";
+﻿export { default } from "./AutoComplete";
+export type { AutoCompleteProps } from "./AutoComplete";

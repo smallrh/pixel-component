@@ -1,16 +1,17 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Timeline.css";
 
 interface TimelineItem {
   key: string;
-  children: React.ReactNode;
+  children: ReactNode;
   color?: "default" | "red" | "green" | "blue";
 }
 
-interface TimelineProps {
+export interface TimelineProps {
   items: TimelineItem[];
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Timeline({

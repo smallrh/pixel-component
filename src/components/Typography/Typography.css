@@ -1,9 +1,9 @@
-/* ── Title ── */
+﻿/* 鈹€鈹€ Title 鈹€鈹€ */
 .pixel-title {
   font-family: var(--pixel-font);
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   margin: 0;
   margin-bottom: 8px;
   image-rendering: pixelated;
@@ -15,11 +15,11 @@
 .pixel-title--h4 { font-size: 14px; }
 .pixel-title--h5 { font-size: 12px; }
 
-/* ── Text ── */
+/* 鈹€鈹€ Text 鈹€鈹€ */
 .pixel-text {
   font-family: var(--pixel-font);
   font-size: 13px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   image-rendering: pixelated;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .pixel-text--mark {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
   padding: 0 2px;
 }
@@ -60,22 +60,22 @@
   font-size: 12px;
 }
 
-/* ── Paragraph ── */
+/* 鈹€鈹€ Paragraph 鈹€鈹€ */
 .pixel-paragraph {
   font-family: var(--pixel-font);
   font-size: 13px;
   line-height: 1.8;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   margin: 0;
   margin-bottom: 8px;
   image-rendering: pixelated;
 }
 
-/* ── Link ── */
+/* 鈹€鈹€ Link 鈹€鈹€ */
 .pixel-link {
   font-family: var(--pixel-font);
   font-size: 13px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -84,7 +84,7 @@
 }
 
 .pixel-link:hover {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 

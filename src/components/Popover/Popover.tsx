@@ -1,15 +1,15 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { type CSSProperties, useState, useRef, useEffect, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Popover.css";
 
-interface PopoverProps {
+export interface PopoverProps {
   title?: ReactNode;
   content: ReactNode;
   children: ReactNode;
   trigger?: "click" | "hover";
   placement?: "top" | "bottom" | "left" | "right";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Popover({

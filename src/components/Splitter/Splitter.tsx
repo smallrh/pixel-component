@@ -1,14 +1,22 @@
-import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import clsx from "clsx";
 import "./Splitter.css";
 
-interface SplitterProps {
+export interface SplitterProps {
   direction?: "horizontal" | "vertical";
   defaultRatio?: number;
   minRatio?: number;
   maxRatio?: number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: [ReactNode, ReactNode];
 }
 
@@ -25,7 +33,7 @@ export default function Splitter({
   const [ratio, setRatio] = useState(defaultRatio);
   const dragging = useRef(false);
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+  const handleMouseDown = useCallback((e: ReactMouseEvent) => {
     e.preventDefault();
     dragging.current = true;
   }, []);

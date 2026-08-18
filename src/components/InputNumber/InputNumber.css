@@ -8,9 +8,9 @@
   font-family: var(--pixel-font);
   font-size: 12px;
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   outline: none;
@@ -45,7 +45,7 @@
   display: flex;
   flex-direction: column;
   width: 22px;
-  border-left: 2px solid #000;
+  border-left: 2px solid var(--pixel-color-primary, #000);
   box-sizing: border-box;
 }
 
@@ -53,7 +53,7 @@
   flex: 1;
   border: none;
   background: #fff;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   font-size: 8px;
   font-family: var(--pixel-font);
   cursor: pointer;
@@ -66,7 +66,7 @@
 }
 
 .pixel-input-number-control:hover:not(:disabled) {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
@@ -80,5 +80,5 @@
 }
 
 .pixel-input-number-down {
-  border-top: 2px solid #000;
+  border-top: 2px solid var(--pixel-color-primary, #000);
 }

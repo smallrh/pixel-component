@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   cursor: pointer;
   gap: 8px;
@@ -38,7 +38,7 @@
   left: 0;
   right: 0;
   z-index: 920;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   border-top: none;
   background: #fff;
   max-height: 200px;
@@ -56,6 +56,24 @@
 }
 
 .pixel-select-option--selected {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
+}
+
+.pixel-select-option--highlighted {
+  outline: 2px dashed var(--pixel-color-primary, #000);
+  outline-offset: -2px;
+}
+
+.pixel-select-trigger:focus-visible {
+  outline: 2px solid var(--pixel-color-primary, #000);
+  outline-offset: 1px;
+}
+
+.pixel-select--disabled {
+  opacity: 0.5;
+}
+
+.pixel-select--disabled .pixel-select-trigger {
+  cursor: not-allowed;
 }

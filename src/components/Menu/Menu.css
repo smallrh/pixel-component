@@ -4,7 +4,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
 }
 
@@ -27,7 +27,7 @@
   left: 0;
   z-index: 920;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   list-style: none;
   margin: 0;
   padding: 4px 0;
@@ -63,7 +63,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   text-align: left;
   transition: all 0.05s ease;
 }
@@ -73,7 +73,7 @@
 }
 
 .pixel-menu-item--selected > .pixel-menu-item-btn {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 
@@ -115,6 +115,6 @@
 }
 
 .pixel-menu-item--sub.pixel-menu-item--selected > .pixel-menu-item-btn {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }

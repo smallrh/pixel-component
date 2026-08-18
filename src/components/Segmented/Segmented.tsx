@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { type CSSProperties, type ReactNode, useState } from "react";
 import clsx from "clsx";
 import "./Segmented.css";
 
 interface SegmentedOption {
-  label: React.ReactNode;
+  label: ReactNode;
   value: string;
   disabled?: boolean;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }
 
-interface SegmentedProps {
+export interface SegmentedProps {
   options: SegmentedOption[];
   value?: string;
   defaultValue?: string;
@@ -18,7 +18,7 @@ interface SegmentedProps {
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Segmented({

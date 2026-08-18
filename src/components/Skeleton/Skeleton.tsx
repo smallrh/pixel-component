@@ -1,11 +1,11 @@
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Skeleton.css";
 
 type Size = "sm" | "md" | "lg";
 type Shape = "circle" | "square" | "round";
 
-interface SkeletonProps {
+export interface SkeletonProps {
   active?: boolean;
   loading?: boolean;
   title?: boolean;
@@ -15,7 +15,7 @@ interface SkeletonProps {
   width?: string | number;
   children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function Skeleton({
@@ -64,12 +64,12 @@ function Skeleton({
 }
 
 // --- Skeleton.Avatar ---
-interface AvatarProps {
+export interface AvatarProps {
   active?: boolean;
   size?: number | Size;
   shape?: Shape;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function SkeletonAvatar({
@@ -96,13 +96,13 @@ function SkeletonAvatar({
 }
 
 // --- Skeleton.Button ---
-interface ButtonProps {
+export interface ButtonProps {
   active?: boolean;
   size?: Size;
   shape?: Shape;
   block?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function SkeletonButton({
@@ -131,11 +131,11 @@ function SkeletonButton({
 }
 
 // --- Skeleton.Input ---
-interface InputProps {
+export interface InputProps {
   active?: boolean;
   size?: Size;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function SkeletonInput({
@@ -160,10 +160,10 @@ function SkeletonInput({
 }
 
 // --- Skeleton.Image ---
-interface ImageProps {
+export interface ImageProps {
   active?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function SkeletonImage({

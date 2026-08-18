@@ -1,4 +1,5 @@
-import { createContext, useContext, type ReactNode } from "react";
+import { type CSSProperties, createContext, useContext, type ReactNode } from "react";
+import { useConfig } from "../ConfigProvider";
 
 interface TokenMap {
   colorPrimary: string;
@@ -20,13 +21,21 @@ const defaultTokens: TokenMap = {
 
 export const ThemeContext = createContext<TokenMap>(defaultTokens);
 
-interface ThemeProps {
+export interface ThemeProps {
   tokens?: Partial<TokenMap>;
   children: ReactNode;
 }
 
 export default function Theme({ tokens, children }: ThemeProps) {
-  const merged = { ...defaultTokens, ...tokens };
+  // 优先消费 ConfigProvider 的 theme，再合并局部 tokens
+  const { theme } = useConfig();
+  const merged = {
+    ...defaultTokens,
+    colorPrimary: theme.primaryColor ?? defaultTokens.colorPrimary,
+    fontFamily: theme.fontFamily ?? defaultTokens.fontFamily,
+    borderRadius: theme.borderRadius ?? defaultTokens.borderRadius,
+    ...tokens,
+  };
   return (
     <ThemeContext.Provider value={merged}>
       <div
@@ -37,7 +46,7 @@ export default function Theme({ tokens, children }: ThemeProps) {
           "--pixel-border-radius": `${merged.borderRadius}px`,
           "--pixel-font-family": merged.fontFamily,
           "--pixel-spacing": `${merged.spacing}px`,
-        } as React.CSSProperties}
+        } as CSSProperties}
       >
         {children}
       </div>

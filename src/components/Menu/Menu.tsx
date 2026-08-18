@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { type CSSProperties, type ReactNode, useState } from "react";
 import clsx from "clsx";
 import "./Menu.css";
 
 interface MenuItem {
   key: string;
-  label: React.ReactNode;
-  icon?: React.ReactNode;
+  label: ReactNode;
+  icon?: ReactNode;
   disabled?: boolean;
   children?: MenuItem[];
 }
 
-interface MenuProps {
+export interface MenuProps {
   items: MenuItem[];
   mode?: "horizontal" | "vertical";
   defaultSelectedKey?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onSelect?: (key: string) => void;
 }
 
@@ -57,6 +57,7 @@ export default function Menu({
         )}
       >
         <button
+          type="button"
           className="pixel-menu-item-btn"
           disabled={item.disabled}
           onClick={() => {

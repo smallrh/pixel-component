@@ -9,7 +9,7 @@
   position: absolute;
   z-index: 950;
   padding: 6px 10px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
   font-family: var(--pixel-font);
   font-size: 11px;

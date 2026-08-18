@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Radio.css";
 
@@ -6,13 +7,13 @@ interface RadioOption {
   value: string;
 }
 
-interface RadioProps {
+export interface RadioProps {
   options: RadioOption[];
   value?: string;
   onChange?: (value: string) => void;
   direction?: "horizontal" | "vertical";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Radio({

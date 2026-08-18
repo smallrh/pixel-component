@@ -1,11 +1,12 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./QRCode.css";
 
-interface QRCodeProps {
+export interface QRCodeProps {
   value?: string;
   size?: number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 // Simple visual QR-code-like grid (decorative pixel pattern)

@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Spin.css";
 
-interface SpinProps {
+export interface SpinProps {
   spinning?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
   tip?: string;
   size?: "sm" | "md" | "lg";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Spin({

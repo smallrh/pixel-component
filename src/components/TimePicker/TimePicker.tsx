@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { type CSSProperties, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import "./TimePicker.css";
 
-interface TimePickerProps {
+export interface TimePickerProps {
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function TimePicker({
@@ -70,7 +70,7 @@ export default function TimePicker({
               ))}
             </div>
           </div>
-          <button className="pixel-timepicker-ok" onClick={select}>
+          <button type="button" className="pixel-timepicker-ok" onClick={select}>
             OK
           </button>
         </div>

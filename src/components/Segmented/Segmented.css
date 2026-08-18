@@ -1,6 +1,6 @@
 .pixel-segmented {
   display: inline-flex;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
@@ -47,7 +47,7 @@
 }
 
 .pixel-segmented-item--active {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
 }
 

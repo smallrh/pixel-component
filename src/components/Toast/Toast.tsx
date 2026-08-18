@@ -2,7 +2,7 @@ import { type ReactNode, useEffect, useState } from "react";
 import clsx from "clsx";
 import "./Toast.css";
 
-interface ToastProps {
+export interface ToastProps {
   open: boolean;
   onClose: () => void;
   message: string;
@@ -51,10 +51,12 @@ export default function Toast({
       <span className="pixel-toast-message">{message}</span>
       {action && <div className="pixel-toast-action">{action}</div>}
       <button
+        type="button"
         className="pixel-toast-close"
         onClick={() => {
           if (!closing) setClosing(true);
         }}
+        aria-label="Close"
       >
         ✕
       </button>

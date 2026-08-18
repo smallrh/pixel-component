@@ -1,4 +1,4 @@
-.pixel-mentions {
+﻿.pixel-mentions {
   position: relative;
   align-self: flex-start;
   font-family: var(--pixel-font);
@@ -11,7 +11,7 @@
 .pixel-mentions-textarea {
   width: 100%;
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   font-family: var(--pixel-font);
   font-size: 12px;
@@ -27,7 +27,7 @@
   right: 0;
   z-index: 920;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   border-top: none;
   max-height: 140px;
   overflow-y: auto;

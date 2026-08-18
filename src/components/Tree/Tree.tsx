@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import "./Tree.css";
 
-interface TreeNode {
+export interface TreeNode {
   title: string;
   key: string;
   children?: TreeNode[];
   disabled?: boolean;
 }
 
-interface TreeProps {
+export interface TreeProps {
   treeData: TreeNode[];
   defaultExpandAll?: boolean;
   defaultSelectedKeys?: string[];
@@ -18,7 +18,7 @@ interface TreeProps {
   onSelect?: (key: string, selected: boolean) => void;
   onCheck?: (checkedKeys: string[]) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 function hasChildren(node: TreeNode): boolean {
@@ -36,22 +36,35 @@ function getExpandableKeys(nodes: TreeNode[]): string[] {
   return keys;
 }
 
-function getChildKeys(node: TreeNode): string[] {
-  if (!node.children) return [];
-  return node.children.flatMap((c) => [c.key, ...getChildKeys(c)]);
+/** 收集节点自身 + 全部后代 key */
+function getSubtreeKeys(node: TreeNode): string[] {
+  return [node.key, ...(node.children ? node.children.flatMap(getSubtreeKeys) : [])];
 }
 
-/** 根据当前已勾选集合计算某节点的勾选状态 */
-function getCheckState(node: TreeNode, checkedKeys: string[]): {
+/** 构建 key -> 直接父节点 的映射 */
+function buildParentMap(nodes: TreeNode[], parent?: TreeNode): Map<string, TreeNode> {
+  const map = new Map<string, TreeNode>();
+  nodes.forEach((n) => {
+    if (parent) map.set(n.key, parent);
+    if (n.children) {
+      const childMap = buildParentMap(n.children, n);
+      childMap.forEach((v, k) => map.set(k, v));
+    }
+  });
+  return map;
+}
+
+/** 根据子树勾选情况计算节点的勾选状态 */
+function getCheckState(node: TreeNode, checkedKeys: Set<string>): {
   checked: boolean;
   indeterminate: boolean;
 } {
   if (!hasChildren(node)) {
-    return { checked: checkedKeys.includes(node.key), indeterminate: false };
+    return { checked: checkedKeys.has(node.key), indeterminate: false };
   }
-  const childKeys = getChildKeys(node);
-  const checkedChildren = childKeys.filter((k) => checkedKeys.includes(k)).length;
-  if (checkedChildren === childKeys.length) {
+  const childKeys = (node.children ?? []).map((c) => c.key);
+  const checkedChildren = childKeys.filter((k) => checkedKeys.has(k)).length;
+  if (checkedChildren === childKeys.length && childKeys.length > 0) {
     return { checked: true, indeterminate: false };
   }
   if (checkedChildren > 0) {
@@ -78,7 +91,7 @@ function TreeNodeItem({
   onToggle: (key: string) => void;
   selectedKey?: string;
   onSelect: (key: string) => void;
-  checkedKeys: string[];
+  checkedKeys: Set<string>;
   onCheckNode: (node: TreeNode, checked: boolean) => void;
 }) {
   const hasCh = hasChildren(node);
@@ -94,6 +107,8 @@ function TreeNodeItem({
         )}
         style={{ paddingLeft: level * 20 }}
         onClick={() => onSelect(node.key)}
+        role="treeitem"
+        aria-selected={selectedKey === node.key}
       >
         {hasCh ? (
           <span
@@ -119,6 +134,8 @@ function TreeNodeItem({
               e.stopPropagation();
               if (!node.disabled) onCheckNode(node, !checked);
             }}
+            role="checkbox"
+            aria-checked={indeterminate ? "mixed" : checked}
           >
             <span className="pixel-tree-checkbox-inner" />
           </span>
@@ -171,7 +188,9 @@ export default function Tree({
   const [selectedKey, setSelectedKey] = useState<string | undefined>(
     defaultSelectedKeys[0]
   );
-  const [checkedKeys, setCheckedKeys] = useState<string[]>(defaultCheckedKeys);
+  const [checkedKeys, setCheckedKeys] = useState<Set<string>>(
+    new Set(defaultCheckedKeys)
+  );
 
   const handleSelect = (key: string) => {
     const next = key === selectedKey ? undefined : key;
@@ -180,19 +199,41 @@ export default function Tree({
   };
 
   const handleCheckNode = (node: TreeNode, checked: boolean) => {
-    const affected = [node.key, ...getChildKeys(node)];
+    const parentMap = buildParentMap(treeData);
     const next = new Set(checkedKeys);
+
+    // 1. 勾选/取消自身 + 全部子树
+    const subtree = getSubtreeKeys(node);
     if (checked) {
-      affected.forEach((k) => next.add(k));
+      subtree.forEach((k) => next.add(k));
     } else {
-      affected.forEach((k) => next.delete(k));
+      subtree.forEach((k) => next.delete(k));
     }
-    setCheckedKeys([...next]);
+
+    // 2. 向上联动祖先：子节点全部勾选 -> 父勾选；否则父取消
+    let current: TreeNode | undefined = node;
+    let parent = parentMap.get(current.key);
+    while (parent) {
+      const siblings = parent.children ?? [];
+      const allChecked = siblings.every((s) => next.has(s.key));
+      const anyChecked = siblings.some((s) => next.has(s.key));
+      if (allChecked) {
+        next.add(parent.key);
+      } else if (anyChecked) {
+        next.delete(parent.key);
+      } else {
+        next.delete(parent.key);
+      }
+      current = parent;
+      parent = parentMap.get(current.key);
+    }
+
+    setCheckedKeys(next);
     onCheck?.([...next]);
   };
 
   return (
-    <div className={clsx("pixel-tree", className)} style={style}>
+    <div className={clsx("pixel-tree", className)} style={style} role="tree">
       {treeData.map((node) => (
         <TreeNodeItem
           key={node.key}

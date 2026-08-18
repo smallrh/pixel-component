@@ -1,67 +1,70 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import "./Message.css";
 
-interface MessageConfig {
+export interface MessageConfig {
   content: string;
   type?: "info" | "success" | "error" | "warning";
   duration?: number;
 }
 
-let messageQueue: MessageConfig[] = [];
-let listeners: Array<() => void> = [];
+export interface MessageItem extends MessageConfig {
+  id: number;
+  visible: boolean;
+}
 
-function emit() {
+/* ===== 模块级单例 store：任意位置调用 message() 都安全 ===== */
+
+let nextId = 1;
+let items: MessageItem[] = [];
+const listeners = new Set<() => void>();
+
+function notify() {
   listeners.forEach((fn) => fn());
 }
 
-export function message(config: MessageConfig) {
-  messageQueue.push(config);
-  emit();
+function push(config: MessageConfig) {
+  items = [...items, { ...config, id: nextId++, visible: true }];
+  notify();
 }
 
-// Singleton render hook
-export  function useMessage() {
-  const [items, setItems] = useState<
-    (MessageConfig & { id: number; visible: boolean })[]
-  >([]);
+function remove(id: number) {
+  items = items.filter((i) => i.id !== id);
+  notify();
+}
+
+export function message(config: MessageConfig) {
+  push(config);
+}
+
+/* ===== Hook：订阅同一份全局状态 ===== */
+
+export function useMessage() {
+  const [snapshot, setSnapshot] = useState<MessageItem[]>(items);
 
   useEffect(() => {
-    const fn = () => {
-      const copy = [...messageQueue];
-      messageQueue = [];
-      if (copy.length > 0) {
-        setItems((prev) => [
-          ...prev,
-          ...copy.map((c, i) => ({
-            ...c,
-            id: Date.now() + i,
-            visible: true,
-          })),
-        ]);
-      }
-    };
-    listeners.push(fn);
+    const fn = () => setSnapshot(items);
+    listeners.add(fn);
     return () => {
-      listeners = listeners.filter((l) => l !== fn);
+      listeners.delete(fn);
     };
   }, []);
 
-  const remove = (id: number) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+  return {
+    items: snapshot,
+    remove,
+    // 便捷方法：useMessage().push(...) 等价于 message(...)
+    push,
   };
-
-  return { items, remove };
 }
 
-interface MessageContainerProps {
-  items: (MessageConfig & { id: number; visible: boolean })[];
+export interface MessageContainerProps {
+  items: MessageItem[];
   onRemove: (id: number) => void;
 }
 
 export function MessageContainer({ items, onRemove }: MessageContainerProps) {
   return (
-    <div className="pixel-message-container">
+    <div className="pixel-message-container" role="status" aria-live="polite">
       {items.map((item) => (
         <MessageItem key={item.id} {...item} onDone={() => onRemove(item.id)} />
       ))}

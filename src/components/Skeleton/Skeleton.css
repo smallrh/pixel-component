@@ -1,4 +1,4 @@
-.pixel-skeleton {
+﻿.pixel-skeleton {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -19,7 +19,7 @@
 
 .pixel-skeleton-line {
   height: 12px;
-  border: 1px solid #000;
+  border: 1px solid var(--pixel-color-primary, #000);
   background: #e8e8e8;
 }
 
@@ -46,7 +46,7 @@
   position: relative;
   width: 40px;
   height: 40px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #e8e8e8;
   flex-shrink: 0;
   overflow: hidden;
@@ -64,7 +64,7 @@
   position: relative;
   height: 32px;
   width: 64px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #e8e8e8;
   overflow: hidden;
 }
@@ -81,7 +81,7 @@
 .pixel-skeleton-input {
   position: relative;
   height: 32px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   overflow: hidden;
 }
@@ -94,7 +94,7 @@
   position: relative;
   width: 120px;
   height: 120px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #e8e8e8;
   overflow: hidden;
   display: flex;

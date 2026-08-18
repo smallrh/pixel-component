@@ -1,15 +1,16 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./PageHeader.css";
 
-interface PageHeaderProps {
-  title: React.ReactNode;
-  subTitle?: React.ReactNode;
-  breadcrumb?: React.ReactNode;
-  extra?: React.ReactNode;
-  footer?: React.ReactNode;
+export interface PageHeaderProps {
+  title: ReactNode;
+  subTitle?: ReactNode;
+  breadcrumb?: ReactNode;
+  extra?: ReactNode;
+  footer?: ReactNode;
   onBack?: () => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function PageHeader({
@@ -28,7 +29,7 @@ export default function PageHeader({
       <div className="pixel-page-header-row">
         <div className="pixel-page-header-left">
           {onBack && (
-            <button className="pixel-page-header-back" onClick={onBack}>
+            <button type="button" className="pixel-page-header-back" onClick={onBack} aria-label="Back">
               ◀
             </button>
           )}

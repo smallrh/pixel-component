@@ -1,13 +1,14 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Pagination.css";
 
-interface PaginationProps {
+export interface PaginationProps {
   current: number;
   total: number;
   pageSize?: number;
   showTotal?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onChange?: (page: number) => void;
 }
 
@@ -49,9 +50,11 @@ export default function Pagination({
       )}
 
       <button
+        type="button"
         className="pixel-pagination-btn"
         disabled={current <= 1}
         onClick={() => onChange?.(current - 1)}
+        aria-label="Previous page"
       >
         ◀
       </button>
@@ -63,12 +66,14 @@ export default function Pagination({
           </span>
         ) : (
           <button
+            type="button"
             key={page}
             className={clsx(
               "pixel-pagination-btn",
               page === current && "pixel-pagination-btn--active"
             )}
             onClick={() => onChange?.(page)}
+            aria-current={page === current ? "page" : undefined}
           >
             {page}
           </button>
@@ -76,9 +81,11 @@ export default function Pagination({
       )}
 
       <button
+        type="button"
         className="pixel-pagination-btn"
         disabled={current >= totalPages}
         onClick={() => onChange?.(current + 1)}
+        aria-label="Next page"
       >
         ▶
       </button>

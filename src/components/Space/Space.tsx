@@ -1,13 +1,13 @@
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Space.css";
 
-interface SpaceProps {
+export interface SpaceProps {
   direction?: "horizontal" | "vertical";
   size?: "sm" | "md" | "lg";
   wrap?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
 }
 

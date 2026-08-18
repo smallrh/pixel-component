@@ -5,7 +5,7 @@
   letter-spacing: 0.5px;
   image-rendering: pixelated;
   padding-bottom: 12px;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--pixel-color-primary, #000);
   margin-bottom: 16px;
 }
 
@@ -30,7 +30,7 @@
 
 .pixel-page-header-back {
   background: none;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   width: 28px;
   height: 28px;
   cursor: pointer;

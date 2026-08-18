@@ -14,11 +14,11 @@
 
 .pixel-table--bordered .pixel-table-th,
 .pixel-table--bordered .pixel-table-td {
-  border: 1px solid #000;
+  border: 1px solid var(--pixel-color-primary, #000);
 }
 
 .pixel-table-th {
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
   padding: 8px 12px;
   text-align: left;
@@ -28,7 +28,7 @@
 
 .pixel-table-td {
   padding: 8px 12px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   background: #fff;
   transition: background 0.05s ease;
 }
@@ -49,7 +49,7 @@
   text-align: center;
   padding: 24px;
   color: #999;
-  border: 1px solid #000;
+  border: 1px solid var(--pixel-color-primary, #000);
   border-top: none;
   font-family: var(--pixel-font);
   font-size: 12px;

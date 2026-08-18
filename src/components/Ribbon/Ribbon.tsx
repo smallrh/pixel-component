@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Ribbon.css";
 
-interface RibbonProps {
-  children: React.ReactNode;
+export interface RibbonProps {
+  children: ReactNode;
   text?: string;
   placement?: "start" | "end";
   color?: "default" | "red" | "blue" | "green";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Ribbon({

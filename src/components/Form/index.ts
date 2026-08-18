@@ -1,1 +1,2 @@
-export { default, FormItem } from "./Form";
+﻿export { default, FormItem, useForm } from "./Form";
+export type { FormRule, FormInstance, FormProps } from "./Form";

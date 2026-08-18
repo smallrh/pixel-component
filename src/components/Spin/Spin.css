@@ -28,7 +28,7 @@
 .pixel-spin-dot {
   width: 16px;
   height: 16px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   animation: pixel-spin-blink 0.6s steps(2) infinite;
 }
 
@@ -47,7 +47,7 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
 }
 
 @keyframes pixel-spin-blink {

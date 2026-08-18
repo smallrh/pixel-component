@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { type CSSProperties, useState, useRef, useEffect, type ReactNode } from "react";
 import clsx from "clsx";
 import Button from "../Button";
 import "./Popconfirm.css";
 
-interface PopconfirmProps {
+export interface PopconfirmProps {
   title: ReactNode;
   children: ReactNode;
   onConfirm?: () => void;
@@ -11,7 +11,7 @@ interface PopconfirmProps {
   okText?: string;
   cancelText?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Popconfirm({

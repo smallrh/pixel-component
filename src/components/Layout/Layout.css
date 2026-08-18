@@ -1,4 +1,4 @@
-/* ── Layout Container ── */
+﻿/* 鈹€鈹€ Layout Container 鈹€鈹€ */
 .pixel-layout {
   display: flex;
   flex-direction: column;
@@ -10,26 +10,26 @@
   flex-direction: row;
 }
 
-/* ── Header ── */
+/* 鈹€鈹€ Header 鈹€鈹€ */
 .pixel-layout-header {
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  background: #000;
+  background: var(--pixel-color-primary, #000);
   color: #fff;
   font-family: var(--pixel-font);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--pixel-color-primary, #000);
 }
 
-/* ── Sider ── */
+/* 鈹€鈹€ Sider 鈹€鈹€ */
 .pixel-layout-sider {
   display: flex;
   flex-direction: column;
   background: #e8e8e8;
-  border-right: 2px solid #000;
+  border-right: 2px solid var(--pixel-color-primary, #000);
   padding: 8px 0;
   font-family: var(--pixel-font);
   font-size: 12px;
@@ -41,17 +41,17 @@
   width: 48px !important;
 }
 
-/* ── Content ── */
+/* 鈹€鈹€ Content 鈹€鈹€ */
 .pixel-layout-content {
   flex: 1;
   padding: 16px;
   font-family: var(--pixel-font);
   font-size: 13px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
   background: #fff;
 }
 
-/* ── Footer ── */
+/* 鈹€鈹€ Footer 鈹€鈹€ */
 .pixel-layout-footer {
   display: flex;
   align-items: center;
@@ -63,5 +63,5 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #999;
-  border-top: 2px solid #000;
+  border-top: 2px solid var(--pixel-color-primary, #000);
 }

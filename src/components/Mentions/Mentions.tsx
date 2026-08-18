@@ -1,14 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { type ChangeEvent, type CSSProperties, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import "./Mentions.css";
 
-interface MentionsProps {
+export interface MentionsProps {
   options: { label: string; value: string }[];
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Mentions({
@@ -24,6 +24,13 @@ export default function Mentions({
   const [filter, setFilter] = useState("");
   const ref = useRef<HTMLDivElement>(null);
 
+  // 外部受控 value 变化时同步内部 text（渲染期间调整，React 官方推荐模式）
+  const [prevValue, setPrevValue] = useState(value);
+  if (prevValue !== value) {
+    setPrevValue(value);
+    setText(value);
+  }
+
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
@@ -32,7 +39,7 @@ export default function Mentions({
     return () => document.removeEventListener("mousedown", handle);
   }, [open]);
 
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
     setText(val);
     onChange?.(val);
