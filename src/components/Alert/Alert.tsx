@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { type CSSProperties, type ReactNode, useState } from "react";
 import clsx from "clsx";
 import "./Alert.css";
 
-interface AlertProps {
-  message: React.ReactNode;
-  description?: React.ReactNode;
+export interface AlertProps {
+  message: ReactNode;
+  description?: ReactNode;
   type?: "info" | "success" | "warning" | "error";
   closable?: boolean;
   showIcon?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 const iconMap: Record<string, string> = {
@@ -42,7 +42,12 @@ export default function Alert({
         {description && <div className="pixel-alert-desc">{description}</div>}
       </div>
       {closable && (
-        <button className="pixel-alert-close" onClick={() => setClosed(true)}>
+        <button
+          type="button"
+          className="pixel-alert-close"
+          onClick={() => setClosed(true)}
+          aria-label="Close"
+        >
           ✕
         </button>
       )}
