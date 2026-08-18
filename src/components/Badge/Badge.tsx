@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Badge.css";
 
-interface BadgeProps {
+export interface BadgeProps {
   count?: number;
   dot?: boolean;
   overflowCount?: number;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Badge({
