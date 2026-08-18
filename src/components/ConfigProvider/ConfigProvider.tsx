@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from "react";
+import { type CSSProperties, createContext, useContext, type ReactNode } from "react";
 
 export interface PixelTheme {
   primaryColor?: string;
@@ -20,7 +20,7 @@ const ConfigContext = createContext<ConfigContextValue>({
   theme: defaultTheme,
 });
 
-interface ConfigProviderProps {
+export interface ConfigProviderProps {
   theme?: PixelTheme;
   locale?: string;
   children: ReactNode;
@@ -34,7 +34,15 @@ export default function ConfigProvider({
   const mergedTheme = { ...defaultTheme, ...theme };
   return (
     <ConfigContext.Provider value={{ theme: mergedTheme, locale }}>
-      {children}
+      <div
+        style={{
+          "--pixel-color-primary": mergedTheme.primaryColor,
+          "--pixel-font-family": mergedTheme.fontFamily,
+          "--pixel-border-radius": `${mergedTheme.borderRadius ?? 0}px`,
+        } as CSSProperties}
+      >
+        {children}
+      </div>
     </ConfigContext.Provider>
   );
 }
