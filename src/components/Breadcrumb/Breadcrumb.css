@@ -1,4 +1,4 @@
-.pixel-breadcrumb {
+﻿.pixel-breadcrumb {
   font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
@@ -31,7 +31,7 @@
 }
 
 .pixel-breadcrumb-link:hover {
-  color: #000;
+  color: var(--pixel-color-text, #000);
   background: #e8e8e8;
 }
 
@@ -40,12 +40,12 @@
 }
 
 .pixel-breadcrumb-text--active {
-  color: #000;
+  color: var(--pixel-color-text, #000);
   font-weight: bold;
 }
 
 .pixel-breadcrumb-separator {
-  color: #000;
+  color: var(--pixel-color-text, #000);
   padding: 0 2px;
   font-weight: bold;
 }

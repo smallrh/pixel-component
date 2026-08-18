@@ -1,16 +1,17 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Breadcrumb.css";
 
 interface BreadcrumbItem {
-  title: React.ReactNode;
+  title: ReactNode;
   href?: string;
 }
 
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
   items: BreadcrumbItem[];
   separator?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Breadcrumb({
