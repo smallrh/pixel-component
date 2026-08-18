@@ -10,7 +10,7 @@ const AppContext = createContext<AppContextValue>({
   notification: () => {},
 });
 
-interface AppProps {
+export interface AppProps {
   children: ReactNode;
   message?: (content: string, type?: "info" | "success" | "error" | "warning") => void;
   notification?: (config: { message: string; description?: string; type?: "info" | "success" | "error" | "warning" }) => void;
