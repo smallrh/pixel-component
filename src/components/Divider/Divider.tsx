@@ -1,11 +1,12 @@
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./Divider.css";
 
-interface DividerProps {
+export interface DividerProps {
   text?: string;
   orientation?: "left" | "center" | "right";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Divider({
