@@ -10,13 +10,23 @@
 
 .pixel-datepicker-input {
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
-  cursor: pointer;
+  cursor: text;
   font-family: var(--pixel-font);
   font-size: 12px;
   width: 140px;
   outline: none;
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
+}
+
+.pixel-datepicker-input:focus {
+  border-color: var(--pixel-color-primary, #000);
+}
+
+.pixel-datepicker--invalid .pixel-datepicker-input {
+  border-color: #d93025;
+  box-shadow: 4px 4px 0px #d93025;
 }
 
 .pixel-datepicker-popup {
@@ -25,7 +35,8 @@
   left: 0;
   z-index: 920;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
   margin-top: 4px;
   padding: 8px;
   width: 210px;
@@ -68,5 +79,5 @@
 
 .pixel-datepicker-day:hover {
   background: #f0f0f0;
-  border-color: #000;
+  border-color: var(--pixel-color-primary, #000);
 }
