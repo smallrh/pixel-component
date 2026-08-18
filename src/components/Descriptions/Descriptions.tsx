@@ -1,19 +1,20 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Descriptions.css";
 
 interface DescriptionsItem {
   label: string;
-  children: React.ReactNode;
+  children: ReactNode;
   span?: number;
 }
 
-interface DescriptionsProps {
+export interface DescriptionsProps {
   items: DescriptionsItem[];
   bordered?: boolean;
   column?: number;
   title?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Descriptions({

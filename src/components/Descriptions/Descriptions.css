@@ -10,7 +10,7 @@
   font-weight: bold;
   margin-bottom: 8px;
   padding: 4px 0;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--pixel-color-primary, #000);
 }
 
 .pixel-descriptions-table {
@@ -20,7 +20,7 @@
 
 .pixel-descriptions-table--bordered .pixel-descriptions-label,
 .pixel-descriptions-table--bordered .pixel-descriptions-value {
-  border: 1px solid #000;
+  border: 1px solid var(--pixel-color-primary, #000);
 }
 
 .pixel-descriptions-label {
@@ -35,7 +35,7 @@
 
 .pixel-descriptions-value {
   padding: 8px 12px;
-  color: #000;
+  color: var(--pixel-color-text, #000);
 }
 
 .pixel-descriptions-table--bordered .pixel-descriptions-label {
