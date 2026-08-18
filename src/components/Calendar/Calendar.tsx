@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import clsx from "clsx";
 import "./Calendar.css";
 
-interface CalendarProps {
+export interface CalendarProps {
   value?: Date;
   defaultValue?: Date;
   onChange?: (date: Date) => void;
   fullscreen?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 const WEEK_HEADERS = ["S", "M", "T", "W", "T", "F", "S"];
