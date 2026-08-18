@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Avatar.css";
 
-interface AvatarProps {
-  children?: React.ReactNode;
+export interface AvatarProps {
+  children?: ReactNode;
   src?: string;
   alt?: string;
   size?: "sm" | "md" | "lg";
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Avatar({
