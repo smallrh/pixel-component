@@ -1,13 +1,13 @@
-import { type HTMLAttributes } from "react";
+import { type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Card.css";
 
-interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   variant?: "outlined" | "elevated" | "inset";
   size?: "sm" | "md" | "lg";
-  title?: React.ReactNode;
-  extra?: React.ReactNode;
-  actions?: React.ReactNode[];
+  title?: ReactNode;
+  extra?: ReactNode;
+  actions?: ReactNode[];
 }
 
 export function Card({
@@ -45,12 +45,12 @@ export function Card({
   );
 }
 
-interface MetaProps {
-  avatar?: React.ReactNode;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
+export interface MetaProps {
+  avatar?: ReactNode;
+  title?: ReactNode;
+  description?: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function Meta({ avatar, title, description, className, style }: MetaProps) {
