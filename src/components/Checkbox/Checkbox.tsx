@@ -1,13 +1,14 @@
+import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Checkbox.css";
 
-interface CheckboxProps {
+export interface CheckboxProps {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   disabled?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Checkbox({
