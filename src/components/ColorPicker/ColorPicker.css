@@ -1,4 +1,4 @@
-.pixel-colorpicker {
+﻿.pixel-colorpicker {
   position: relative;
   display: inline-block;
   image-rendering: pixelated;
@@ -7,7 +7,7 @@
 .pixel-colorpicker-swatch {
   width: 28px;
   height: 28px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   cursor: pointer;
 }
 
@@ -22,7 +22,7 @@
   gap: 2px;
   padding: 6px;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
 }
 
 .pixel-colorpicker-color {
@@ -33,11 +33,11 @@
 }
 
 .pixel-colorpicker-color:hover {
-  border-color: #000;
+  border-color: var(--pixel-color-text, #000);
 }
 
 .pixel-colorpicker-color--selected {
-  border-color: #000;
+  border-color: var(--pixel-color-text, #000);
   outline: 1px solid #fff;
   outline-offset: -3px;
 }

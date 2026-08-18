@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { type CSSProperties, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import "./ColorPicker.css";
 
-interface ColorPickerProps {
+export interface ColorPickerProps {
   value?: string;
   onChange?: (color: string) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 const DEFAULT_COLORS = [
