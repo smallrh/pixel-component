@@ -10,12 +10,13 @@
 
 .pixel-autocomplete-input {
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   background: #fff;
   font-family: var(--pixel-font);
   font-size: 12px;
   outline: none;
   width: 200px;
+  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
 }
 
 .pixel-autocomplete-dropdown {
@@ -25,7 +26,7 @@
   right: 0;
   z-index: 920;
   background: #fff;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
   border-top: none;
   max-height: 160px;
   overflow-y: auto;

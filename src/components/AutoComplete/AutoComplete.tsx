@@ -1,14 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { type CSSProperties, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import "./AutoComplete.css";
 
-interface AutoCompleteProps {
+export interface AutoCompleteProps {
   options: string[];
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function AutoComplete({
@@ -22,6 +22,13 @@ export default function AutoComplete({
   const [input, setInput] = useState(value);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  // 外部受控 value 变化时同步内部 input（渲染期间调整，React 官方推荐模式）
+  const [prevValue, setPrevValue] = useState(value);
+  if (prevValue !== value) {
+    setPrevValue(value);
+    setInput(value);
+  }
 
   useEffect(() => {
     const handle = (e: MouseEvent) => {
