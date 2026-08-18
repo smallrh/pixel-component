@@ -1,12 +1,12 @@
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import "./Affix.css";
 
-interface AffixProps {
+export interface AffixProps {
   offsetTop?: number;
   offsetBottom?: number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   children?: ReactNode;
 }
 
