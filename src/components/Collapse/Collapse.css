@@ -1,10 +1,10 @@
-.pixel-collapse {
+﻿.pixel-collapse {
   font-family: var(--pixel-font);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
-  border: 2px solid #000;
+  border: 2px solid var(--pixel-color-primary, #000);
 }
 
 .pixel-collapse-item {

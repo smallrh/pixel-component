@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type CSSProperties, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Collapse.css";
 
@@ -8,12 +8,12 @@ interface CollapseItem {
   children: ReactNode;
 }
 
-interface CollapseProps {
+export interface CollapseProps {
   items: CollapseItem[];
   defaultActiveKey?: string[];
   accordion?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export default function Collapse({
