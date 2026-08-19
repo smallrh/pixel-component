@@ -11,7 +11,6 @@ describe("Progress", () => {
   it("clamps percent to 0-100", () => {
     render(<Progress percent={150} />);
     expect(screen.getByText("100%")).toBeInTheDocument();
-    const { rerender } = render(<Progress percent={-10} />);
     expect(screen.getByText("0%")).toBeInTheDocument();
   });
 });

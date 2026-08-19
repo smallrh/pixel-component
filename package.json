@@ -1,6 +1,6 @@
 {
-  "name": "pixel-ui",
-  "version": "0.1.0",
+  "name": "react-ui-pixel",
+  "version": "1.0.3",
   "type": "module",
   "main": "./dist/pixel-ui.cjs",
   "module": "./dist/pixel-ui.es.js",

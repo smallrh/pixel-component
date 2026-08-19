@@ -13,9 +13,9 @@
 ## 📦 安装
 
 ```bash
-npm install pixel-ui react react-dom
+npm install react-ui-pixel react react-dom
 # 或
-pnpm add pixel-ui react react-dom
+pnpm add react-ui-pixel react react-dom
 ```
 
 ## 🚀 快速开始
