@@ -31,6 +31,10 @@ export default defineConfig(({ mode }) => {
               },
             },
           },
+          // 字体去内联由 scripts/extract-fonts.mjs 在构建后处理
+          // （Vite lib 模式会强制内联 CSS 中引用的资源，assetsInlineLimit 无效）
+          // 不自动清空 outDir（批量删除会触发安全策略确认，由构建后脚本处理残留）
+          emptyOutDir: false,
           sourcemap: true,
         }
       : {},

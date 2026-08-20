@@ -1,6 +1,7 @@
 import { type CSSProperties, type KeyboardEvent, useState, useRef, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import "./TreeSelect.css";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface TreeSelectNode {
   title: string;
@@ -36,10 +37,12 @@ export default function TreeSelect({
   treeData,
   value,
   onChange,
-  placeholder = "Select...",
+  placeholder,
   className,
   style,
 }: TreeSelectProps) {
+  const { messages } = useLocale();
+  const placeholderText = placeholder ?? t("treeselect.placeholder", messages);
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -105,7 +108,7 @@ export default function TreeSelect({
         onKeyDown={handleKeyDown}
       >
         <span className={clsx(!selected && "pixel-treeselect-placeholder")}>
-          {selected?.title ?? placeholder}
+          {selected?.title ?? placeholderText}
         </span>
         <span className="pixel-treeselect-arrow">{open ? "▴" : "▾"}</span>
       </div>

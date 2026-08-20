@@ -17,7 +17,7 @@
   padding: 8px 16px;
   background: var(--pixel-color-primary, #000);
   color: #fff;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -31,7 +31,7 @@
   background: #e8e8e8;
   border-right: 2px solid var(--pixel-color-primary, #000);
   padding: 8px 0;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   overflow: hidden;
   transition: width 0.1s ease;
@@ -45,10 +45,10 @@
 .pixel-layout-content {
   flex: 1;
   padding: 16px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
   color: var(--pixel-color-text, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
 }
 
 /* 鈹€鈹€ Footer 鈹€鈹€ */
@@ -57,8 +57,8 @@
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
-  background: #f0f0f0;
-  font-family: var(--pixel-font);
+  background: var(--pixel-color-bg, #f0f0f0);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;

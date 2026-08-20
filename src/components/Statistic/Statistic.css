@@ -1,5 +1,5 @@
 .pixel-statistic {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;

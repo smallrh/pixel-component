@@ -1,9 +1,9 @@
 ﻿.pixel-anchor {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   image-rendering: pixelated;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   padding: 8px 0;
 }
 

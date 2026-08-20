@@ -2,6 +2,8 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import "./Modal.css";
+import { lockBodyScroll, unlockBodyScroll } from "../../utils/scrollLock";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface ModalProps {
   open: boolean;
@@ -10,12 +12,12 @@ export interface ModalProps {
   children: ReactNode;
   size?: "sm" | "md" | "lg";
   closable?: boolean;
+  /** 点击遮罩是否关闭，默认 true */
   maskClosable?: boolean;
+  /** 按 Esc 是否关闭，默认 true */
+  keyboard?: boolean;
   footer?: ReactNode;
 }
-
-/** 统计当前打开的弹层数量，用于 body 滚动锁定 */
-let openOverlays = 0;
 
 export default function Modal({
   open,
@@ -25,30 +27,33 @@ export default function Modal({
   size = "md",
   closable = true,
   maskClosable = true,
+  keyboard = true,
   footer,
 }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const prevActiveRef = useRef<Element | null>(null);
+  const { messages } = useLocale();
 
-  // Escape 关闭 + body 滚动锁定
+  // Escape 关闭 + body 滚动锁定（共享计数器）
   useEffect(() => {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (keyboard && e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKey);
-    openOverlays += 1;
-    document.body.style.overflow = "hidden";
+    lockBodyScroll();
     return () => {
       window.removeEventListener("keydown", handleKey);
-      openOverlays = Math.max(0, openOverlays - 1);
-      if (openOverlays === 0) document.body.style.overflow = "";
+      unlockBodyScroll();
     };
-  }, [open, onClose]);
+  }, [open, onClose, keyboard]);
 
-  // 焦点陷阱：Tab 循环在弹层内
+  // 焦点陷阱：Tab 循环在弹层内 + 打开聚焦 + 关闭还原焦点
   useEffect(() => {
     if (!open || !panelRef.current) return;
     const panel = panelRef.current;
+    prevActiveRef.current = document.activeElement;
+
     const focusables = () =>
       panel.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
@@ -75,6 +80,11 @@ export default function Modal({
     return () => {
       panel.removeEventListener("keydown", handleKey);
       window.clearTimeout(t);
+      // 关闭时把焦点还原到打开前的元素（WCAG 2.4.3 焦点顺序）
+      const prev = prevActiveRef.current;
+      if (prev && document.contains(prev) && prev instanceof HTMLElement) {
+        prev.focus();
+      }
     };
   }, [open]);
 
@@ -98,7 +108,7 @@ export default function Modal({
                 type="button"
                 className="pixel-modal-close"
                 onClick={onClose}
-                aria-label="Close"
+                aria-label={t("close", messages)}
               >
                 ✕
               </button>

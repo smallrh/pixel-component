@@ -6,12 +6,12 @@
 }
 
 .pixel-tooltip-content {
-  position: absolute;
-  z-index: 950;
+  /* 定位由 utils/popup 的 fixed 样式提供（portal 到 body） */
+  z-index: 1200;
   padding: 6px 10px;
   background: var(--pixel-color-primary, #000);
   color: #fff;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -20,31 +20,4 @@
   pointer-events: none;
 }
 
-/* Placement */
-.pixel-tooltip--top {
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 6px;
-}
-
-.pixel-tooltip--bottom {
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 6px;
-}
-
-.pixel-tooltip--left {
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 6px;
-}
-
-.pixel-tooltip--right {
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 6px;
-}
+/* Placement 标识类（定位逻辑在 utils/popup） */

@@ -4,7 +4,7 @@
   align-items: center;
   text-align: center;
   padding: 32px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
@@ -25,8 +25,8 @@
 .pixel-result-icon--success { background: #e6f7e6; color: #0a0; }
 .pixel-result-icon--error { background: #ffe6e6; color: #c00; }
 .pixel-result-icon--info { background: #e8f0fe; color: #00a; }
-.pixel-result-icon--warning { background: #fff7e6; color: #a60; }
-.pixel-result-icon--404 { background: #f0f0f0; color: #666; }
+.pixel-result-icon--warning { background: var(--pixel-color-bg, #fff)7e6; color: #a60; }
+.pixel-result-icon--404 { background: var(--pixel-color-bg, #f0f0f0); color: #666; }
 .pixel-result-icon--500 { background: #ffe6e6; color: #c00; }
 
 .pixel-result-title {

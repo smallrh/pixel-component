@@ -9,7 +9,7 @@
   top: 8px;
   z-index: 1;
   padding: 2px 8px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

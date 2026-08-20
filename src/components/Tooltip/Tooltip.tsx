@@ -1,6 +1,7 @@
-import { type CSSProperties, type ReactNode, useState, useRef, useEffect } from "react";
+import { type CSSProperties, type ReactNode, useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import "./Tooltip.css";
+import { usePopupPosition, popupStyle, renderPopup, type PopupPlacement } from "../../utils/popup";
 
 export interface TooltipProps {
   title: ReactNode;
@@ -9,6 +10,13 @@ export interface TooltipProps {
   className?: string;
   style?: CSSProperties;
 }
+
+const PLACEMENT_MAP: Record<NonNullable<TooltipProps["placement"]>, PopupPlacement> = {
+  top: "top",
+  bottom: "bottom",
+  left: "left",
+  right: "right",
+};
 
 export default function Tooltip({
   title,
@@ -19,6 +27,9 @@ export default function Tooltip({
 }: TooltipProps) {
   const [visible, setVisible] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const wrapRef = useRef<HTMLSpanElement>(null);
+  const popupRef = useRef<HTMLSpanElement>(null);
+  const pos = usePopupPosition(wrapRef, popupRef, visible, PLACEMENT_MAP[placement]);
 
   const show = () => {
     clearTimeout(timerRef.current);
@@ -37,6 +48,7 @@ export default function Tooltip({
 
   return (
     <span
+      ref={wrapRef}
       className={clsx("pixel-tooltip", className)}
       style={style}
       onMouseEnter={show}
@@ -45,17 +57,17 @@ export default function Tooltip({
       onBlur={hide}
     >
       {children}
-      {visible && (
-        <span
-          role="tooltip"
-          className={clsx(
-            "pixel-tooltip-content",
-            `pixel-tooltip--${placement}`
-          )}
-        >
-          {title}
-        </span>
-      )}
+      {visible &&
+        renderPopup(
+          <span
+            ref={popupRef}
+            role="tooltip"
+            className={clsx("pixel-tooltip-content", `pixel-tooltip--${placement}`)}
+            style={popupStyle(pos, 1200)}
+          >
+            {title}
+          </span>
+        )}
     </span>
   );
 }

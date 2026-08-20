@@ -1,5 +1,5 @@
 .pixel-tree {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -49,7 +49,7 @@
   height: 14px;
   flex-shrink: 0;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   cursor: pointer;
   display: inline-flex;
   align-items: center;

@@ -1,7 +1,7 @@
 .pixel-treeselect {
   position: relative;
   align-self: flex-start;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -15,7 +15,7 @@
   justify-content: space-between;
   padding: 6px 10px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   cursor: pointer;
   gap: 8px;
 }
@@ -34,7 +34,7 @@
   left: 0;
   right: 0;
   z-index: 920;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
   border-top: none;
   max-height: 180px;
@@ -47,7 +47,7 @@
 }
 
 .pixel-treeselect-option:hover {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }
 
 .pixel-treeselect-option--selected {

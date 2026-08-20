@@ -15,11 +15,19 @@ const enMessages: LocaleMessages = {
   "input.hidePassword": "Hide password",
   "input.search": "Search",
   "table.empty": "No data",
+  "empty.noData": "No data",
   "upload.trigger": "Upload",
   "select.placeholder": "Select...",
   "cascader.placeholder": "Select...",
-  "autocomplete.placeholder": "Search...",
+  "treeselect.placeholder": "Select...",
   "datepicker.placeholder": "YYYY-MM-DD",
+  "timepicker.ok": "OK",
+  "popconfirm.ok": "OK",
+  "popconfirm.cancel": "Cancel",
+  "tour.next": "Next",
+  "tour.done": "Done",
+  "form.required": "This field is required",
+  "close": "Close",
 };
 
 const defaultLocalePack: LocalePack = {

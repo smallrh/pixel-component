@@ -3,7 +3,7 @@
   align-items: center;
   gap: 4px;
   padding: 2px 6px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

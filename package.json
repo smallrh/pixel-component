@@ -14,7 +14,7 @@
       "import": "./dist/pixel-ui.es.js",
       "require": "./dist/pixel-ui.cjs"
     },
-    "./style.css": "./dist/pixel-ui.css",
+    "./style.css": "./dist/react-ui-pixel.css",
     "./package.json": "./package.json"
   },
   "sideEffects": [
@@ -24,7 +24,7 @@
     "dev": "vite",
     "build": "npm run build:demo && npm run build:lib",
     "build:demo": "tsc -b && vite build",
-    "build:lib": "vite build --mode lib && tsc -p tsconfig.lib.json",
+    "build:lib": "vite build --mode lib && tsc -p tsconfig.lib.json && node scripts/strip-css-imports.mjs && node scripts/extract-fonts.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",

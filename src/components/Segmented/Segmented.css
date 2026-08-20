@@ -1,7 +1,7 @@
 .pixel-segmented {
   display: inline-flex;
   border: 2px solid var(--pixel-color-primary, #000);
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -43,7 +43,7 @@
 }
 
 .pixel-segmented-item:hover {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }
 
 .pixel-segmented-item--active {

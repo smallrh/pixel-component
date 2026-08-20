@@ -1,68 +1,62 @@
 import type { CSSProperties } from "react";
 import clsx from "clsx";
 import "./QRCode.css";
+import { generateQRCodeMatrix } from "./qr";
 
 export interface QRCodeProps {
+  /** 编码内容（UTF-8，Version 1-10 容量上限内） */
   value?: string;
+  /** 渲染尺寸（px） */
   size?: number;
+  /** 前景色（暗模块） */
+  color?: string;
+  /** 背景色 */
+  bgColor?: string;
+  /** 纠错等级 */
+  errorCorrectionLevel?: "L" | "M" | "Q" | "H";
   className?: string;
   style?: CSSProperties;
 }
 
-// Simple visual QR-code-like grid (decorative pixel pattern)
+/**
+ * 二维码（真实 QR，可被任意扫码器识别）。
+ * 编码由 qr.ts 实现（无第三方依赖，Version 1-10 / 字节模式 / RS 纠错 / 8 掩码优化）。
+ */
 export default function QRCode({
   value = "pixel-ui",
   size = 128,
+  color = "#000",
+  bgColor = "#fff",
+  errorCorrectionLevel = "M",
   className,
   style,
 }: QRCodeProps) {
-  // Generate deterministic pattern from value
-  const seed = value
-    .split("")
-    .reduce((acc, c) => acc + c.charCodeAt(0), 0);
-  const rows = 11;
-  const cells: boolean[][] = [];
-
-  for (let r = 0; r < rows; r++) {
-    const row: boolean[] = [];
-    for (let c = 0; c < rows; c++) {
-      // Always border and corner markers
-      if (
-        r === 0 || r === rows - 1 || c === 0 || c === rows - 1 ||
-        (r < 4 && c < 4) || (r < 4 && c > rows - 5) ||
-        (r > rows - 5 && c < 4)
-      ) {
-        row.push(true);
-      } else {
-        row.push((seed + r * 7 + c * 13) % 3 !== 0);
-      }
-    }
-    cells.push(row);
-  }
-
-  const cellSize = Math.floor(size / rows);
+  const cells = generateQRCodeMatrix(value, errorCorrectionLevel);
+  const count = cells.length;
+  const cellSize = Math.max(1, Math.floor(size / count));
+  const renderSize = cellSize * count;
 
   return (
     <div
       className={clsx("pixel-qrcode", className)}
       style={{
-        width: cellSize * rows,
-        height: cellSize * rows,
+        width: renderSize,
+        height: renderSize,
         ...style,
       }}
     >
-      <svg width={cellSize * rows} height={cellSize * rows} viewBox={`0 0 ${rows} ${rows}`}>
+      <svg
+        width={renderSize}
+        height={renderSize}
+        viewBox={`0 0 ${count} ${count}`}
+        role="img"
+        aria-label={`QR code: ${value}`}
+      >
+        <rect width={count} height={count} fill={bgColor} />
         {cells.map((row, ri) =>
           row.map((filled, ci) =>
             filled ? (
-              <rect
-                key={`${ri}-${ci}`}
-                x={ci}
-                y={ri}
-                width={1}
-                height={1}
-                fill="#000"
-              />
+              <rect key={`${ri}-${ci}`} x={ci} y={ri} width={1} height={1} fill={color} />
             ) : null
           )
         )}

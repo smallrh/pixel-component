@@ -181,7 +181,7 @@ const ALL_COMPONENTS = CATEGORIES.flatMap((c) => c.items);
 
 /* ===== 组件代码示例 ===== */
 const CODE_EXAMPLES: Record<string, string> = {
-  Button: `import Button from "pixel-ui/Button";
+  Button: `import Button from "react-ui-pixel";
 
 <Button variant="primary">Primary</Button>
 <Button variant="secondary">Secondary</Button>
@@ -190,7 +190,7 @@ const CODE_EXAMPLES: Record<string, string> = {
 <Button size="lg">Large</Button>
 <Button disabled>Disabled</Button>`,
 
-  Input: `import Input from "pixel-ui/Input";
+  Input: `import Input from "react-ui-pixel";
 
 <Input placeholder="Default" />
 <Input variant="filled" placeholder="Filled" />
@@ -198,7 +198,7 @@ const CODE_EXAMPLES: Record<string, string> = {
 <Input size="lg" placeholder="Large" />
 <Input disabled value="Disabled" />`,
 
-  Card: `import Card from "pixel-ui/Card";
+  Card: `import Card from "react-ui-pixel";
 
 <Card title="Outlined" variant="outlined">
   Content here
@@ -221,13 +221,13 @@ const CODE_EXAMPLES: Record<string, string> = {
   />
 </Card>`,
 
-  Switch: `import Switch from "pixel-ui/Switch";
+  Switch: `import Switch from "react-ui-pixel";
 
 <Switch />
 <Switch defaultChecked />
 <Switch disabled />`,
 
-  Tag: `import Tag from "pixel-ui/Tag";
+  Tag: `import Tag from "react-ui-pixel";
 
 <Tag>Default</Tag>
 <Tag color="red">Red</Tag>
@@ -235,7 +235,7 @@ const CODE_EXAMPLES: Record<string, string> = {
 <Tag color="blue">Blue</Tag>
 <Tag closable>Closable</Tag>`,
 
-  Badge: `import Badge from "pixel-ui/Badge";
+  Badge: `import Badge from "react-ui-pixel";
 
 <Badge count={5}>
   <Button>Inbox</Button>
@@ -247,7 +247,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   <Button>Overflow</Button>
 </Badge>`,
 
-  Typography: `import { Title, Text, Paragraph, Link } from "pixel-ui/Typography";
+  Typography: `import { Title, Text, Paragraph, Link } from "react-ui-pixel";
 
 <Title>Heading</Title>
 <Text>Text content</Text>
@@ -256,7 +256,7 @@ const CODE_EXAMPLES: Record<string, string> = {
 
 <Paragraph>像素字体同样支持中文排版：你好，世界！</Paragraph>`,
 
-  Icon: `import Icon from "pixel-ui/Icon";
+  Icon: `import Icon from "react-ui-pixel";
 
 <Icon name="star" />
 <Icon name="heart" />
@@ -265,20 +265,20 @@ const CODE_EXAMPLES: Record<string, string> = {
 <Icon name="refresh" spin />
 <Icon name="arrow-right" size="lg" color="#c00" />`,
 
-  Rate: `import Rate from "pixel-ui/Rate";
+  Rate: `import Rate from "react-ui-pixel";
 
 <Rate defaultValue={3} />
 <Rate defaultValue={2.5} allowHalf />
 <Rate defaultValue={4} disabled />`,
 
-  Calendar: `import Calendar from "pixel-ui/Calendar";
+  Calendar: `import Calendar from "react-ui-pixel";
 
 <Calendar
   value={new Date()}
   onChange={(date) => console.log(date)}
 />`,
 
-  Layout: `import { Header, Sider, Content, Footer } from "pixel-ui/Layout";
+  Layout: `import { Header, Sider, Content, Footer } from "react-ui-pixel";
 
 <Layout>
   <Header>Header</Header>
@@ -289,7 +289,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   <Footer>Footer</Footer>
 </Layout>`,
 
-  Grid: `import { Row, Col } from "pixel-ui/Grid";
+  Grid: `import { Row, Col } from "react-ui-pixel";
 
 <Row gutter={16}>
   <Col span={8}>Col 8</Col>
@@ -297,7 +297,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   <Col span={8}>Col 8</Col>
 </Row>`,
 
-  Space: `import Space from "pixel-ui/Space";
+  Space: `import Space from "react-ui-pixel";
 
 <Space direction="horizontal" size="md">
   <Button>1</Button>
@@ -305,7 +305,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   <Button>3</Button>
 </Space>`,
 
-  Flex: `import Flex from "pixel-ui/Flex";
+  Flex: `import Flex from "react-ui-pixel";
 
 <Flex vertical gap={8}>
   <Button>Item 1</Button>
@@ -319,7 +319,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   <span>Right</span>
 </Flex>`,
 
-  Empty: `import Empty from "pixel-ui/Empty";
+  Empty: `import Empty from "react-ui-pixel";
 
 <Empty />
 <Empty description="No data found">
@@ -330,7 +330,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   image={<span>📭</span>}
 />`,
 
-  Menu: `import Menu from "pixel-ui/Menu";
+  Menu: `import Menu from "react-ui-pixel";
 
 <Menu
   mode="horizontal"
@@ -342,7 +342,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   ]}
 />`,
 
-  Dropdown: `import Dropdown from "pixel-ui/Dropdown";
+  Dropdown: `import Dropdown from "react-ui-pixel";
 
 <Dropdown
   trigger="click"
@@ -355,7 +355,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   <Button>Click me</Button>
 </Dropdown>`,
 
-  Tabs: `import Tabs from "pixel-ui/Tabs";
+  Tabs: `import Tabs from "react-ui-pixel";
 
 <Tabs
   items={[
@@ -365,11 +365,11 @@ const CODE_EXAMPLES: Record<string, string> = {
   ]}
 />`,
 
-  Pagination: `import Pagination from "pixel-ui/Pagination";
+  Pagination: `import Pagination from "react-ui-pixel";
 
 <Pagination current={1} total={50} pageSize={10} showTotal />`,
 
-  Steps: `import Steps from "pixel-ui/Steps";
+  Steps: `import Steps from "react-ui-pixel";
 
 <Steps
   current={1}
@@ -381,7 +381,7 @@ const CODE_EXAMPLES: Record<string, string> = {
   ]}
 />`,
 
-  Modal: `import Modal from "pixel-ui/Modal";
+  Modal: `import Modal from "react-ui-pixel";
 import { useState } from "react";
 
 const [open, setOpen] = useState(false);
@@ -390,66 +390,66 @@ const [open, setOpen] = useState(false);
   <p>Modal content here</p>
 </Modal>`,
 
-  Alert: `import Alert from "pixel-ui/Alert";
+  Alert: `import Alert from "react-ui-pixel";
 
 <Alert message="Info message" type="info" />
 <Alert message="Success" type="success" />
 <Alert message="Warning" type="warning" />
 <Alert message="Error" type="error" closable />`,
 
-  Toast: `import { toast } from "pixel-ui/Toast";
+  Toast: `import { toast } from "react-ui-pixel";
 
 toast.success("Saved!");
 toast.error("Failed!");
 toast.warning("Check input");`,
 
-  Progress: `import Progress from "pixel-ui/Progress";
+  Progress: `import Progress from "react-ui-pixel";
 
 <Progress percent={30} />
 <Progress percent={60} />
 <Progress percent={90} />`,
 
-  Spin: `import Spin from "pixel-ui/Spin";
+  Spin: `import Spin from "react-ui-pixel";
 
 <Spin spinning>
   <div>Content loading...</div>
 </Spin>
 <Spin tip="Loading..." />`,
 
-  Slider: `import Slider from "pixel-ui/Slider";
+  Slider: `import Slider from "react-ui-pixel";
 
 <Slider min={0} max={100} value={50} />`,
 
-  Divider: `import Divider from "pixel-ui/Divider";
+  Divider: `import Divider from "react-ui-pixel";
 
 <Divider />
 <Divider text="Section" orientation="center" />
 <Divider text="Left" orientation="left" />`,
 
-  FloatButton: `import FloatButton from "pixel-ui/FloatButton";
+  FloatButton: `import FloatButton from "react-ui-pixel";
 
 <FloatButton variant="primary" position="bottom-right" />
 <FloatButton.BackTop visibilityHeight={400} />`,
 
-  Tooltip: `import Tooltip from "pixel-ui/Tooltip";
+  Tooltip: `import Tooltip from "react-ui-pixel";
 
 <Tooltip title="Tooltip text">
   <Button>Hover me</Button>
 </Tooltip>`,
 
-  Popover: `import Popover from "pixel-ui/Popover";
+  Popover: `import Popover from "react-ui-pixel";
 
 <Popover title="Title" content="Popover content">
   <Button>Hover me</Button>
 </Popover>`,
 
-  Popconfirm: `import Popconfirm from "pixel-ui/Popconfirm";
+  Popconfirm: `import Popconfirm from "react-ui-pixel";
 
 <Popconfirm title="Are you sure?" onConfirm={() => {}}>
   <Button>Delete</Button>
 </Popconfirm>`,
 
-  Form: `import Form, { FormItem } from "pixel-ui/Form";
+  Form: `import Form, { FormItem } from "react-ui-pixel";
 
 <Form onFinish={(v) => console.log(v)}>
   <FormItem label="Name" name="name">
@@ -461,7 +461,7 @@ toast.warning("Check input");`,
   <Button type="submit">Submit</Button>
 </Form>`,
 
-  Table: `import Table from "pixel-ui/Table";
+  Table: `import Table from "react-ui-pixel";
 
 <Table
   columns={[
@@ -474,7 +474,7 @@ toast.warning("Check input");`,
   ]}
 />`,
 
-  Select: `import Select from "pixel-ui/Select";
+  Select: `import Select from "react-ui-pixel";
 
 <Select
   options={[
@@ -483,7 +483,7 @@ toast.warning("Check input");`,
   ]}
 />`,
 
-  Radio: `import Radio from "pixel-ui/Radio";
+  Radio: `import Radio from "react-ui-pixel";
 
 <Radio.Group defaultValue="a">
   <Radio value="a">A</Radio>
@@ -491,20 +491,20 @@ toast.warning("Check input");`,
   <Radio value="c">C</Radio>
 </Radio.Group>`,
 
-  Checkbox: `import Checkbox from "pixel-ui/Checkbox";
+  Checkbox: `import Checkbox from "react-ui-pixel";
 
 <Checkbox>Option 1</Checkbox>
 <Checkbox defaultChecked>Option 2</Checkbox>
 <Checkbox disabled>Disabled</Checkbox>`,
 
-  Avatar: `import Avatar from "pixel-ui/Avatar";
+  Avatar: `import Avatar from "react-ui-pixel";
 
 <Avatar size="sm" />
 <Avatar size="md" />
 <Avatar size="lg" />
 <Avatar src="https://i.pravatar.cc/80" />`,
 
-  Collapse: `import Collapse from "pixel-ui/Collapse";
+  Collapse: `import Collapse from "react-ui-pixel";
 
 <Collapse
   items={[
@@ -513,7 +513,7 @@ toast.warning("Check input");`,
   ]}
 />`,
 
-  Timeline: `import Timeline from "pixel-ui/Timeline";
+  Timeline: `import Timeline from "react-ui-pixel";
 
 <Timeline
   items={[
@@ -523,7 +523,7 @@ toast.warning("Check input");`,
   ]}
 />`,
 
-  Statistic: `import Statistic from "pixel-ui/Statistic";
+  Statistic: `import Statistic from "react-ui-pixel";
 
 <Statistic title="Users" value={12345} />
 <Statistic title="Revenue" value={9999} prefix="$" suffix=".00" />
@@ -535,7 +535,7 @@ toast.warning("Check input");`,
   onFinish={() => console.log("done")}
 />`,
 
-  Breadcrumb: `import Breadcrumb from "pixel-ui/Breadcrumb";
+  Breadcrumb: `import Breadcrumb from "react-ui-pixel";
 
 <Breadcrumb
   items={[
@@ -545,20 +545,20 @@ toast.warning("Check input");`,
   ]}
 />`,
 
-  Affix: `import Affix from "pixel-ui/Affix";
+  Affix: `import Affix from "react-ui-pixel";
 
 <Affix offsetTop={20}>
   <Button>Sticky Button</Button>
 </Affix>`,
 
-  Splitter: `import Splitter from "pixel-ui/Splitter";
+  Splitter: `import Splitter from "react-ui-pixel";
 
 <Splitter direction="horizontal" style={{ height: 200 }}>
   <div>Left panel</div>
   <div>Right panel</div>
 </Splitter>`,
 
-  Skeleton: `import Skeleton from "pixel-ui/Skeleton";
+  Skeleton: `import Skeleton from "react-ui-pixel";
 
 <Skeleton rows={3} />
 <Skeleton rows={5} />
@@ -570,7 +570,7 @@ toast.warning("Check input");`,
 <Skeleton.Input size="sm" />
 <Skeleton.Image />`,
 
-  Result: `import Result from "pixel-ui/Result";
+  Result: `import Result from "react-ui-pixel";
 
 <Result
   status="success"
@@ -579,7 +579,7 @@ toast.warning("Check input");`,
   extra={<Button>Back</Button>}
 />`,
 
-  Drawer: `import Drawer from "pixel-ui/Drawer";
+  Drawer: `import Drawer from "react-ui-pixel";
 import { useState } from "react";
 
 const [open, setOpen] = useState(false);
@@ -588,11 +588,11 @@ const [open, setOpen] = useState(false);
   <p>Drawer content</p>
 </Drawer>`,
 
-  Image: `import Image from "pixel-ui/Image";
+  Image: `import Image from "react-ui-pixel";
 
 <Image src="https://picsum.photos/200" alt="Random" width={200} />`,
 
-  Carousel: `import Carousel from "pixel-ui/Carousel";
+  Carousel: `import Carousel from "react-ui-pixel";
 
 <Carousel
   items={[
@@ -602,7 +602,7 @@ const [open, setOpen] = useState(false);
   ]}
 />`,
 
-  Descriptions: `import Descriptions from "pixel-ui/Descriptions";
+  Descriptions: `import Descriptions from "react-ui-pixel";
 
 <Descriptions
   title="User Info"
@@ -613,7 +613,7 @@ const [open, setOpen] = useState(false);
   ]}
 />`,
 
-  List: `import List from "pixel-ui/List";
+  List: `import List from "react-ui-pixel";
 
 <List
   items={[
@@ -635,21 +635,21 @@ const [open, setOpen] = useState(false);
   </List.Item>
 </List>`,
 
-  QRCode: `import QRCode from "pixel-ui/QRCode";
+  QRCode: `import QRCode from "react-ui-pixel";
 
 <QRCode value="https://example.com" size={128} />`,
 
-  Watermark: `import Watermark from "pixel-ui/Watermark";
+  Watermark: `import Watermark from "react-ui-pixel";
 
 <Watermark text="Pixel UI">
   <div style={{ height: 200 }}>Watermarked content</div>
 </Watermark>`,
 
-  ColorPicker: `import ColorPicker from "pixel-ui/ColorPicker";
+  ColorPicker: `import ColorPicker from "react-ui-pixel";
 
 <ColorPicker value="#000" onChange={(v) => console.log(v)} />`,
 
-  Segmented: `import Segmented from "pixel-ui/Segmented";
+  Segmented: `import Segmented from "react-ui-pixel";
 
 <Segmented
   options={[
@@ -663,7 +663,7 @@ const [open, setOpen] = useState(false);
   options={[{ label: "Daily", value: "daily" }, { label: "Weekly", value: "weekly" }]}
 />`,
 
-  Transfer: `import Transfer from "pixel-ui/Transfer";
+  Transfer: `import Transfer from "react-ui-pixel";
 
 <Transfer
   dataSource={[
@@ -672,7 +672,7 @@ const [open, setOpen] = useState(false);
   ]}
 />`,
 
-  Tree: `import Tree from "pixel-ui/Tree";
+  Tree: `import Tree from "react-ui-pixel";
 
 <Tree
   treeData={[
@@ -696,7 +696,7 @@ const [open, setOpen] = useState(false);
   onCheck={(keys) => console.log(keys)}
 />`,
 
-  TreeSelect: `import TreeSelect from "pixel-ui/TreeSelect";
+  TreeSelect: `import TreeSelect from "react-ui-pixel";
 
 <TreeSelect
   treeData={[
@@ -707,7 +707,7 @@ const [open, setOpen] = useState(false);
   placeholder="Select..."
 />`,
 
-  Cascader: `import Cascader from "pixel-ui/Cascader";
+  Cascader: `import Cascader from "react-ui-pixel";
 
 <Cascader
   options={[
@@ -717,14 +717,14 @@ const [open, setOpen] = useState(false);
   ]}
 />`,
 
-  AutoComplete: `import AutoComplete from "pixel-ui/AutoComplete";
+  AutoComplete: `import AutoComplete from "react-ui-pixel";
 
 <AutoComplete
   options={["Apple", "Banana", "Cherry"]}
   placeholder="Type fruit..."
 />`,
 
-  Mentions: `import Mentions from "pixel-ui/Mentions";
+  Mentions: `import Mentions from "react-ui-pixel";
 
 <Mentions
   options={[
@@ -734,31 +734,31 @@ const [open, setOpen] = useState(false);
   placeholder="Type @ to mention..."
 />`,
 
-  DatePicker: `import DatePicker from "pixel-ui/DatePicker";
+  DatePicker: `import DatePicker from "react-ui-pixel";
 
 <DatePicker onChange={(v) => console.log(v)} />`,
 
-  TimePicker: `import TimePicker from "pixel-ui/TimePicker";
+  TimePicker: `import TimePicker from "react-ui-pixel";
 
 <TimePicker onChange={(v) => console.log(v)} />`,
 
-  Upload: `import Upload from "pixel-ui/Upload";
+  Upload: `import Upload from "react-ui-pixel";
 
 <Upload multiple>
   <Button>Upload Files</Button>
 </Upload>`,
 
-  InputNumber: `import InputNumber from "pixel-ui/InputNumber";
+  InputNumber: `import InputNumber from "react-ui-pixel";
 
 <InputNumber min={0} max={100} defaultValue={50} />`,
 
-  Ribbon: `import Ribbon from "pixel-ui/Ribbon";
+  Ribbon: `import Ribbon from "react-ui-pixel";
 
 <Ribbon text="HOT" color="red">
   <Card title="Product">Content</Card>
 </Ribbon>`,
 
-  Tour: `import Tour from "pixel-ui/Tour";
+  Tour: `import Tour from "react-ui-pixel";
 
 <Tour
   open={false}
@@ -769,7 +769,7 @@ const [open, setOpen] = useState(false);
   ]}
 />`,
 
-  ConfigProvider: `import ConfigProvider from "pixel-ui/ConfigProvider";
+  ConfigProvider: `import ConfigProvider from "react-ui-pixel";
 
 <ConfigProvider
   theme={{ primaryColor: "#000", fontFamily: "var(--pixel-font)" }}
@@ -778,7 +778,7 @@ const [open, setOpen] = useState(false);
   {/* Your app */}
 </ConfigProvider>`,
 
-  LocaleProvider: `import LocaleProvider from "pixel-ui/LocaleProvider";
+  LocaleProvider: `import LocaleProvider from "react-ui-pixel";
 
 <LocaleProvider locale={{ locale: "en", messages: {} }}>
   {/* Your app */}

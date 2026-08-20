@@ -18,7 +18,7 @@
   padding: 0 4px;
   background: var(--pixel-color-primary, #000);
   color: #fff;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 10px;
   font-weight: bold;
   border: 1px solid #fff;

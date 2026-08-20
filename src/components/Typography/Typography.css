@@ -1,6 +1,6 @@
 ﻿/* 鈹€鈹€ Title 鈹€鈹€ */
 .pixel-title {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--pixel-color-text, #000);
@@ -17,7 +17,7 @@
 
 /* 鈹€鈹€ Text 鈹€鈹€ */
 .pixel-text {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
   color: var(--pixel-color-text, #000);
   image-rendering: pixelated;
@@ -53,7 +53,7 @@
 }
 
 .pixel-text-code {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   background: #e8e8e8;
   border: 1px solid #999;
   padding: 1px 4px;
@@ -62,7 +62,7 @@
 
 /* 鈹€鈹€ Paragraph 鈹€鈹€ */
 .pixel-paragraph {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
   line-height: 1.8;
   color: var(--pixel-color-text, #000);
@@ -73,7 +73,7 @@
 
 /* 鈹€鈹€ Link 鈹€鈹€ */
 .pixel-link {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
   color: var(--pixel-color-text, #000);
   text-decoration: underline;

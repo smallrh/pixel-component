@@ -2,6 +2,7 @@ import { type CSSProperties, useState, useRef, useEffect, type ReactNode } from 
 import clsx from "clsx";
 import Button from "../Button";
 import "./Popconfirm.css";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface PopconfirmProps {
   title: ReactNode;
@@ -19,11 +20,14 @@ export default function Popconfirm({
   children,
   onConfirm,
   onCancel,
-  okText = "OK",
-  cancelText = "Cancel",
+  okText,
+  cancelText,
   className,
   style,
 }: PopconfirmProps) {
+  const { messages } = useLocale();
+  const ok = okText ?? t("popconfirm.ok", messages);
+  const cancel = cancelText ?? t("popconfirm.cancel", messages);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -54,7 +58,7 @@ export default function Popconfirm({
                 setOpen(false);
               }}
             >
-              {cancelText}
+              {cancel}
             </Button>
             <Button
               size="sm"
@@ -64,7 +68,7 @@ export default function Popconfirm({
                 setOpen(false);
               }}
             >
-              {okText}
+              {ok}
             </Button>
           </div>
         </div>

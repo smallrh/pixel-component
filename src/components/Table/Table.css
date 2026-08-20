@@ -1,7 +1,7 @@
 .pixel-table-wrapper {
   overflow-x: auto;
   image-rendering: pixelated;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
 }
 
@@ -29,12 +29,12 @@
 .pixel-table-td {
   padding: 8px 12px;
   color: var(--pixel-color-text, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   transition: background 0.05s ease;
 }
 
 .pixel-table-tr:hover .pixel-table-td {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }
 
 .pixel-table-tr:nth-child(even) .pixel-table-td {
@@ -51,7 +51,7 @@
   color: #999;
   border: 1px solid var(--pixel-color-primary, #000);
   border-top: none;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
 }

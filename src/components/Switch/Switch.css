@@ -25,13 +25,13 @@
   display: block;
   width: 16px;
   height: 16px;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 1px solid var(--pixel-color-primary, #000);
   transition: transform 0.1s ease;
 }
 
 .pixel-switch--checked .pixel-switch-knob {
   transform: translateX(20px);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border-color: #fff;
 }

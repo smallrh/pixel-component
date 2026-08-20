@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -29,12 +29,16 @@
   width: 14px;
   height: 14px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   flex-shrink: 0;
   transition: background 0.05s ease;
 }
 
 .pixel-checkbox-inner--checked {
+  background: var(--pixel-color-primary, #000);
+}
+
+.pixel-checkbox-inner--indeterminate {
   background: var(--pixel-color-primary, #000);
 }
 

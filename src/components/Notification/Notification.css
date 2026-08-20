@@ -12,12 +12,12 @@
 .pixel-notification {
   padding: 12px 16px;
   border: 2px solid var(--pixel-color-primary, #000);
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
 }
 
 .pixel-notification--info { border-color: #00a; }

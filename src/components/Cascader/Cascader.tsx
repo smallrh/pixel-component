@@ -1,6 +1,7 @@
 import { type CSSProperties, useState, useRef, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import "./Cascader.css";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface CascaderOption {
   label: string;
@@ -47,10 +48,12 @@ export default function Cascader({
   options,
   value,
   onChange,
-  placeholder = "Select...",
+  placeholder,
   className,
   style,
 }: CascaderProps) {
+  const { messages } = useLocale();
+  const placeholderText = placeholder ?? t("cascader.placeholder", messages);
   const [open, setOpen] = useState(false);
   const [path, setPath] = useState<string[]>(value ?? []); // 当前展开路径（每列选中项）
   const ref = useRef<HTMLDivElement>(null);
@@ -100,7 +103,7 @@ export default function Cascader({
         aria-haspopup="listbox"
       >
         <span className={clsx((value?.length ?? 0) === 0 && "pixel-cascader-placeholder")}>
-          {value && value.length > 0 ? collectLabels(options, value).join(" / ") : placeholder}
+          {value && value.length > 0 ? collectLabels(options, value).join(" / ") : placeholderText}
         </span>
         <span className="pixel-cascader-arrow">{open ? "▴" : "▾"}</span>
       </div>

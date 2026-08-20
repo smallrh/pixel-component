@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Table.css";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface TableColumn {
   key: string;
@@ -14,6 +15,10 @@ export interface TableProps {
   dataSource: Record<string, unknown>[];
   rowKey?: string;
   bordered?: boolean;
+  /** 加载状态（显示内置加载指示） */
+  loading?: boolean;
+  /** 空数据文案，默认取 locale（"No data"） */
+  emptyText?: ReactNode;
   className?: string;
   style?: CSSProperties;
 }
@@ -23,9 +28,15 @@ export default function Table({
   dataSource,
   rowKey = "key",
   bordered = true,
+  loading = false,
+  emptyText,
   className,
   style,
 }: TableProps) {
+  const { messages } = useLocale();
+  const empty = emptyText ?? t("table.empty", messages);
+  const isEmpty = !loading && dataSource.length === 0;
+
   return (
     <div className={clsx("pixel-table-wrapper", className)} style={style}>
       <table className={clsx("pixel-table", bordered && "pixel-table--bordered")}>
@@ -52,9 +63,8 @@ export default function Table({
           ))}
         </tbody>
       </table>
-      {dataSource.length === 0 && (
-        <div className="pixel-table-empty">No data</div>
-      )}
+      {loading && <div className="pixel-table-empty">Loading...</div>}
+      {isEmpty && <div className="pixel-table-empty">{empty}</div>}
     </div>
   );
 }

@@ -82,7 +82,7 @@
   position: relative;
   height: 32px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   overflow: hidden;
 }
 

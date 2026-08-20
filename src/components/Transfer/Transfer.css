@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -12,7 +12,7 @@
 .pixel-transfer-panel {
   flex: 1;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   min-height: 180px;
   min-width: 160px;
 }
@@ -40,7 +40,7 @@
 }
 
 .pixel-transfer-item:hover {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }
 
 .pixel-transfer-actions {

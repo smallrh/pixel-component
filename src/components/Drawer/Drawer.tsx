@@ -2,6 +2,8 @@ import { type CSSProperties, type ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import "./Drawer.css";
+import { lockBodyScroll, unlockBodyScroll } from "../../utils/scrollLock";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface DrawerProps {
   open: boolean;
@@ -10,12 +12,13 @@ export interface DrawerProps {
   children: ReactNode;
   placement?: "left" | "right";
   closable?: boolean;
+  /** 点击遮罩是否关闭，默认 true */
   maskClosable?: boolean;
+  /** 按 Esc 是否关闭，默认 true */
+  keyboard?: boolean;
   className?: string;
   style?: CSSProperties;
 }
-
-let openDrawers = 0;
 
 export default function Drawer({
   open,
@@ -25,31 +28,34 @@ export default function Drawer({
   placement = "right",
   closable = true,
   maskClosable = true,
+  keyboard = true,
   className,
   style,
 }: DrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const prevActiveRef = useRef<Element | null>(null);
+  const { messages } = useLocale();
 
-  // Escape 关闭 + body 滚动锁定
+  // Escape 关闭 + body 滚动锁定（共享计数器）
   useEffect(() => {
     if (!open) return;
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (keyboard && e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", handleEsc);
-    openDrawers += 1;
-    document.body.style.overflow = "hidden";
+    lockBodyScroll();
     return () => {
       document.removeEventListener("keydown", handleEsc);
-      openDrawers = Math.max(0, openDrawers - 1);
-      if (openDrawers === 0) document.body.style.overflow = "";
+      unlockBodyScroll();
     };
-  }, [open, onClose]);
+  }, [open, onClose, keyboard]);
 
-  // 焦点陷阱
+  // 焦点陷阱 + 打开聚焦 + 关闭还原焦点
   useEffect(() => {
     if (!open || !panelRef.current) return;
     const panel = panelRef.current;
+    prevActiveRef.current = document.activeElement;
+
     const focusables = () =>
       panel.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
@@ -73,6 +79,10 @@ export default function Drawer({
     return () => {
       panel.removeEventListener("keydown", handleKey);
       window.clearTimeout(t);
+      const prev = prevActiveRef.current;
+      if (prev && document.contains(prev) && prev instanceof HTMLElement) {
+        prev.focus();
+      }
     };
   }, [open]);
 
@@ -101,7 +111,7 @@ export default function Drawer({
                 type="button"
                 className="pixel-drawer-close"
                 onClick={onClose}
-                aria-label="Close"
+                aria-label={t("close", messages)}
               >
                 ✕
               </button>

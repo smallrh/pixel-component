@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import "./Empty.css";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface EmptyProps {
   description?: ReactNode;
@@ -33,18 +34,20 @@ function DefaultImage() {
 }
 
 export default function Empty({
-  description = "No data",
+  description,
   image,
   children,
   className,
   style,
 }: EmptyProps) {
+  const { messages } = useLocale();
+  const desc = description ?? t("empty.noData", messages);
   return (
     <div className={clsx("pixel-empty", className)} style={style}>
       <div className="pixel-empty-image-wrap">
         {image ?? <DefaultImage />}
       </div>
-      {description && <div className="pixel-empty-description">{description}</div>}
+      {desc && <div className="pixel-empty-description">{desc}</div>}
       {children && <div className="pixel-empty-footer">{children}</div>}
     </div>
   );

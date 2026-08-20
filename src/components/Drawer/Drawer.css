@@ -12,11 +12,11 @@
   bottom: 0;
   width: 300px;
   max-width: 90vw;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
   display: flex;
   flex-direction: column;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

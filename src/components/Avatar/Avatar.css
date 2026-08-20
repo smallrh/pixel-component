@@ -16,7 +16,7 @@
 }
 
 .pixel-avatar-text {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;

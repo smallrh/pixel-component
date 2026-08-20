@@ -1,6 +1,6 @@
 .pixel-steps {
   display: flex;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
@@ -52,7 +52,7 @@
   width: 28px;
   height: 28px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   font-size: 12px;
   font-weight: bold;
   flex-shrink: 0;
@@ -64,7 +64,7 @@
 }
 
 .pixel-step--active .pixel-step-indicator {
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   color: var(--pixel-color-text, #000);
   animation: step-pulse 0.5s steps(2) infinite;
 }

@@ -4,7 +4,7 @@
   gap: 10px;
   padding: 10px 12px;
   border: 2px solid var(--pixel-color-primary, #000);
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -20,7 +20,7 @@
 }
 
 .pixel-alert--warning {
-  background: #fff7e6;
+  background: var(--pixel-color-bg, #fff)7e6;
 }
 
 .pixel-alert--error {

@@ -1,7 +1,7 @@
 .pixel-radio-group {
   display: flex;
   gap: 16px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -34,7 +34,7 @@
   width: 14px;
   height: 14px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   flex-shrink: 0;
 }
 

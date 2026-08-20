@@ -2,6 +2,7 @@ import { type CSSProperties, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import Button from "../Button";
 import "./Tour.css";
+import { useLocale, t } from "../LocaleProvider";
 
 interface TourStep {
   title?: string;
@@ -24,6 +25,7 @@ export default function Tour({
   className,
   style,
 }: TourProps) {
+  const { messages } = useLocale();
   const [step, setStep] = useState(0);
 
   if (!open || steps.length === 0) return null;
@@ -55,7 +57,7 @@ export default function Tour({
               }
             }}
           >
-            {isLast ? "Done" : "Next"}
+            {isLast ? t("tour.done", messages) : t("tour.next", messages)}
           </Button>
         </div>
       </div>

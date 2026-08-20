@@ -2,7 +2,7 @@ import { type CSSProperties, type ReactNode, useState } from "react";
 import clsx from "clsx";
 import "./Menu.css";
 
-interface MenuItem {
+export interface MenuItem {
   key: string;
   label: ReactNode;
   icon?: ReactNode;
@@ -13,7 +13,10 @@ interface MenuItem {
 export interface MenuProps {
   items: MenuItem[];
   mode?: "horizontal" | "vertical";
+  /** 非受控：默认选中项 */
   defaultSelectedKey?: string;
+  /** 受控：当前选中项（传入后由外部管理） */
+  selectedKey?: string;
   className?: string;
   style?: CSSProperties;
   onSelect?: (key: string) => void;
@@ -23,16 +26,19 @@ export default function Menu({
   items,
   mode = "horizontal",
   defaultSelectedKey,
+  selectedKey: selectedKeyProp,
   className,
   style,
   onSelect,
 }: MenuProps) {
-  const [selectedKey, setSelectedKey] = useState(defaultSelectedKey ?? "");
+  const [innerSelectedKey, setInnerSelectedKey] = useState(defaultSelectedKey ?? "");
+  const isControlled = selectedKeyProp !== undefined;
+  const selectedKey = isControlled ? selectedKeyProp : innerSelectedKey;
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const handleSelect = (key: string, disabled?: boolean) => {
     if (disabled) return;
-    setSelectedKey(key);
+    if (!isControlled) setInnerSelectedKey(key);
     onSelect?.(key);
   };
 

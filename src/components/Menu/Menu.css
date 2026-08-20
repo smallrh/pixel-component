@@ -1,11 +1,11 @@
 .pixel-menu {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
 }
 
 /* ── Mode: horizontal ── */
@@ -26,7 +26,7 @@
   top: 100%;
   left: 0;
   z-index: 920;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
   list-style: none;
   margin: 0;
@@ -58,7 +58,7 @@
   padding: 8px 16px;
   background: none;
   border: none;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

@@ -14,6 +14,7 @@ import {
   type ReactNode,
 } from "react";
 import clsx from "clsx";
+import { useLocale, t } from "../LocaleProvider";
 
 /* ===== 类型 ===== */
 
@@ -41,6 +42,10 @@ interface FormContextValue {
   errors: Record<string, string>;
   setError: (name: string, message?: string) => void;
   setFieldValue: (name: string, v: FieldValue) => void;
+  /** 初始值（Form initialValues 透传） */
+  initialValues?: Record<string, unknown>;
+  /** 值变化回调（仅携带本次变更字段，由 Form 层维护全量值） */
+  onValuesChange?: (changed: Record<string, unknown>) => void;
 }
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -58,12 +63,20 @@ export interface FormInstance {
   setError: (name: string, message?: string) => void;
   registerField: (h: FieldHandle) => void;
   unregisterField: (name: string) => void;
+  /** @internal 由 Form 渲染时注入 locale 消息（用于内置校验文案） */
+  _setMessages: (messages: Record<string, string>) => void;
 }
 
 export function useForm(): FormInstance {
   const fieldsRef = useRef<Map<string, FieldHandle>>(new Map());
   const [, setErrors] = useState<Record<string, string>>({});
   const errorsRef = useRef<Record<string, string>>({});
+  // locale 消息（由 Form 渲染时注入，用于内置校验文案）
+  const messagesRef = useRef<Record<string, string>>({});
+
+  const setMessages = useCallback((messages: Record<string, string>) => {
+    messagesRef.current = messages;
+  }, []);
 
   const registerField = useCallback((h: FieldHandle) => {
     fieldsRef.current.set(h.name, h);
@@ -87,7 +100,7 @@ export function useForm(): FormInstance {
     const nextErrors: Record<string, string> = {};
     for (const [name, field] of fieldsRef.current) {
       const value = field.getValue();
-      const message = await runRules(value, field.rules);
+      const message = await runRules(value, field.rules, messagesRef.current);
       if (message) nextErrors[name] = message;
     }
     errorsRef.current = nextErrors;
@@ -133,17 +146,22 @@ export function useForm(): FormInstance {
     setError,
     registerField,
     unregisterField,
+    _setMessages: setMessages,
   };
 }
 
 /* ===== 校验逻辑 ===== */
 
-async function runRules(value: FieldValue, rules?: FormRule[]): Promise<string | undefined> {
+async function runRules(
+  value: FieldValue,
+  rules: FormRule[] | undefined,
+  messages: { [key: string]: string }
+): Promise<string | undefined> {
   if (!rules) return undefined;
   for (const rule of rules) {
     const isEmpty = value === undefined || value === null || value === "";
     if (rule.required && isEmpty) {
-      return rule.message ?? "This field is required";
+      return rule.message ?? t("form.required", messages);
     }
     if (!isEmpty && rule.min !== undefined && typeof value === "number" && value < rule.min) {
       return rule.message ?? `Minimum value is ${rule.min}`;
@@ -188,7 +206,12 @@ export function FormItem({
   style,
 }: FormItemProps) {
   const form = useContext(FormContext);
-  const [value, setValue] = useState<FieldValue>(() => getInitialValue(children));
+  // 初始化优先级：Form.initialValues[name] > 子控件 defaultValue/value > ""
+  const [value, setValue] = useState<FieldValue>(() =>
+    name && form?.initialValues?.[name] !== undefined
+      ? form.initialValues[name]
+      : getInitialValue(children)
+  );
   const valueRef = useRef(value);
   const handleRef = useRef<FieldHandle | null>(null);
 
@@ -234,6 +257,7 @@ export function FormItem({
             onChange: (v: FieldValue) => {
               setValue(v);
               form.setError(name, undefined);
+              form.onValuesChange?.({ [name]: v });
             },
           })
         : children,
@@ -279,7 +303,13 @@ function cloneControl(
     name?: string;
   }>;
   const props = child.props ?? {};
-  const isCheckable = props.type === "checkbox" || props.type === "radio";
+  // 原生 checkbox/radio 通过 props.type 识别；自定义可勾选组件（Checkbox 等）
+  // 通过静态标记 __PIXEL_CHECKABLE__ 识别，否则会注入 value 而非 checked，
+  // 导致组件不消费 value、选中 UI 与表单值脱节。
+  const isCheckable =
+    props.type === "checkbox" ||
+    props.type === "radio" ||
+    Boolean((child.type as { __PIXEL_CHECKABLE__?: boolean } | null)?.__PIXEL_CHECKABLE__);
 
   return cloneElement(child, {
     name: control.name,
@@ -293,7 +323,12 @@ function cloneControl(
       const isEvent =
         first && typeof first === "object" && "target" in (first as object);
       if (isCheckable) {
-        control.onChange((first as { target?: { checked?: boolean } }).target?.checked ?? false);
+        // 原生 input 回调参数为 event；自定义 Checkbox 回调参数为布尔值
+        if (isEvent) {
+          control.onChange((first as { target?: { checked?: boolean } }).target?.checked ?? false);
+        } else {
+          control.onChange(first);
+        }
       } else if (isEvent) {
         control.onChange((first as { target?: { value?: FieldValue } }).target?.value);
       } else {
@@ -308,8 +343,12 @@ function cloneControl(
 export interface FormProps {
   children: ReactNode;
   form?: FormInstance;
+  /** 表单初始值（优先级高于子控件 defaultValue/value） */
+  initialValues?: Record<string, unknown>;
   onFinish?: (values: Record<string, FieldValue>) => void;
   onFinishFailed?: (errors: Record<string, string>) => void;
+  /** 任意字段值变化时触发（values 为全量当前值，changedValues 为本次变更） */
+  onValuesChange?: (values: Record<string, unknown>, changedValues: Record<string, unknown>) => void;
   className?: string;
   style?: CSSProperties;
 }
@@ -317,14 +356,34 @@ export interface FormProps {
 export default function Form({
   children,
   form: formProp,
+  initialValues,
   onFinish,
   onFinishFailed,
+  onValuesChange,
   className,
   style,
 }: FormProps) {
   const internal = useForm();
   const form = formProp ?? internal;
+  const { messages } = useLocale();
   const errors = form.getErrors();
+
+  // 注入 locale 消息，供内置校验文案（required 等）使用
+  useEffect(() => {
+    form._setMessages?.(messages);
+  }, [form, messages]);
+
+  // 维护全量值（供 onValuesChange 使用，避免读字段 ref 的滞后值）
+  const [, setValues] = useState<Record<string, unknown>>({});
+  const onValuesChangeRef = useRef(onValuesChange);
+  onValuesChangeRef.current = onValuesChange;
+  const handleValuesChange = useCallback((changed: Record<string, unknown>) => {
+    setValues((prev) => {
+      const next = { ...prev, ...changed };
+      onValuesChangeRef.current?.(next, changed);
+      return next;
+    });
+  }, []);
 
   const contextValue = useMemo<FormContextValue>(
     () => ({
@@ -333,8 +392,10 @@ export default function Form({
       errors,
       setError: (name, message) => form.setError(name, message),
       setFieldValue: (name, v) => form.setFieldValue(name, v),
+      initialValues,
+      onValuesChange: handleValuesChange,
     }),
-    [form, errors]
+    [form, errors, initialValues, handleValuesChange]
   );
 
   const handleSubmit = async (e: FormEvent) => {

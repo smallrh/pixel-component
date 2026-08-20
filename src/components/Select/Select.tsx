@@ -1,6 +1,8 @@
 import { type CSSProperties, type KeyboardEvent, useState, useRef, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import "./Select.css";
+import { usePopupPosition, popupStyle, renderPopup } from "../../utils/popup";
+import { useLocale, t } from "../LocaleProvider";
 
 export interface SelectOption {
   label: string;
@@ -13,6 +15,8 @@ export interface SelectProps {
   onChange?: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
+  /** 显示清除按钮 */
+  allowClear?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -21,8 +25,9 @@ export default function Select({
   options,
   value,
   onChange,
-  placeholder = "Select...",
+  placeholder,
   disabled = false,
+  allowClear = false,
   className,
   style,
 }: SelectProps) {
@@ -30,6 +35,10 @@ export default function Select({
   const [highlighted, setHighlighted] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
+  const pos = usePopupPosition(triggerRef, popupRef, open, "bottomLeft");
+  const { messages } = useLocale();
+  const placeholderText = placeholder ?? t("select.placeholder", messages);
 
   useEffect(() => {
     const handle = (e: MouseEvent) => {
@@ -98,6 +107,13 @@ export default function Select({
   };
 
   const selected = options.find((o) => o.value === value);
+  const triggerWidth = triggerRef.current?.getBoundingClientRect().width;
+
+  const clear = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+    onChange?.(undefined as unknown as string);
+    setOpen(false);
+  };
 
   return (
     <div
@@ -117,33 +133,52 @@ export default function Select({
         onKeyDown={handleKeyDown}
       >
         <span className={clsx(!selected && "pixel-select-placeholder")}>
-          {selected ? selected.label : placeholder}
+          {selected ? selected.label : placeholderText}
         </span>
+        {allowClear && selected && !disabled && (
+          <span
+            role="button"
+            aria-label="Clear"
+            className="pixel-select-clear"
+            onClick={clear}
+          >
+            ✕
+          </span>
+        )}
         <span className="pixel-select-arrow">{open ? "▴" : "▾"}</span>
       </div>
-      {open && (
-        <div className="pixel-select-dropdown" role="listbox">
-          {options.map((opt, i) => (
-            <div
-              key={opt.value}
-              role="option"
-              aria-selected={opt.value === value}
-              className={clsx(
-                "pixel-select-option",
-                opt.value === value && "pixel-select-option--selected",
-                i === highlighted && "pixel-select-option--highlighted"
-              )}
-              onMouseEnter={() => setHighlighted(i)}
-              onClick={() => {
-                onChange?.(opt.value);
-                setOpen(false);
-              }}
-            >
-              {opt.label}
-            </div>
-          ))}
-        </div>
-      )}
+      {open &&
+        renderPopup(
+          <div
+            ref={popupRef}
+            role="listbox"
+            className="pixel-select-dropdown"
+            style={{
+              ...popupStyle(pos),
+              minWidth: triggerWidth ? Math.max(triggerWidth, 140) : 140,
+            }}
+          >
+            {options.map((opt, i) => (
+              <div
+                key={opt.value}
+                role="option"
+                aria-selected={opt.value === value}
+                className={clsx(
+                  "pixel-select-option",
+                  opt.value === value && "pixel-select-option--selected",
+                  i === highlighted && "pixel-select-option--highlighted"
+                )}
+                onMouseEnter={() => setHighlighted(i)}
+                onClick={() => {
+                  onChange?.(opt.value);
+                  setOpen(false);
+                }}
+              >
+                {opt.label}
+              </div>
+            ))}
+          </div>
+        )}
     </div>
   );
 }

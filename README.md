@@ -1,4 +1,4 @@
-# pixel-ui
+# react-ui-pixel
 
 一个基于 React 19 + TypeScript 的像素风格（Pixel / 8-bit）组件库，提供 70+ 个组件，API 风格贴近 [Ant Design](https://ant.design)，视觉风格致敬经典 8-bit 游戏。
 
@@ -21,8 +21,8 @@ pnpm add react-ui-pixel react react-dom
 ## 🚀 快速开始
 
 ```tsx
-import { Button, ConfigProvider, Theme } from "pixel-ui";
-import "pixel-ui/style.css";
+import { Button, ConfigProvider, Theme } from "react-ui-pixel";
+import "react-ui-pixel/style.css";
 export default function App() {
   return (
     <ConfigProvider theme={{ primaryColor: "#000" }}>
@@ -51,10 +51,11 @@ npm run build   # 类型检查 + 库构建（ES/CJS）+ 生成 .d.ts
 
 ```
 dist/
-├── pixel-ui.es.js      # ES Module 产物
-├── pixel-ui.cjs        # CommonJS 产物
-├── pixel-ui.css        # 全量样式
-└── types/              # TypeScript 类型声明
+├── pixel-ui.es.js        # ES Module 产物
+├── pixel-ui.cjs          # CommonJS 产物
+├── react-ui-pixel.css    # 全量样式（~70KB，字体已提取为独立文件）
+├── assets/fonts/         # 像素字体（独立 .woff2，浏览器按需加载）
+└── types/                # TypeScript 类型声明
 ```
 
 ## 📚 组件列表

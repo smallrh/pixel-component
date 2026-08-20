@@ -18,10 +18,10 @@
   margin: 4px 0 0 0;
   padding: 4px 0;
   list-style: none;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
   box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

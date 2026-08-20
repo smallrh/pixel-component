@@ -43,7 +43,7 @@
   transform: translate(-50%, -50%);
   width: 14px;
   height: 14px;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
   pointer-events: none;
   z-index: 1;

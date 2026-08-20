@@ -1,7 +1,7 @@
 .pixel-autocomplete {
   position: relative;
   align-self: flex-start;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -11,8 +11,8 @@
 .pixel-autocomplete-input {
   padding: 6px 10px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
-  font-family: var(--pixel-font);
+  background: var(--pixel-color-bg, #fff);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   outline: none;
   width: 200px;
@@ -25,7 +25,7 @@
   left: 0;
   right: 0;
   z-index: 920;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
   border-top: none;
   max-height: 160px;
@@ -38,5 +38,5 @@
 }
 
 .pixel-autocomplete-option:hover {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }

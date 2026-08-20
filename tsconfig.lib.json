@@ -18,5 +18,6 @@
     "outDir": "dist/types",
     "rootDir": "src"
   },
-  "include": ["src/index.ts", "src/components", "src/styles", "src/tokens"]
+  "include": ["src/index.ts", "src/components", "src/styles", "src/tokens"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test"]
 }

@@ -1,5 +1,5 @@
 .pixel-upload {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -26,7 +26,7 @@
 }
 
 .pixel-upload-placeholder:hover {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }
 
 .pixel-upload-list {

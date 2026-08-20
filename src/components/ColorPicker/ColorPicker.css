@@ -21,7 +21,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
   padding: 6px;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
 }
 

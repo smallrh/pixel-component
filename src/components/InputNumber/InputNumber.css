@@ -5,11 +5,11 @@
 }
 
 .pixel-input-number {
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   padding: 6px 10px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   color: var(--pixel-color-text, #000);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -52,10 +52,10 @@
 .pixel-input-number-control {
   flex: 1;
   border: none;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   color: var(--pixel-color-text, #000);
   font-size: 8px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   cursor: pointer;
   padding: 0;
   line-height: 1;

@@ -1,7 +1,7 @@
 .pixel-select {
   position: relative;
   align-self: flex-start;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -15,7 +15,7 @@
   justify-content: space-between;
   padding: 6px 10px;
   border: 2px solid var(--pixel-color-primary, #000);
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   cursor: pointer;
   gap: 8px;
 }
@@ -32,15 +32,21 @@
   font-size: 10px;
 }
 
+.pixel-select-clear {
+  font-size: 10px;
+  cursor: pointer;
+  color: #999;
+  padding: 0 2px;
+}
+
+.pixel-select-clear:hover {
+  color: var(--pixel-color-text, #000);
+}
+
 .pixel-select-dropdown {
-  position: absolute;
-  top: calc(100% - 2px);
-  left: 0;
-  right: 0;
-  z-index: 920;
+  /* 定位由 utils/popup 的 fixed 样式提供（portal 到 body，避免被裁剪） */
   border: 2px solid var(--pixel-color-primary, #000);
-  border-top: none;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   max-height: 200px;
   overflow-y: auto;
 }
@@ -52,7 +58,7 @@
 }
 
 .pixel-select-option:hover {
-  background: #f0f0f0;
+  background: var(--pixel-color-bg, #f0f0f0);
 }
 
 .pixel-select-option--selected {

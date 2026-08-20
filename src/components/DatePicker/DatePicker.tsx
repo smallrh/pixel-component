@@ -6,6 +6,7 @@ export interface DatePickerProps {
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
+  disabled?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -28,6 +29,7 @@ export default function DatePicker({
   value,
   onChange,
   placeholder = "YYYY-MM-DD",
+  disabled = false,
   className,
   style,
 }: DatePickerProps) {
@@ -36,6 +38,11 @@ export default function DatePicker({
   const [valid, setValid] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // disabled 时自动关闭弹层
+  useEffect(() => {
+    if (disabled) setOpen(false);
+  }, [disabled]);
 
   // 外部 value 变化时同步 input（渲染期间调整，React 官方推荐模式）
   const [prevValue, setPrevValue] = useState(value);
@@ -104,16 +111,26 @@ export default function DatePicker({
   };
 
   return (
-    <div ref={ref} className={clsx("pixel-datepicker", !valid && "pixel-datepicker--invalid", className)} style={style}>
+    <div
+      ref={ref}
+      className={clsx(
+        "pixel-datepicker",
+        !valid && "pixel-datepicker--invalid",
+        disabled && "pixel-datepicker--disabled",
+        className
+      )}
+      style={style}
+    >
       <input
         ref={inputRef}
         className="pixel-datepicker-input"
         value={input}
         placeholder={placeholder}
         onChange={(e) => handleInputChange(e.target.value)}
-        onFocus={() => setOpen(true)}
-        onClick={() => setOpen((v) => !v)}
+        onFocus={() => !disabled && setOpen(true)}
+        onClick={() => !disabled && setOpen((v) => !v)}
         onKeyDown={handleKeyDown}
+        disabled={disabled}
         role="combobox"
         aria-expanded={open}
         aria-invalid={!valid}

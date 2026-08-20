@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
   image-rendering: pixelated;
@@ -21,9 +21,9 @@
   min-width: 32px;
   height: 32px;
   padding: 0 8px;
-  background: #fff;
+  background: var(--pixel-color-bg, #fff);
   border: 2px solid var(--pixel-color-primary, #000);
-  font-family: var(--pixel-font);
+  font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   cursor: pointer;
   color: var(--pixel-color-text, #000);
