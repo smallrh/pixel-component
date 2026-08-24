@@ -6,18 +6,32 @@ type Size = "sm" | "md" | "lg";
 type Shape = "circle" | "square" | "round";
 
 export interface SkeletonProps {
+  /** 是否展示动画效果，默认 true */
   active?: boolean;
+  /** 为 true 时直接渲染 children，不再展示骨架，默认 false */
   loading?: boolean;
+  /** 是否显示标题占位条，默认 true */
   title?: boolean;
+  /** 是否显示头像占位，默认 false */
   avatar?: boolean;
+  /** 段落占位配置；为 false 不渲染，对象可指定 rows/width，默认 true */
   paragraph?: boolean | { rows?: number; width?: string | number };
+  /** 段落行数（覆盖 paragraph.rows），默认 3 */
   rows?: number;
+  /** 段落宽度（覆盖 paragraph.width），最后一行默认 60% */
   width?: string | number;
+  /** loading 为 true 时实际渲染的内容 */
   children?: ReactNode;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Skeleton 骨架屏。在数据加载前展示占位结构，支持头像、标题、段落与子组件回退，
+ * 同时提供 Avatar/Button/Input/Image 复合子组件。
+ */
 function Skeleton({
   active = true,
   loading = false,
@@ -65,13 +79,21 @@ function Skeleton({
 
 // --- Skeleton.Avatar ---
 export interface AvatarProps {
+  /** 是否展示动画效果，默认 true */
   active?: boolean;
+  /** 头像尺寸，数字为像素值，否则取档位，默认 "md" */
   size?: number | Size;
+  /** 头像形状，默认 "circle" */
   shape?: Shape;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Skeleton.Avatar 头像骨架占位。提供圆/方/圆角三种形状与像素或档位尺寸。
+ */
 function SkeletonAvatar({
   active = true,
   size = "md",
@@ -97,14 +119,23 @@ function SkeletonAvatar({
 
 // --- Skeleton.Button ---
 export interface ButtonProps {
+  /** 是否展示动画效果，默认 true */
   active?: boolean;
+  /** 按钮尺寸，默认 "md" */
   size?: Size;
+  /** 按钮形状，默认 "round" */
   shape?: Shape;
+  /** 是否撑满父级宽度，默认 false */
   block?: boolean;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Skeleton.Button 按钮骨架占位。用于在加载完成前预留按钮形态。
+ */
 function SkeletonButton({
   active = true,
   size = "md",
@@ -132,12 +163,19 @@ function SkeletonButton({
 
 // --- Skeleton.Input ---
 export interface InputProps {
+  /** 是否展示动画效果，默认 true */
   active?: boolean;
+  /** 输入框尺寸，默认 "md" */
   size?: Size;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Skeleton.Input 输入框骨架占位。用于在加载完成前预留表单输入位置。
+ */
 function SkeletonInput({
   active = true,
   size = "md",
@@ -161,11 +199,17 @@ function SkeletonInput({
 
 // --- Skeleton.Image ---
 export interface ImageProps {
+  /** 是否展示动画效果，默认 true */
   active?: boolean;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Skeleton.Image 图片骨架占位。附带图片图标提示，用于图片资源加载前的占位。
+ */
 function SkeletonImage({
   active = true,
   className,

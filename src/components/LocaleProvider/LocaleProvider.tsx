@@ -27,6 +27,12 @@ const enMessages: LocaleMessages = {
   "tour.next": "Next",
   "tour.done": "Done",
   "form.required": "This field is required",
+  "form.min.value": "Minimum value is {min}",
+  "form.max.value": "Maximum value is {max}",
+  "form.min.length": "Minimum length is {min}",
+  "form.max.length": "Maximum length is {max}",
+  "form.pattern": "Invalid format",
+  "table.loading": "Loading...",
   "close": "Close",
 };
 
@@ -62,6 +68,19 @@ export function useLocale() {
   return useContext(LocaleContext);
 }
 
-export function t(key: string, messages: LocaleMessages): string {
-  return messages[key] ?? key;
+/**
+ * 取文案：扁平查找 key（未命中回退到 key 本身）。
+ * @param params 可选的插值参数，将模板中的 `{name}` 占位符替换为对应值。
+ *   示例：t("form.min.value", messages, { min: 3 }) → "Minimum value is 3"
+ */
+export function t(
+  key: string,
+  messages: LocaleMessages,
+  params?: Record<string, string | number>
+): string {
+  const raw = messages[key] ?? key;
+  if (!params) return raw;
+  return raw.replace(/\{(\w+)\}/g, (_, name) =>
+    params[name] !== undefined ? String(params[name]) : `{${name}}`
+  );
 }

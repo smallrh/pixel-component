@@ -1,6 +1,6 @@
 ﻿.pixel-qrcode {
   display: inline-block;
-  border: 4px solid var(--pixel-color-primary, #000);
+  border: 4px solid var(--pixel-border, #000);
   image-rendering: pixelated;
 }
 

@@ -4,8 +4,8 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
 }
 
 /* ── Mode: horizontal ── */
@@ -26,8 +26,8 @@
   top: 100%;
   left: 0;
   z-index: 920;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
   list-style: none;
   margin: 0;
   padding: 4px 0;
@@ -63,18 +63,18 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   text-align: left;
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-menu-item-btn:hover {
-  background: #e8e8e8;
+  background: var(--pixel-bg-disabled, #e8e8e8);
 }
 
 .pixel-menu-item--selected > .pixel-menu-item-btn {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-menu-item--selected > .pixel-menu-item-btn:hover {
@@ -82,7 +82,7 @@
 }
 
 .pixel-menu-item--disabled .pixel-menu-item-btn {
-  color: #ccc;
+  color: var(--pixel-text-disabled, #ccc);
   cursor: not-allowed;
 }
 
@@ -100,7 +100,7 @@
 
 .pixel-menu-arrow {
   margin-left: auto;
-  transition: transform 0.05s ease;
+  transition: transform var(--pixel-transition-fast, 0.08s steps(2));
   font-size: 10px;
 }
 
@@ -116,5 +116,5 @@
 
 .pixel-menu-item--sub.pixel-menu-item--selected > .pixel-menu-item-btn {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }

@@ -1,9 +1,9 @@
-﻿/* 鈹€鈹€ Title 鈹€鈹€ */
+/* 鈹€鈹€ Title 鈹€鈹€ */
 .pixel-title {
   font-family: var(--pixel-font-family, var(--pixel-font));
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   margin: 0;
   margin-bottom: 8px;
   image-rendering: pixelated;
@@ -19,16 +19,16 @@
 .pixel-text {
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   image-rendering: pixelated;
 }
 
 .pixel-text--secondary {
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
 }
 
 .pixel-text--disabled {
-  color: #ccc;
+  color: var(--pixel-text-disabled, #ccc);
   cursor: not-allowed;
 }
 
@@ -38,7 +38,7 @@
 
 .pixel-text--mark {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
   padding: 0 2px;
 }
 
@@ -54,8 +54,8 @@
 
 .pixel-text-code {
   font-family: var(--pixel-font-family, var(--pixel-font));
-  background: #e8e8e8;
-  border: 1px solid #999;
+  background: var(--pixel-bg-disabled, #e8e8e8);
+  border: 1px solid var(--pixel-text-disabled, #999);
   padding: 1px 4px;
   font-size: 12px;
 }
@@ -65,7 +65,7 @@
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
   line-height: 1.8;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   margin: 0;
   margin-bottom: 8px;
   image-rendering: pixelated;
@@ -75,17 +75,17 @@
 .pixel-link {
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
   image-rendering: pixelated;
 }
 
 .pixel-link:hover {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-link:active {

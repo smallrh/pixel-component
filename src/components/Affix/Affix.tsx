@@ -3,13 +3,22 @@ import clsx from "clsx";
 import "./Affix.css";
 
 export interface AffixProps {
+  /** 距离视口顶部的固定偏移量，设置后将以顶部固定模式触发 */
   offsetTop?: number;
+  /** 距离视口底部的固定偏移量，设置后将以底部固定模式触发 */
   offsetBottom?: number;
+  /** 自定义附加类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
+  /** 需要固钉包裹的内容 */
   children?: ReactNode;
 }
 
+/**
+ * Affix 固钉。
+ * 监听滚动将内容固定到视口顶部或底部，固钉时占位高度自动保持。
+ */
 export default function Affix({
   offsetTop,
   offsetBottom,

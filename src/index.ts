@@ -45,6 +45,8 @@ export { default as Dropdown } from "./components/Dropdown";
 export type { DropdownProps } from "./components/Dropdown";
 export { default as EditableTable } from "./components/EditableTable";
 export type { EditableTableProps } from "./components/EditableTable";
+export { default as ErrorBoundary } from "./components/ErrorBoundary";
+export type { ErrorBoundaryProps } from "./components/ErrorBoundary";
 export { default as Empty } from "./components/Empty";
 export type { EmptyProps } from "./components/Empty";
 export { default as Flex } from "./components/Flex";

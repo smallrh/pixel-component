@@ -18,15 +18,15 @@
   justify-content: center;
   width: 100px;
   height: 100px;
-  border: 2px dashed var(--pixel-color-primary, #000);
-  background: #fafafa;
+  border: 2px dashed var(--pixel-border, #000);
+  background: var(--pixel-bg-elevated, #fafafa);
   gap: 4px;
   font-size: 24px;
   font-weight: bold;
 }
 
 .pixel-upload-placeholder:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg, #f0f0f0);
 }
 
 .pixel-upload-list {
@@ -52,13 +52,13 @@
 }
 
 .pixel-upload-status {
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
 }
 
 .pixel-upload-remove {
   background: none;
-  border: 1px solid #999;
-  color: #666;
+  border: 1px solid var(--pixel-text-disabled, #999);
+  color: var(--pixel-text-secondary, #666);
   cursor: pointer;
   font-size: 10px;
   line-height: 1;
@@ -66,6 +66,6 @@
 }
 
 .pixel-upload-remove:hover {
-  border-color: var(--pixel-color-primary, #000);
+  border-color: var(--pixel-border, #000);
   color: var(--pixel-color-primary, #000);
 }

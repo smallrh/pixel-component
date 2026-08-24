@@ -7,14 +7,14 @@
 
 .pixel-statistic-title {
   font-size: 11px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   margin-bottom: 4px;
 }
 
 .pixel-statistic-value {
   font-size: 24px;
   font-weight: bold;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   line-height: 1.2;
 }
 
@@ -26,5 +26,5 @@
 .pixel-statistic-suffix {
   margin-left: 4px;
   font-size: 14px;
-  color: #666;
+  color: var(--pixel-text-secondary, #666);
 }

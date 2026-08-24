@@ -40,8 +40,13 @@ describe("Message singleton", () => {
       message({ content: "temp", duration: 1 });
     });
     expect(screen.getByText("temp")).toBeInTheDocument();
+    // 第一步：推进 1s 展示时间 → 触发 setClosing(true)，注册第二个淡出定时器
     act(() => {
-      vi.advanceTimersByTime(1200);
+      vi.advanceTimersByTime(1000);
+    });
+    // 第二步：推进 > 240ms closing 淡出阶段 → 真正 remove
+    act(() => {
+      vi.advanceTimersByTime(500);
     });
     expect(screen.queryByText("temp")).not.toBeInTheDocument();
     vi.useRealTimers();

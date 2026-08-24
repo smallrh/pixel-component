@@ -1,8 +1,8 @@
 .pixel-calendar {
   display: inline-block;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
   font-family: var(--pixel-font-family, var(--pixel-font));
   image-rendering: pixelated;
   user-select: none;
@@ -18,9 +18,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  border-bottom: 2px solid var(--pixel-color-primary, #000);
+  border-bottom: 2px solid var(--pixel-border, #000);
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-calendar-title {
@@ -33,9 +33,9 @@
 .pixel-calendar-nav {
   width: 24px;
   height: 24px;
-  border: 2px solid #fff;
+  border: 2px solid var(--pixel-bg, #fff);
   background: transparent;
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 10px;
   cursor: pointer;
@@ -46,8 +46,8 @@
 }
 
 .pixel-calendar-nav:hover {
-  background: var(--pixel-color-bg, #fff);
-  color: var(--pixel-color-text, #000);
+  background: var(--pixel-bg, #fff);
+  color: var(--pixel-text, #000);
 }
 
 .pixel-calendar-nav:active {
@@ -72,7 +72,7 @@
 .pixel-calendar-week-cell {
   text-align: center;
   font-size: 10px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   padding: 2px 0;
   text-transform: uppercase;
 }
@@ -80,9 +80,9 @@
 .pixel-calendar-cell {
   width: 32px;
   height: 32px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
-  color: var(--pixel-color-text, #000);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
+  color: var(--pixel-text, #000);
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   cursor: pointer;
@@ -105,13 +105,13 @@
 
 .pixel-calendar-cell--today {
   border-style: dashed;
-  border-color: var(--pixel-color-primary, #000);
+  border-color: var(--pixel-border, #000);
   font-weight: bold;
 }
 
 .pixel-calendar-cell--selected {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-calendar-cell--selected:hover {

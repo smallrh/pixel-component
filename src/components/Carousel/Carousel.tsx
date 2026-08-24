@@ -1,17 +1,28 @@
-import { type CSSProperties, useEffect, useState, type ReactNode } from "react";
+import { type CSSProperties, type KeyboardEvent, useEffect, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import "./Carousel.css";
 
 export interface CarouselProps {
+  /** 轮播项列表（每项为 ReactNode） */
   items: ReactNode[];
+  /** 是否自动轮播，默认 false */
   autoplay?: boolean;
+  /** 自动轮播切换间隔（毫秒），默认 3000 */
   interval?: number;
+  /** 是否显示指示点，默认 true */
   dots?: boolean;
+  /** 是否显示前后翻页箭头，默认 true */
   arrows?: boolean;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Carousel 轮播组件。横向滑动展示一组内容，支持自动播放、指示点、翻页箭头，
+ * 鼠标悬停时自动暂停，单页时不触发自动播放。
+ */
 export default function Carousel({
   items,
   autoplay = false,
@@ -40,6 +51,16 @@ export default function Carousel({
     <div
       className={clsx("pixel-carousel", className)}
       style={style}
+      tabIndex={0}
+      onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          next();
+        }
+      }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

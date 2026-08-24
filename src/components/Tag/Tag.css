@@ -7,28 +7,41 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border: 2px solid var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-border, #000);
   line-height: 1.4;
   image-rendering: pixelated;
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
+  color: var(--pixel-text, #000);
+  background: var(--pixel-bg, #fff);
 }
 
+/*
+ * Tag 颜色变体（保持各颜色在亮/暗模式下的可读性与像素语义）：
+ * - red/blue: 深色实底 + 浅色字（强调色）
+ * - green/yellow: 浅色底 + 深色描边（信息色）
+ */
 .pixel-tag--red {
-  background: #000 !important;
-  color: #fff !important;
+  background: var(--pixel-color-error, #000) !important;
+  color: var(--pixel-text-inverse, #fff) !important;
+  border-color: var(--pixel-color-error, #000) !important;
 }
 
 .pixel-tag--green {
-  border-color: #000;
+  background: var(--pixel-alert-bg-success, #e6f7e6) !important;
+  color: var(--pixel-text, #000) !important;
+  border-color: var(--pixel-color-success, #000) !important;
 }
 
 .pixel-tag--blue {
-  background: #000 !important;
-  color: #fff !important;
+  background: var(--pixel-color-info, #000) !important;
+  color: var(--pixel-text-inverse, #fff) !important;
+  border-color: var(--pixel-color-info, #000) !important;
 }
 
 .pixel-tag--yellow {
-  border-color: #000;
+  background: var(--pixel-alert-bg-warning, #fff7e6) !important;
+  color: var(--pixel-text, #000) !important;
+  border-color: var(--pixel-color-warning, #000) !important;
 }
 
 .pixel-tag-close {

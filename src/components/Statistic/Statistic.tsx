@@ -3,14 +3,24 @@ import clsx from "clsx";
 import "./Statistic.css";
 
 export interface StatisticProps {
+  /** 标题 */
   title?: ReactNode;
+  /** 数值内容 */
   value: ReactNode;
+  /** 数值前缀 */
   prefix?: ReactNode;
+  /** 数值后缀 */
   suffix?: ReactNode;
+  /** 自定义类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Statistic 统计数值。展示标题、数值及前后缀。
+ * 关键特性：通过 Statistic.Countdown 子组件复用展示倒计时。
+ */
 export function Statistic({
   title,
   value,
@@ -32,13 +42,21 @@ export function Statistic({
 }
 
 export interface CountdownProps {
+  /** 标题 */
   title?: ReactNode;
+  /** 倒计时目标，时间戳（ms）或 Date 对象 */
   value?: number | Date;
+  /** 数值前缀 */
   prefix?: ReactNode;
+  /** 数值后缀 */
   suffix?: ReactNode;
+  /** 时间格式（支持 DD/HH/mm/ss），默认 "HH:mm:ss" */
   format?: string;
+  /** 倒计时结束回调 */
   onFinish?: () => void;
+  /** 自定义类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
@@ -72,6 +90,7 @@ function renderTime(parts: TimeParts, format: string): string {
     .replace(/ss/g, pad(parts.seconds));
 }
 
+/** Statistic.Countdown 倒计时。按秒 tick 计算剩余时间并以 format 格式化展示。 */
 export function Countdown({
   title,
   value,

@@ -41,11 +41,17 @@ export type IconName =
   | "external";
 
 export interface IconProps {
+  /** 图标名称，对应内置像素矩阵集合 */
   name: IconName;
+  /** 尺寸，默认 "md"（sm=12px / md=16px / lg=24px） */
   size?: "sm" | "md" | "lg";
+  /** 前景色，默认 "currentColor" 跟随父级文字颜色 */
   color?: string;
+  /** 是否旋转动画，默认 false（常用于 loading） */
   spin?: boolean;
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式 */
   style?: CSSProperties;
 }
 
@@ -413,6 +419,10 @@ const GLYPHS: Record<IconName, string[]> = {
   ],
 };
 
+/**
+ * Icon 像素风图标。依据内置像素矩阵（'#' 填充 / '.' 留空）渲染 SVG rect，
+ * 支持尺寸档位、自定义前景色与旋转动画，所有图标均沿用 crispEdges 像素渲染。
+ */
 export default function Icon({
   name,
   size = "md",

@@ -10,18 +10,18 @@
 
 .pixel-datepicker-input {
   padding: 6px 10px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   cursor: text;
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   width: 140px;
   outline: none;
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
 }
 
 .pixel-datepicker-input:focus {
-  border-color: var(--pixel-color-primary, #000);
+  border-color: var(--pixel-border, #000);
 }
 
 .pixel-datepicker--invalid .pixel-datepicker-input {
@@ -30,14 +30,10 @@
 }
 
 .pixel-datepicker-popup {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 920;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
-  margin-top: 4px;
+  /* 定位由 utils/popup 的 fixed 样式提供（portal 到 body，避免被裁剪） */
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
   padding: 8px;
   width: 210px;
 }
@@ -67,7 +63,7 @@
 
 .pixel-datepicker-weekday {
   font-size: 10px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   padding: 4px 0;
 }
 
@@ -78,8 +74,8 @@
 }
 
 .pixel-datepicker-day:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
-  border-color: var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #f0f0f0);
+  border-color: var(--pixel-border, #000);
 }
 
 .pixel-datepicker--disabled {

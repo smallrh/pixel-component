@@ -4,7 +4,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
-  border: 2px solid var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-border, #000);
 }
 
 .pixel-collapse-item {
@@ -22,11 +22,11 @@
   padding: 10px 12px;
   cursor: pointer;
   user-select: none;
-  transition: background 0.05s ease;
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-collapse-header:hover {
-  background: #f5f5f5;
+  background: var(--pixel-bg-inset, #f5f5f5);
 }
 
 .pixel-collapse-arrow {

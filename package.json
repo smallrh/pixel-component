@@ -1,61 +1,93 @@
 {
-  "name": "react-ui-pixel",
-  "version": "1.0.3",
-  "type": "module",
-  "main": "./dist/pixel-ui.cjs",
-  "module": "./dist/pixel-ui.es.js",
-  "types": "./dist/types/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/pixel-ui.es.js",
-      "require": "./dist/pixel-ui.cjs"
+    "name": "react-ui-pixel",
+    "version": "1.0.4",
+    "type": "module",
+    "main": "./dist/pixel-ui.cjs",
+    "module": "./dist/pixel-ui.es.js",
+    "types": "./dist/types/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/pixel-ui.es.js",
+            "require": "./dist/pixel-ui.cjs"
+        },
+        "./style.css": "./dist/react-ui-pixel.css",
+        "./Button/style.css": "./dist/components/Button.css",
+        "./Input/style.css": "./dist/components/Input.css",
+        "./Select/style.css": "./dist/components/Select.css",
+        "./Checkbox/style.css": "./dist/components/Checkbox.css",
+        "./Table/style.css": "./dist/components/Table.css",
+        "./Form/style.css": "./dist/components/Form.css",
+        "./Modal/style.css": "./dist/components/Modal.css",
+        "./Drawer/style.css": "./dist/components/Drawer.css",
+        "./Popover/style.css": "./dist/components/Popover.css",
+        "./Dropdown/style.css": "./dist/components/Dropdown.css",
+        "./Tabs/style.css": "./dist/components/Tabs.css",
+        "./DatePicker/style.css": "./dist/components/DatePicker.css",
+        "./TimePicker/style.css": "./dist/components/TimePicker.css",
+        "./Menu/style.css": "./dist/components/Menu.css",
+        "./Card/style.css": "./dist/components/Card.css",
+        "./style/global.css": "./dist/components/global.css",
+        "./package.json": "./package.json"
     },
-    "./style.css": "./dist/react-ui-pixel.css",
-    "./package.json": "./package.json"
-  },
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "scripts": {
-    "dev": "vite",
-    "build": "npm run build:demo && npm run build:lib",
-    "build:demo": "tsc -b && vite build",
-    "build:lib": "vite build --mode lib && tsc -p tsconfig.lib.json && node scripts/strip-css-imports.mjs && node scripts/extract-fonts.mjs",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "preview": "vite preview"
-  },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "dependencies": {
-    "clsx": "^2.1.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.5",
-    "@types/node": "^24.13.2",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^10.5.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.3",
-    "globals": "^17.6.0",
-    "jsdom": "^30.0.1",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.61.0",
-    "vite": "^6.4.3",
-    "vitest": "^4.1.10"
-  }
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "npm run build:demo && npm run build:lib",
+        "build:demo": "tsc -b && vite build",
+        "build:lib": "vite build --mode lib && tsc -p tsconfig.lib.json && node scripts/strip-css-imports.mjs && node scripts/extract-fonts.mjs && node scripts/extract-component-css.mjs",
+        "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "preview": "vite preview",
+        "storybook:dev": "storybook dev -p 6006",
+        "storybook:build": "storybook build -o storybook-static"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "dependencies": {
+        "clsx": "^2.1.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@storybook/addon-essentials": "^8.6.14",
+        "@storybook/addon-interactions": "^8.6.14",
+        "@storybook/addon-links": "^8.6.18",
+        "@storybook/blocks": "^8.6.14",
+        "@storybook/react-vite": "^8.6.18",
+        "@storybook/test": "^8.6.18",
+        "@testing-library/jest-dom": "^7.0.1",
+        "@testing-library/react": "^16.3.2",
+        "@testing-library/user-event": "^14.6.5",
+        "@types/node": "^24.13.2",
+        "@types/react": "^19.2.17",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^4.7.0",
+        "eslint": "^10.5.0",
+        "eslint-plugin-react-hooks": "^7.1.1",
+        "eslint-plugin-react-refresh": "^0.5.3",
+        "globals": "^17.6.0",
+        "jsdom": "^30.0.1",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7",
+        "storybook": "^8.6.18",
+        "typescript": "~6.0.2",
+        "typescript-eslint": "^8.61.0",
+        "vite": "^6.4.3",
+        "vitest": "^4.1.10"
+    },
+    "browserslist": [
+        ">0.5%",
+        "last 2 versions",
+        "Firefox ESR",
+        "not dead",
+        "not op_mini all"
+    ]
 }

@@ -1,2 +1,6 @@
-﻿export { default, FormItem, useForm } from "./Form";
-export type { FormRule, FormInstance, FormProps } from "./Form";
+export { default } from "./Form";
+export { FormItem } from "./FormItem";
+export { useForm } from "./useForm";
+export type { FormRule } from "./types";
+export type { FormInstance } from "./useForm";
+export type { FormProps } from "./Form";

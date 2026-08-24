@@ -2,9 +2,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--pixel-color-text, #000);
+  color: inherit;
   line-height: 0;
   image-rendering: pixelated;
+  transition: color var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-icon svg {
@@ -12,14 +13,5 @@
 }
 
 .pixel-icon--spin svg {
-  animation: pixel-icon-spin 0.9s steps(8) infinite;
-}
-
-@keyframes pixel-icon-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  animation: pixel-spin 0.9s steps(8) infinite;
 }

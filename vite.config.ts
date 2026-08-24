@@ -35,8 +35,12 @@ export default defineConfig(({ mode }) => {
           // （Vite lib 模式会强制内联 CSS 中引用的资源，assetsInlineLimit 无效）
           // 不自动清空 outDir（批量删除会触发安全策略确认，由构建后脚本处理残留）
           emptyOutDir: false,
+          cssCodeSplit: true,
           sourcemap: true,
+          // 产物语法降级目标，与 package.json browserslist 对齐（ES2020 ≈ Chrome 80+/FF 80+/Safari 14+）
+          target: "es2020",
         }
       : {},
   };
 });
+

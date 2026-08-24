@@ -8,11 +8,17 @@
   letter-spacing: 0.5px;
   cursor: pointer;
   image-rendering: pixelated;
+  color: var(--pixel-text, #000);
+  /* WCAG 2.5.8 触摸目标下限：label 点击区至少 44×44px（视觉框仍 14px，透明 padding 扩展点击区） */
+  min-height: 44px;
+  padding: 15px 0;
+  box-sizing: border-box;
 }
 
 .pixel-checkbox--disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  color: var(--pixel-text-disabled, #999);
 }
 
 .pixel-checkbox-input {
@@ -28,10 +34,10 @@
   justify-content: center;
   width: 14px;
   height: 14px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   flex-shrink: 0;
-  transition: background 0.05s ease;
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-checkbox-inner--checked {
@@ -43,11 +49,17 @@
 }
 
 .pixel-checkbox-mark {
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
   font-size: 10px;
   line-height: 1;
 }
 
 .pixel-checkbox-label {
   user-select: none;
+}
+
+/* 焦点指示器：input 获焦时在可视框上显示 outline（键盘可达性） */
+.pixel-checkbox:focus-within .pixel-checkbox-inner {
+  outline: 2px solid var(--pixel-focus-ring, #000);
+  outline-offset: 2px;
 }

@@ -1,6 +1,6 @@
 .pixel-segmented {
   display: inline-flex;
-  border: 2px solid var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-border, #000);
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
@@ -31,7 +31,7 @@
   padding: 6px 14px;
   cursor: pointer;
   border-right: 1px solid #e0e0e0;
-  transition: background 0.05s ease;
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -43,12 +43,12 @@
 }
 
 .pixel-segmented-item:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg, #f0f0f0);
 }
 
 .pixel-segmented-item--active {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-segmented-item--disabled {
@@ -66,8 +66,8 @@
 }
 
 .pixel-segmented--disabled .pixel-segmented-item--active {
-  background: #999;
-  color: #fff;
+  background: var(--pixel-text-disabled, #999);
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-segmented-item-icon {

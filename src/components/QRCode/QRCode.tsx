@@ -14,7 +14,9 @@ export interface QRCodeProps {
   bgColor?: string;
   /** 纠错等级 */
   errorCorrectionLevel?: "L" | "M" | "Q" | "H";
+  /** 附加的样式类名 */
   className?: string;
+  /** 行内样式（会与渲染尺寸合并） */
   style?: CSSProperties;
 }
 

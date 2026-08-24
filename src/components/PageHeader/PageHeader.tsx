@@ -3,16 +3,28 @@ import clsx from "clsx";
 import "./PageHeader.css";
 
 export interface PageHeaderProps {
+  /** 主标题 */
   title: ReactNode;
+  /** 副标题 */
   subTitle?: ReactNode;
+  /** 面包屑区域内容 */
   breadcrumb?: ReactNode;
+  /** 右侧操作区内容 */
   extra?: ReactNode;
+  /** 底部内容 */
   footer?: ReactNode;
+  /** 返回按钮点击回调，设置后会渲染返回按钮 */
   onBack?: () => void;
+  /** 自定义附加类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
+/**
+ * PageHeader 页头。
+ * 用于页面顶部信息展示，集成面包屑、标题、副标题、返回按钮与操作区。
+ */
 export default function PageHeader({
   title,
   subTitle,

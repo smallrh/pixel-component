@@ -5,19 +5,30 @@ import "./Tour.css";
 import { useLocale, t } from "../LocaleProvider";
 
 interface TourStep {
+  /** 当前步骤标题 */
   title?: string;
+  /** 当前步骤描述 */
   description: ReactNode;
+  /** 目标元素的 CSS 选择器 */
   target?: string; // CSS selector
 }
 
 export interface TourProps {
+  /** 引导步骤列表 */
   steps: TourStep[];
+  /** 是否展示，非受控默认 false */
   open?: boolean;
+  /** 关闭/跳过回调 */
   onClose?: () => void;
+  /** 自定义类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Tour。分步引导浮层，按 steps 顺序展示步骤并支持上一步/下一步/跳过，结束后回调 onClose。
+ */
 export default function Tour({
   steps,
   open = false,

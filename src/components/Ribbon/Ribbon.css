@@ -18,22 +18,22 @@
 
 .pixel-ribbon--default {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-ribbon--red {
   background: #c00;
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-ribbon--blue {
   background: #00a;
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-ribbon--green {
   background: #0a0;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
 }
 
 .pixel-ribbon--start {

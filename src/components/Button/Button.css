@@ -5,13 +5,16 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  border: 2px solid var(--pixel-color-primary, #000);
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
-  color: var(--pixel-color-text, #000);
+  border: 2px solid var(--pixel-border, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
+  background: var(--pixel-bg, #fff);
+  color: var(--pixel-text, #000);
   padding: 8px 16px;
+  /* WCAG 2.5.8 触摸目标下限：所有尺寸至少 44×44px */
+  min-height: 44px;
+  min-width: 44px;
   border-radius: var(--pixel-border-radius, 0px);
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
   image-rendering: pixelated;
   user-select: none;
 }
@@ -20,6 +23,9 @@
 .pixel-button--sm {
   padding: 4px 8px;
   font-size: 11px;
+  /* sm 视觉更小，但仍满足 44px 触摸目标下限 */
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .pixel-button--lg {
@@ -29,52 +35,40 @@
 
 /* Variants */
 .pixel-button--primary {
-  background: var(--pixel-color-bg, #fff);
+  background: var(--pixel-bg, #fff);
   color: var(--pixel-color-primary, #000);
-  border-color: var(--pixel-color-primary, #000);
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
+  border-color: var(--pixel-border, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
 }
 
 .pixel-button--secondary {
-  background: #999;
-  color: #fff;
-  border-color: #666;
-  box-shadow: 4px 4px 0px #666;
+  background: var(--pixel-shadow-secondary, #999);
+  color: var(--pixel-text-inverse, #fff);
+  border-color: var(--pixel-shadow-secondary, #666);
+  box-shadow: 4px 4px 0px var(--pixel-shadow-secondary, #666);
 }
 
 .pixel-button--danger {
-  background: #000;
-  color: #fff;
-  border-color: #000;
-  box-shadow: 4px 4px 0px #000;
+  background: var(--pixel-color-error, #000);
+  color: var(--pixel-text-inverse, #fff);
+  border-color: var(--pixel-color-error, #000);
+  box-shadow: 4px 4px 0px var(--pixel-color-error, #000);
 }
 
-/* Hover: 描边闪烁效果 */
+/* Hover: 描边闪烁效果（复用全局统一 pixel-blink-border） */
 .pixel-button:hover {
-  animation: blink-border 0.15s steps(2) 3;
-}
-
-@keyframes blink-border {
-  0% {
-    border-color: var(--pixel-color-primary, #000);
-  }
-  50% {
-    border-color: transparent;
-  }
-  100% {
-    border-color: var(--pixel-color-primary, #000);
-  }
+  animation: pixel-blink-border 0.16s steps(2) 3;
 }
 
 /* Active: 下沉1像素 */
 .pixel-button:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px var(--pixel-color-primary, #000);
+  box-shadow: 2px 2px 0px var(--pixel-shadow, #000);
 }
 
 /* Focus */
 .pixel-button:focus-visible {
-  outline: 2px solid var(--pixel-color-primary, #000);
+  outline: 2px solid var(--pixel-focus-ring, #000);
   outline-offset: 2px;
 }
 
@@ -83,6 +77,6 @@
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
   animation: none;
 }

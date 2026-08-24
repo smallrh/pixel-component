@@ -5,14 +5,14 @@
   letter-spacing: 0.5px;
   image-rendering: pixelated;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--pixel-color-primary, #000);
+  border-bottom: 2px solid var(--pixel-border, #000);
   margin-bottom: 16px;
 }
 
 .pixel-page-header-breadcrumb {
   margin-bottom: 8px;
   font-size: 11px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
 }
 
 .pixel-page-header-row {
@@ -30,7 +30,7 @@
 
 .pixel-page-header-back {
   background: none;
-  border: 2px solid var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-border, #000);
   width: 28px;
   height: 28px;
   cursor: pointer;
@@ -49,7 +49,7 @@
 
 .pixel-page-header-subtitle {
   font-size: 12px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   margin-left: 8px;
   text-transform: none;
 }

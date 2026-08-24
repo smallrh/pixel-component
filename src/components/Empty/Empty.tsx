@@ -4,10 +4,15 @@ import "./Empty.css";
 import { useLocale, t } from "../LocaleProvider";
 
 export interface EmptyProps {
+  /** 空状态描述文本，默认取自国际化 "empty.noData" */
   description?: ReactNode;
+  /** 自定义空状态图像，默认渲染像素风 DefaultImage */
   image?: ReactNode;
+  /** 底部补充内容，常用于放置操作按钮 */
   children?: ReactNode;
+  /** 自定义附加类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
@@ -33,6 +38,10 @@ function DefaultImage() {
   );
 }
 
+/**
+ * Empty 空状态。
+ * 用于无数据或无内容时的占位展示，支持自定义图像、描述与底部操作。
+ */
 export default function Empty({
   description,
   image,

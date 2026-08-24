@@ -10,8 +10,8 @@
 
 .pixel-timepicker-input {
   padding: 6px 10px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   cursor: pointer;
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
@@ -22,8 +22,8 @@
 .pixel-timepicker-popup {
   /* 定位由 utils/popup 的 fixed 样式提供（portal 到 body） */
   z-index: 1000;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
   padding: 8px;
 }
 
@@ -55,21 +55,21 @@
 }
 
 .pixel-timepicker-opt:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg, #f0f0f0);
 }
 
 .pixel-timepicker-opt--sel {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-timepicker-ok {
   width: 100%;
   margin-top: 8px;
   padding: 4px;
-  border: 2px solid var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-border, #000);
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
   cursor: pointer;
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 11px;

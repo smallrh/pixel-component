@@ -14,18 +14,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   cursor: pointer;
   gap: 8px;
 }
 
 .pixel-treeselect-trigger:focus-visible {
-  outline: 2px solid var(--pixel-color-primary, #000);
+  outline: 2px solid var(--pixel-border, #000);
   outline-offset: 1px;
 }
 
-.pixel-treeselect-placeholder { color: #999; }
+.pixel-treeselect-placeholder { color: var(--pixel-text-disabled, #999); }
 .pixel-treeselect-arrow { font-size: 10px; }
 
 .pixel-treeselect-dropdown {
@@ -34,8 +34,8 @@
   left: 0;
   right: 0;
   z-index: 920;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
   border-top: none;
   max-height: 180px;
   overflow-y: auto;
@@ -47,15 +47,15 @@
 }
 
 .pixel-treeselect-option:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg, #f0f0f0);
 }
 
 .pixel-treeselect-option--selected {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-treeselect-option--highlighted {
-  outline: 2px dashed var(--pixel-color-primary, #000);
+  outline: 2px dashed var(--pixel-border, #000);
   outline-offset: -2px;
 }

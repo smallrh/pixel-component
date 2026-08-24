@@ -153,6 +153,7 @@ class BitBuffer {
 
 function buildDataBits(text: string, version: number): BitBuffer {
   const buffer = new BitBuffer();
+  // 依赖 TextEncoder（UTF-8 编码）。browserslist 目标浏览器（Chrome 38+/FF 19+/Safari 10.1+）原生支持，无需 polyfill。
   const bytes = new TextEncoder().encode(text);
   buffer.append(MODE_BYTE, 4);
   buffer.append(bytes.length, charCountBits(version));
@@ -348,6 +349,7 @@ export function generateQRCodeMatrix(
 
   // 1. 选择版本：最小满足数据容量的版本
   let version = 1;
+  // 依赖 TextEncoder（UTF-8 编码）。browserslist 目标浏览器（Chrome 38+/FF 19+/Safari 10.1+）原生支持，无需 polyfill。
   const bytes = new TextEncoder().encode(text);
   for (; version <= 10; version++) {
     const bits = 4 + charCountBits(version) + bytes.length * 8;

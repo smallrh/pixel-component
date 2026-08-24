@@ -12,8 +12,8 @@
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
-  color: #ccc;
-  text-shadow: 1px 1px 0 var(--pixel-color-primary, #000);
+  color: var(--pixel-text-secondary, #666);
+  text-shadow: 1px 1px 0 var(--pixel-shadow, #000);
   user-select: none;
   transition: none;
 }
@@ -49,11 +49,11 @@
 }
 
 .pixel-rate-star--disabled:hover {
-  color: #ccc;
+  color: var(--pixel-text-disabled, #ccc);
 }
 
 .pixel-rate-value {
   margin-left: 8px;
   font-size: 12px;
-  color: #666;
+  color: var(--pixel-text-secondary, #666);
 }

@@ -1,5 +1,5 @@
 .pixel-divider {
-  border-top: 2px solid var(--pixel-color-primary, #000);
+  border-top: 2px solid var(--pixel-border, #000);
   margin: 16px 0;
   image-rendering: pixelated;
 }
@@ -15,7 +15,7 @@
 .pixel-divider--with-text::after {
   content: "";
   flex: 1;
-  border-top: 2px solid var(--pixel-color-primary, #000);
+  border-top: 2px solid var(--pixel-border, #000);
 }
 
 .pixel-divider-text {
@@ -23,7 +23,7 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   padding: 0 12px;
   flex-shrink: 0;
 }

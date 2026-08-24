@@ -1,4 +1,4 @@
-﻿.pixel-tour-overlay {
+.pixel-tour-overlay {
   position: fixed;
   inset: 0;
   z-index: 1090;
@@ -10,8 +10,8 @@
 
 .pixel-tour-card {
   max-width: 360px;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
   padding: 20px;
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
@@ -22,7 +22,7 @@
 
 .pixel-tour-step {
   font-size: 10px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   margin-bottom: 8px;
 }
 

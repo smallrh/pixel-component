@@ -13,7 +13,7 @@
 
 .pixel-splitter-pane {
   overflow: hidden;
-  border: 1px solid var(--pixel-color-primary, #000);
+  border: 1px solid var(--pixel-border, #000);
 }
 
 .pixel-splitter-handle {
@@ -21,7 +21,7 @@
   background: var(--pixel-color-primary, #000);
   z-index: 1;
   cursor: col-resize;
-  transition: background 0.05s ease;
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-splitter-handle--horizontal {
@@ -35,9 +35,9 @@
 }
 
 .pixel-splitter-handle:hover {
-  background: #666;
+  background: var(--pixel-text-secondary, #666);
 }
 
 .pixel-splitter-handle:active {
-  background: #999;
+  background: var(--pixel-text-disabled, #999);
 }

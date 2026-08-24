@@ -1,0 +1,100 @@
+.pixel-user-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pixel-user-table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pixel-user-table-search {
+  width: 240px;
+}
+
+.pixel-user-table-filter {
+  width: 140px;
+}
+
+.pixel-user-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.pixel-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pixel-user-cell-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pixel-user-cell-name {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.pixel-user-cell-email {
+  font-size: 11px;
+  color: var(--pixel-text-secondary, #666);
+}
+
+.pixel-user-orders {
+  font-weight: 500;
+}
+
+.pixel-user-table-loading {
+  padding: 16px;
+}
+
+.pixel-user-table-pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 0;
+}
+
+.pixel-user-table-selection-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 4px 4px 0 var(--pixel-border, #000);
+  z-index: 100;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (max-width: 768px) {
+  .pixel-user-table-search {
+    width: 100%;
+  }
+  .pixel-user-table-filter {
+    width: 100%;
+  }
+  .pixel-user-table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

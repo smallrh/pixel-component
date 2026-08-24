@@ -1,25 +1,48 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { type CSSProperties, forwardRef, useEffect, useId, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import "./Modal.css";
 import { lockBodyScroll, unlockBodyScroll } from "../../utils/scrollLock";
+import { mergeRefs } from "../../utils/mergeRefs";
+import { useFocusTrap } from "../../utils/useFocusTrap";
 import { useLocale, t } from "../LocaleProvider";
 
 export interface ModalProps {
+  /** 是否打开 */
   open: boolean;
+  /** 关闭回调（点击遮罩/Esc/关闭按钮时触发） */
   onClose: () => void;
+  /** 标题（字符串或自定义节点） */
   title?: ReactNode;
+  /** 内容 */
   children: ReactNode;
+  /** 尺寸：sm / md（默认）/ lg */
   size?: "sm" | "md" | "lg";
+  /** 是否显示右上角关闭按钮，默认 true */
   closable?: boolean;
   /** 点击遮罩是否关闭，默认 true */
   maskClosable?: boolean;
   /** 按 Esc 是否关闭，默认 true */
   keyboard?: boolean;
+  /** 底部内容（传入 undefined 则不渲染底部） */
   footer?: ReactNode;
+  /** 自定义类名（追加到 dialog panel） */
+  className?: string;
+  /** 自定义内联样式（应用到 dialog panel） */
+  style?: CSSProperties;
 }
 
-export default function Modal({
+/**
+ * 模态对话框。通过 createPortal 渲染到 body，含 Esc 关闭、遮罩点击关闭、
+ * 焦点陷阱（Tab 循环）、打开聚焦与关闭还原焦点、body 滚动锁定（共享计数器）。
+ *
+ * ```tsx
+ * <Modal open={open} onClose={() => setOpen(false)} title="标题">
+ *   内容
+ * </Modal>
+ * ```
+ */
+const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal({
   open,
   onClose,
   title,
@@ -29,10 +52,12 @@ export default function Modal({
   maskClosable = true,
   keyboard = true,
   footer,
-}: ModalProps) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const prevActiveRef = useRef<Element | null>(null);
+  className,
+  style,
+}, ref) {
+  const panelRef = useFocusTrap(open);
   const { messages } = useLocale();
+  const titleId = useId();
 
   // Escape 关闭 + body 滚动锁定（共享计数器）
   useEffect(() => {
@@ -48,61 +73,22 @@ export default function Modal({
     };
   }, [open, onClose, keyboard]);
 
-  // 焦点陷阱：Tab 循环在弹层内 + 打开聚焦 + 关闭还原焦点
-  useEffect(() => {
-    if (!open || !panelRef.current) return;
-    const panel = panelRef.current;
-    prevActiveRef.current = document.activeElement;
-
-    const focusables = () =>
-      panel.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-      );
-    const first = () => focusables()[0];
-
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key !== "Tab") return;
-      const list = focusables();
-      if (list.length === 0) return;
-      const firstEl = list[0];
-      const lastEl = list[list.length - 1];
-      if (e.shiftKey && document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      } else if (!e.shiftKey && document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      }
-    };
-    panel.addEventListener("keydown", handleKey);
-    // 聚焦到第一个可聚焦元素
-    const t = window.setTimeout(() => first()?.focus(), 0);
-    return () => {
-      panel.removeEventListener("keydown", handleKey);
-      window.clearTimeout(t);
-      // 关闭时把焦点还原到打开前的元素（WCAG 2.4.3 焦点顺序）
-      const prev = prevActiveRef.current;
-      if (prev && document.contains(prev) && prev instanceof HTMLElement) {
-        prev.focus();
-      }
-    };
-  }, [open]);
-
   if (!open) return null;
 
   const modal = (
     <div className="pixel-modal-overlay" onClick={maskClosable ? onClose : undefined}>
       <div
-        ref={panelRef}
+        ref={mergeRefs(ref, panelRef)}
         role="dialog"
         aria-modal="true"
-        aria-label={typeof title === "string" ? title : undefined}
-        className={clsx("pixel-modal", `pixel-modal--${size}`)}
+        aria-labelledby={title ? titleId : undefined}
+        className={clsx("pixel-modal", `pixel-modal--${size}`, className)}
+        style={style}
         onClick={(e) => e.stopPropagation()}
       >
         {title && (
           <div className="pixel-modal-header">
-            <span className="pixel-modal-title">{title}</span>
+            <span id={titleId} className="pixel-modal-title">{title}</span>
             {closable && (
               <button
                 type="button"
@@ -122,4 +108,6 @@ export default function Modal({
   );
 
   return createPortal(modal, document.body);
-}
+});
+
+export default Modal;

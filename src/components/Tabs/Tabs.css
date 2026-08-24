@@ -4,12 +4,13 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   image-rendering: pixelated;
+  color: var(--pixel-text, #000);
 }
 
 /* ── Tab Bar ── */
 .pixel-tabs-bar {
   display: flex;
-  border-bottom: 2px solid var(--pixel-color-primary, #000);
+  border-bottom: 2px solid var(--pixel-border, #000);
   position: relative;
 }
 
@@ -23,37 +24,43 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   margin-bottom: -2px;
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
+  min-height: 44px;  /* WCAG 2.5.8 触摸目标 */
 }
 
 .pixel-tabs-tab:hover {
-  color: var(--pixel-color-text, #000);
-  background: var(--pixel-color-bg, #f0f0f0);
+  color: var(--pixel-text, #000);
+  background: var(--pixel-bg-hover, #f0f0f0);
 }
 
 .pixel-tabs-tab--active {
-  color: var(--pixel-color-text, #000);
-  background: var(--pixel-color-bg, #fff);
-  border-bottom: 2px solid var(--pixel-color-primary, #000);
+  color: var(--pixel-text, #000);
+  background: var(--pixel-bg, #fff);
+  border-bottom: 2px solid var(--pixel-border, #000);
   font-weight: bold;
 }
 
 .pixel-tabs-tab--disabled {
-  color: #ccc;
+  color: var(--pixel-text-placeholder, #ccc);
   cursor: not-allowed;
 }
 
 .pixel-tabs-tab--disabled:hover {
-  color: #ccc;
+  color: var(--pixel-text-placeholder, #ccc);
   background: none;
 }
+
+/* sizes */
+.pixel-tabs--sm .pixel-tabs-tab { padding: 6px 12px; font-size: 11px; min-height: 36px; }
+.pixel-tabs--lg .pixel-tabs-tab { padding: 12px 20px; font-size: 14px; min-height: 52px; }
 
 /* ── Content ── */
 .pixel-tabs-content {
   padding: 16px 0;
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 13px;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
+  animation: pixel-fade-in var(--pixel-transition-fast, 0.08s steps(2));
 }

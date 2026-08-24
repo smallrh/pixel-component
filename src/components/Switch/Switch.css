@@ -1,15 +1,26 @@
-﻿.pixel-switch {
+.pixel-switch {
   position: relative;
   display: inline-flex;
   align-items: center;
   width: 40px;
   height: 20px;
   padding: 0;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: #e8e8e8;
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg-disabled, #e8e8e8);
   cursor: pointer;
   image-rendering: pixelated;
-  transition: background 0.05s ease;
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
+}
+
+/* WCAG 2.5.8 触摸目标下限：用透明伪元素扩展点击区到 44×44px，不影响 knob 定位 */
+.pixel-switch::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
 }
 
 .pixel-switch--checked {
@@ -25,13 +36,19 @@
   display: block;
   width: 16px;
   height: 16px;
-  background: var(--pixel-color-bg, #fff);
-  border: 1px solid var(--pixel-color-primary, #000);
-  transition: transform 0.1s ease;
+  background: var(--pixel-bg, #fff);
+  border: 1px solid var(--pixel-border, #000);
+  transition: transform var(--pixel-transition-normal, 0.16s steps(4));
 }
 
 .pixel-switch--checked .pixel-switch-knob {
   transform: translateX(20px);
-  background: var(--pixel-color-bg, #fff);
-  border-color: #fff;
+  background: var(--pixel-bg, #fff);
+  border-color: var(--pixel-bg, #fff);
+}
+
+/* 焦点指示器：键盘聚焦时显示 outline（仅键盘聚焦，鼠标点击不显示） */
+.pixel-switch:focus-visible {
+  outline: 2px solid var(--pixel-border, #000);
+  outline-offset: 2px;
 }

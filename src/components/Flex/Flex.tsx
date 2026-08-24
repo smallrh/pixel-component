@@ -8,15 +8,25 @@ type FlexJustify = "flex-start" | "center" | "flex-end" | "space-between" | "spa
 type FlexAlign = "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
 
 export interface FlexProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
+  /** 是否纵向排列，默认 false（水平方向） */
   vertical?: boolean;
+  /** 换行方式，传 true 等价于 "wrap" */
   wrap?: FlexWrap | boolean;
+  /** 主轴对齐方式 */
   justify?: FlexJustify;
+  /** 交叉轴对齐方式 */
   align?: FlexAlign;
+  /** 间距，可为单值或 [行间距, 列间距] */
   gap?: FlexGap | [FlexGap, FlexGap];
+  /** flex CSS 简写属性，写入 style.flex */
   flex?: CSSProperties["flex"];
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Flex。弹性布局容器，封装 flexbox 常用能力，支持方向、对齐、换行与间距的快捷配置。
+ */
 export default function Flex({
   vertical = false,
   wrap = false,

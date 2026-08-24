@@ -25,8 +25,8 @@
   width: 10px;
   height: 10px;
   background: var(--pixel-color-primary, #000);
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 1px var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-bg, #fff);
+  box-shadow: 0 0 0 1px var(--pixel-shadow, #000);
 }
 
 .pixel-timeline-item--red .pixel-timeline-dot {

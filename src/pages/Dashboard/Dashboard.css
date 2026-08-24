@@ -1,0 +1,208 @@
+.pixel-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: var(--pixel-bg-secondary, #f5f5f5);
+}
+
+.pixel-dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pixel-dashboard-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.pixel-dashboard-tabs {
+  max-width: 100%;
+}
+
+/* ========== Overview Tab ========== */
+.pixel-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pixel-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.pixel-overview-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pixel-health-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.pixel-card-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.pixel-health-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pixel-health-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pixel-health-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pixel-text-secondary, #666);
+}
+
+.pixel-overview-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ========== Analytics Tab ========== */
+.pixel-analytics {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.pixel-chart-card {
+  min-height: 400px;
+}
+
+.pixel-chart-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.pixel-pixel-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 200px;
+  width: 100%;
+  padding: 16px;
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+}
+
+.pixel-chart-bar {
+  flex: 1;
+  background: var(--pixel-color-primary, #000);
+  position: relative;
+  transition: background 0.16s steps(4);
+}
+
+.pixel-chart-bar:hover {
+  background: var(--pixel-color-primary-hover, #333);
+}
+
+.pixel-chart-label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--pixel-text-secondary, #666);
+}
+
+.pixel-timeline-time {
+  font-size: 11px;
+  color: var(--pixel-text-secondary, #666);
+  margin-top: 2px;
+}
+
+/* ========== Orders Tab ========== */
+.pixel-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pixel-orders-table th,
+.pixel-orders-table td {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 13px;
+  border-bottom: 1px solid var(--pixel-border, #000);
+}
+
+.pixel-orders-table th {
+  font-weight: bold;
+  background: var(--pixel-bg-secondary, #f5f5f5);
+}
+
+.pixel-order-status {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  border: 1px solid var(--pixel-border, #000);
+}
+
+.pixel-order-status--completed {
+  background: var(--pixel-bg-success, #e6ffe6);
+  color: var(--pixel-color-success, #00a000);
+}
+
+.pixel-order-status--pending {
+  background: var(--pixel-bg-warning, #fff7e6);
+  color: var(--pixel-color-warning, #d48806);
+}
+
+.pixel-order-status--failed {
+  background: var(--pixel-bg-danger, #ffe6e6);
+  color: var(--pixel-color-danger, #d40000);
+}
+
+.pixel-order-status--cancelled {
+  background: var(--pixel-bg-secondary, #f5f5f5);
+  color: var(--pixel-text-secondary, #666);
+}
+
+/* ========== Logs Tab ========== */
+.pixel-logs {
+  display: block;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1200px) {
+  .pixel-overview-row {
+    grid-template-columns: 1fr;
+  }
+  .pixel-analytics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .pixel-dashboard-content {
+    padding: 16px;
+  }
+  .pixel-stat-grid {
+    grid-template-columns: 1fr;
+  }
+  .pixel-orders-table {
+    font-size: 12px;
+  }
+  .pixel-orders-table th,
+  .pixel-orders-table td {
+    padding: 6px 8px;
+  }
+}

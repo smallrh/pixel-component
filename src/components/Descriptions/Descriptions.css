@@ -10,7 +10,7 @@
   font-weight: bold;
   margin-bottom: 8px;
   padding: 4px 0;
-  border-bottom: 2px solid var(--pixel-color-primary, #000);
+  border-bottom: 2px solid var(--pixel-border, #000);
 }
 
 .pixel-descriptions-table {
@@ -20,14 +20,14 @@
 
 .pixel-descriptions-table--bordered .pixel-descriptions-label,
 .pixel-descriptions-table--bordered .pixel-descriptions-value {
-  border: 1px solid var(--pixel-color-primary, #000);
+  border: 1px solid var(--pixel-border, #000);
 }
 
 .pixel-descriptions-label {
   width: 120px;
   padding: 8px 12px;
-  background: #f5f5f5;
-  color: #666;
+  background: var(--pixel-bg-inset, #f5f5f5);
+  color: var(--pixel-text-secondary, #666);
   font-weight: bold;
   white-space: nowrap;
   vertical-align: top;
@@ -35,9 +35,9 @@
 
 .pixel-descriptions-value {
   padding: 8px 12px;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
 }
 
 .pixel-descriptions-table--bordered .pixel-descriptions-label {
-  background: #e8e8e8;
+  background: var(--pixel-bg-disabled, #e8e8e8);
 }

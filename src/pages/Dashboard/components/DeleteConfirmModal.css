@@ -1,0 +1,44 @@
+.pixel-delete-confirm-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.pixel-delete-confirm-content {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.pixel-delete-confirm-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pixel-bg-warning, #fff7e6);
+  border: 2px solid var(--pixel-border, #000);
+  color: var(--pixel-color-warning, #d48806);
+}
+
+.pixel-delete-confirm-content p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.pixel-delete-confirm-name {
+  color: var(--pixel-color-danger, #d40000);
+}
+
+.pixel-delete-confirm-warning {
+  font-size: 12px !important;
+  color: var(--pixel-text-secondary, #666);
+  margin-top: 8px;
+}
+
+.pixel-delete-confirm-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

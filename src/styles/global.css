@@ -16,28 +16,221 @@
 
 :root {
   --pixel-font: "Press Start 2P", "Fusion Pixel", monospace;
-  /* 主题 Token（默认值，可被 ConfigProvider / Theme 覆盖） */
+
+  /* ========== 主题 Token（默认值，可被 ConfigProvider / Theme 覆盖） ========== */
   --pixel-color-primary: #000;
   --pixel-color-bg: #fff;
   --pixel-color-text: #000;
   --pixel-border-radius: 0px;
   --pixel-font-family: var(--pixel-font);
   --pixel-spacing: 4px;
+
+  /* ========== 语义化颜色（亮色）：供组件按语义引用，天然支持暗色 ========== */
+  --pixel-bg: #fff;                     /* 组件默认背景（卡片/按钮/弹层/输入框） */
+  --pixel-bg-elevated: #fafafa;         /* 升高层背景（偶数行/次级面板） */
+  --pixel-bg-hover: #f0f0f0;            /* hover 态背景（行/菜单项） */
+  --pixel-bg-disabled: #e8e8e8;         /* 禁用态背景 */
+  --pixel-bg-filled: #e8e8e8;           /* filled 变体输入框 */
+  --pixel-bg-inset: #f5f5f5;            /* inset 变体卡片 */
+  --pixel-bg-even-row: #fafafa;         /* 表格偶数行 */
+  --pixel-bg-odd-row: #fff;             /* 表格奇数行 */
+  --pixel-text: #000;                   /* 主文本 */
+  --pixel-text-inverse: #fff;           /* 反色文本（主色填充背景上的字） */
+  --pixel-text-secondary: #666;         /* 描述/次级说明文字（WCAG 对比度达标） */
+  --pixel-text-placeholder: #999;       /* 占位符（允许低对比） */
+  --pixel-text-disabled: #999;          /* 禁用文字 */
+  --pixel-border: var(--pixel-color-primary, #000);  /* 描边色：默认走 primary */
+    --pixel-shadow: var(--pixel-color-primary, #000);  /* 硬阴影色：默认走 primary */
+  --pixel-shadow-secondary: #666;       /* 次按钮等次级阴影 */
+  --pixel-shadow-inset: #ccc;           /* inset 内嵌高光 */
+  --pixel-overlay: rgba(0, 0, 0, 0.6);  /* 遮罩层 */
+  --pixel-focus-ring: var(--pixel-color-primary, #000);
+  --pixel-skeleton-shimmer: rgba(255, 255, 255, 0.55); /* 骨架屏扫光亮带 */
+  --pixel-spin-overlay: rgba(255, 255, 255, 0.7);     /* Spin 加载遮罩 */
+
+  /* 语义化状态色 */
+  --pixel-color-success: #52c41a;
+  --pixel-color-warning: #faad14;
+  --pixel-color-error: #d93025;
+  --pixel-color-info: #1677ff;
+
+  /* Alert 背景色（状态专用浅底） */
+  --pixel-alert-bg-info: #e8f0fe;
+  --pixel-alert-bg-success: #e6f7e6;
+  --pixel-alert-bg-warning: #fff7e6;
+  --pixel-alert-bg-error: #ffe6e6;
+
+  /* 统一动画时间：像素风格优先 steps() 而非平滑 ease */
+  --pixel-transition-fast: 0.08s steps(2);   /* hover/focus 小反馈 */
+  --pixel-transition-normal: 0.16s steps(4); /* 标准过渡 */
+  --pixel-transition-slow: 0.24s steps(6);   /* 弹层/抽屉进入 */
+
+  /* Dashboard 额外语义变量 */
+  --pixel-bg-secondary: #f5f5f5;
+  --pixel-color-primary-hover: #333;
+  --pixel-bg-success: #e6ffe6;
+  --pixel-bg-warning: #fff7e6;
+  --pixel-bg-danger: #ffe6e6;
+}
+
+/* ========== 暗色模式：在容器加 [data-theme="dark"] 即可生效 ==========
+ * - 保持像素高对比：深底 + 淡字 + 反相硬阴影依然保留"黑色描边+投影"像素风
+ */
+[data-theme="dark"] {
+  --pixel-color-primary: #ffffff;          /* 暗色下主色反白（描边/阴影/按钮背景） */
+  --pixel-color-bg: #1a1a1a;
+  --pixel-color-text: #f0f0f0;
+
+  --pixel-bg: #1a1a1a;
+  --pixel-bg-elevated: #262626;
+  --pixel-bg-hover: #333333;
+  --pixel-bg-disabled: #2a2a2a;
+  --pixel-bg-filled: #2d2d2d;
+  --pixel-bg-inset: #202020;
+  --pixel-bg-even-row: #222222;
+  --pixel-bg-odd-row: #1a1a1a;
+  --pixel-text: #f0f0f0;
+  --pixel-text-inverse: #0a0a0a;
+  --pixel-text-secondary: #c0c0c0;
+  --pixel-text-placeholder: #777777;
+  --pixel-text-disabled: #888888;
+  --pixel-border: var(--pixel-color-primary, #ffffff);
+  --pixel-shadow: var(--pixel-color-primary, #ffffff);
+  --pixel-shadow-secondary: #888888;
+  --pixel-shadow-inset: #4a4a4a;
+  --pixel-overlay: rgba(0, 0, 0, 0.8);
+  --pixel-focus-ring: #6db3ff;
+  --pixel-skeleton-shimmer: rgba(255, 255, 255, 0.15); /* 骨架屏扫光亮带（暗色降低亮度） */
+  --pixel-spin-overlay: rgba(26, 26, 26, 0.8);        /* Spin 加载遮罩（暗色） */
+
+  --pixel-color-success: #49aa19;
+  --pixel-color-warning: #e0a020;
+  --pixel-color-error: #ff5555;
+  --pixel-color-info: #4490ff;
+
+  --pixel-alert-bg-info: #1e2a3a;
+  --pixel-alert-bg-success: #1e2e1a;
+  --pixel-alert-bg-warning: #2e2a1a;
+  --pixel-alert-bg-error: #2e1a1a;
+
+  /* Dashboard 额外语义变量（暗色） */
+  --pixel-bg-secondary: #1a1a1a;
+  --pixel-color-primary-hover: #555;
+  --pixel-bg-success: #1e2e1a;
+  --pixel-bg-warning: #2e2a1a;
+  --pixel-bg-danger: #2e1a1a;
+}
+
+/* ========== 统一像素关键帧：所有组件复用，避免重复定义 ========== */
+
+/* 描边闪烁（按钮 hover / 浮动按钮 hover） */
+@keyframes pixel-blink-border {
+  0%   { border-color: var(--pixel-border, #000); }
+  50%  { border-color: transparent; }
+  100% { border-color: var(--pixel-border, #000); }
+}
+
+/* 脉冲呼吸（加载指示 / 骨架屏 pulse / Steps 当前步骤） */
+@keyframes pixel-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+/* 闪烁（Toast/Spin 的 steps 版） */
+@keyframes pixel-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* 淡入（弹层 / Toast 进入） */
+@keyframes pixel-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 淡出（Toast 退出） */
+@keyframes pixel-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* 从右滑入（抽屉右 / Drawer 右） */
+@keyframes pixel-slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* 从左滑入（抽屉左） */
+@keyframes pixel-slide-in-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+/* 从下滑入（Toast / Modal） */
+@keyframes pixel-slide-in-up {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* 自旋（Icon loading / Spin，steps(8) 8 帧像素旋转） */
+@keyframes pixel-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+  /* 骨架屏闪烁（Skeleton pulse） */
+@keyframes pixel-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
+/* 骨架屏扫光（Skeleton shimmer，用 transform 而非 background-position 避免变量错位） */
+@keyframes pixel-skeleton-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* 仅对位图类元素启用像素渲染，避免全局污染普通图片 */
-img,
-canvas,
-video {
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+/*
+ * 注意：本库不在全局设置 body 字体/背景，也不对 img/canvas/video 施加
+ * image-rendering: pixelated —— 这些会污染宿主应用的普通图片与页面样式。
+ * 各组件已在自身 .pixel-* 根元素上声明 image-rendering（该属性可继承），
+ * 因此像素渲染效果对库内部元素依然生效，且不溢出到宿主。
+ */
+
+/* Dashboard 全局重置 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--pixel-bg-secondary, #f5f5f5);
+  color: var(--pixel-text, #000);
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
+/* Pixel font class for headings and emphasis */
+.pixel-font {
   font-family: var(--pixel-font);
-  background: #f0f0f0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pixel-bg-secondary, #e8e8e8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-border, #ccc);
+  border: 1px solid var(--pixel-border, #000);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-color-primary, #000);
 }

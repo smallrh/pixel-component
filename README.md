@@ -55,8 +55,63 @@ dist/
 ├── pixel-ui.cjs          # CommonJS 产物
 ├── react-ui-pixel.css    # 全量样式（~70KB，字体已提取为独立文件）
 ├── assets/fonts/         # 像素字体（独立 .woff2，浏览器按需加载）
+├── components/           # 按组件拆分的独立 CSS（用于按需引入）
+│   ├── global.css        # 全局 CSS 变量与字体（按需引入时必须先引入）
+│   ├── Button.css
+│   ├── Input.css
+│   ├── Select.css
+│   ├── Checkbox.css
+│   ├── Table.css
+│   ├── Form.css
+│   ├── Modal.css
+│   ├── Drawer.css
+│   ├── Popover.css
+│   ├── Dropdown.css
+│   ├── Tabs.css
+│   ├── DatePicker.css
+│   ├── TimePicker.css
+│   ├── Menu.css
+│   └── Card.css
 └── types/                # TypeScript 类型声明
 ```
+
+## 💡 按需引入 CSS
+
+如果项目对首屏 CSS 体积敏感，可以只引入实际用到的组件样式，而不必加载全量 `react-ui-pixel.css`。
+
+**使用步骤**：
+
+1. 先引入全局基础样式（包含 CSS 变量与像素字体定义，**必须引入**）：
+   ```ts
+   import "react-ui-pixel/style/global.css";
+   ```
+
+2. 再按需引入对应组件的样式，例如使用 `Button` + `Input` + `Modal`：
+   ```ts
+   import "react-ui-pixel/Button/style.css";
+   import "react-ui-pixel/Input/style.css";
+   import "react-ui-pixel/Modal/style.css";
+   ```
+
+> **注意**：`react-ui-pixel/style/global.css` 与全量 `react-ui-pixel/style.css` 二选一即可，不要同时引入。
+> 全量入口 `react-ui-pixel/style.css` 已包含 global + 所有组件样式，无需额外引入。
+
+**目前支持按需引入的组件 CSS 子路径**：
+- `react-ui-pixel/Button/style.css`
+- `react-ui-pixel/Input/style.css`
+- `react-ui-pixel/Select/style.css`
+- `react-ui-pixel/Checkbox/style.css`
+- `react-ui-pixel/Table/style.css`
+- `react-ui-pixel/Form/style.css`
+- `react-ui-pixel/Modal/style.css`
+- `react-ui-pixel/Drawer/style.css`
+- `react-ui-pixel/Popover/style.css`
+- `react-ui-pixel/Dropdown/style.css`
+- `react-ui-pixel/Tabs/style.css`
+- `react-ui-pixel/DatePicker/style.css`
+- `react-ui-pixel/TimePicker/style.css`
+- `react-ui-pixel/Menu/style.css`
+- `react-ui-pixel/Card/style.css`
 
 ## 📚 组件列表
 
@@ -172,3 +227,4 @@ dist/
 ## 📄 License
 
 MIT
+

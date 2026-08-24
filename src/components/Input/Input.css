@@ -1,15 +1,15 @@
 .pixel-input {
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 14px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
-  color: var(--pixel-color-text, #000);
+  border: 2px solid var(--pixel-border, #000);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000);
+  background: var(--pixel-bg, #fff);
+  color: var(--pixel-text, #000);
   padding: 8px 12px;
   outline: none;
   image-rendering: pixelated;
-  transition: all 0.05s ease;
-  caret-color: var(--pixel-color-text, #000);
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
+  caret-color: var(--pixel-text, #000);
 }
 
 /* Sizes */
@@ -25,27 +25,27 @@
 
 /* Variants */
 .pixel-input--filled {
-  background: #e8e8e8;
-  box-shadow: inset 2px 2px 0px #ccc, 4px 4px 0px var(--pixel-color-primary, #000);
+  background: var(--pixel-bg-filled, #e8e8e8);
+  box-shadow: inset 2px 2px 0px var(--pixel-shadow-inset, #ccc), 4px 4px 0px var(--pixel-shadow, #000);
 }
 
 /* Focus: 像素感高亮 - 背景反色 */
 .pixel-input:focus {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000), inset 0 0 0 2px #fff;
-  caret-color: #fff;
+  color: var(--pixel-text-inverse, #fff);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000), inset 0 0 0 2px var(--pixel-text-inverse, #fff);
+  caret-color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-input--filled:focus {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
-  box-shadow: 4px 4px 0px var(--pixel-color-primary, #000), inset 0 0 0 2px #fff;
+  color: var(--pixel-text-inverse, #fff);
+  box-shadow: 4px 4px 0px var(--pixel-shadow, #000), inset 0 0 0 2px var(--pixel-text-inverse, #fff);
 }
 
 /* Placeholder */
 .pixel-input::placeholder {
-  color: #999;
+  color: var(--pixel-text-placeholder, #999);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9em;
@@ -55,9 +55,9 @@
 .pixel-input:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  background: #e8e8e8;
-  color: #999;
-  box-shadow: 4px 4px 0px #999;
+  background: var(--pixel-bg-disabled, #e8e8e8);
+  color: var(--pixel-text-disabled, #999);
+  box-shadow: 4px 4px 0px var(--pixel-text-disabled, #999);
 }
 
 /* --- Password wrapper --- */
@@ -79,23 +79,24 @@
   width: 20px;
   height: 20px;
   padding: 0;
-  border: 1px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
-  color: var(--pixel-color-text, #000);
+  border: 1px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
+  color: var(--pixel-text, #000);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 0 var(--pixel-color-primary, #000);
+  box-shadow: 2px 2px 0 var(--pixel-shadow, #000);
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-input-password-toggle:hover {
-  background: #e8e8e8;
+  background: var(--pixel-bg-hover, #e8e8e8);
 }
 
 .pixel-input-password-toggle:active {
   transform: translateY(-50%) translate(1px, 1px);
-  box-shadow: 1px 1px 0 var(--pixel-color-primary, #000);
+  box-shadow: 1px 1px 0 var(--pixel-shadow, #000);
 }
 
 /* --- Search wrapper --- */
@@ -117,15 +118,16 @@
   height: 24px;
   min-width: 28px;
   padding: 0 6px;
-  border: 2px solid var(--pixel-color-primary, #000);
+  border: 2px solid var(--pixel-border, #000);
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
   cursor: pointer;
   font-family: var(--pixel-font-family, var(--pixel-font));
-  box-shadow: 2px 2px 0 var(--pixel-color-primary, #000);
+  box-shadow: 2px 2px 0 var(--pixel-shadow, #000);
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-input-search-btn:hover {
-  background: var(--pixel-color-bg, #fff);
-  color: var(--pixel-color-text, #000);
+  background: var(--pixel-bg, #fff);
+  color: var(--pixel-text, #000);
 }

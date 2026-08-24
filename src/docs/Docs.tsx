@@ -275,7 +275,7 @@ const CODE_EXAMPLES: Record<string, string> = {
 
 <Calendar
   value={new Date()}
-  onChange={(date) => console.log(date)}
+  onChange={(date) => { /* handle change */ }}
 />`,
 
   Layout: `import { Header, Sider, Content, Footer } from "react-ui-pixel";
@@ -451,7 +451,7 @@ toast.warning("Check input");`,
 
   Form: `import Form, { FormItem } from "react-ui-pixel";
 
-<Form onFinish={(v) => console.log(v)}>
+<Form onFinish={(v) => { /* submit */ }}>
   <FormItem label="Name" name="name">
     <Input />
   </FormItem>
@@ -532,7 +532,7 @@ toast.warning("Check input");`,
   title="Deploy Time"
   value={Date.now() + 600000}
   format="mm:ss"
-  onFinish={() => console.log("done")}
+  onFinish={() => { /* countdown end */ }}
 />`,
 
   Breadcrumb: `import Breadcrumb from "react-ui-pixel";
@@ -647,7 +647,7 @@ const [open, setOpen] = useState(false);
 
   ColorPicker: `import ColorPicker from "react-ui-pixel";
 
-<ColorPicker value="#000" onChange={(v) => console.log(v)} />`,
+<ColorPicker value="#000" onChange={(v) => { /* handle change */ }} />`,
 
   Segmented: `import Segmented from "react-ui-pixel";
 
@@ -693,7 +693,7 @@ const [open, setOpen] = useState(false);
       { key: "a-2", title: "Leaf B" },
     ]},
   ]}
-  onCheck={(keys) => console.log(keys)}
+  onCheck={(keys) => { /* handle check */ }}
 />`,
 
   TreeSelect: `import TreeSelect from "react-ui-pixel";
@@ -736,11 +736,11 @@ const [open, setOpen] = useState(false);
 
   DatePicker: `import DatePicker from "react-ui-pixel";
 
-<DatePicker onChange={(v) => console.log(v)} />`,
+<DatePicker onChange={(v) => { /* handle change */ }} />`,
 
   TimePicker: `import TimePicker from "react-ui-pixel";
 
-<TimePicker onChange={(v) => console.log(v)} />`,
+<TimePicker onChange={(v) => { /* handle change */ }} />`,
 
   Upload: `import Upload from "react-ui-pixel";
 
@@ -1202,7 +1202,7 @@ function ComponentPreview({ name }: { name: string }) {
     case "Form":
       return (
         <div style={{ width: "100%", maxWidth: 300 }}>
-          <Form onFinish={(v) => console.log(v)}>
+          <Form onFinish={() => { /* submit */ }}>
             <FormItem label="Name" name="name">
               <Input placeholder="Enter name" style={{ width: "100%" }} />
             </FormItem>
@@ -1423,7 +1423,7 @@ function ComponentPreview({ name }: { name: string }) {
         </Watermark>
       );
     case "ColorPicker":
-      return <ColorPicker value="#000" onChange={(v) => console.log(v)} />;
+      return <ColorPicker value="#000" onChange={() => { /* handle change */ }} />;
     case "Segmented":
       return (
         <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 8 }}>
@@ -1532,9 +1532,9 @@ function ComponentPreview({ name }: { name: string }) {
         />
       );
     case "DatePicker":
-      return <DatePicker onChange={(v) => console.log(v)} />;
+      return <DatePicker onChange={() => { /* handle change */ }} />;
     case "TimePicker":
-      return <TimePicker onChange={(v) => console.log(v)} />;
+      return <TimePicker onChange={() => { /* handle change */ }} />;
     case "Upload":
       return (
         <Upload multiple>

@@ -1,4 +1,4 @@
-﻿.pixel-breadcrumb {
+.pixel-breadcrumb {
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   text-transform: uppercase;
@@ -23,29 +23,29 @@
 }
 
 .pixel-breadcrumb-link {
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-breadcrumb-link:hover {
-  color: var(--pixel-color-text, #000);
-  background: #e8e8e8;
+  color: var(--pixel-text, #000);
+  background: var(--pixel-bg-disabled, #e8e8e8);
 }
 
 .pixel-breadcrumb-text {
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
 }
 
 .pixel-breadcrumb-text--active {
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   font-weight: bold;
 }
 
 .pixel-breadcrumb-separator {
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   padding: 0 2px;
   font-weight: bold;
 }

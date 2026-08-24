@@ -1,0 +1,24 @@
+.pixel-user-form-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.pixel-user-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pixel-user-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .pixel-user-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

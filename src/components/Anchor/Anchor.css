@@ -2,8 +2,8 @@
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   image-rendering: pixelated;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   padding: 8px 0;
 }
 
@@ -28,21 +28,21 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  transition: all 0.05s ease;
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
   cursor: pointer;
 }
 
 .pixel-anchor-link:hover {
-  background: #e8e8e8;
+  background: var(--pixel-bg-disabled, #e8e8e8);
 }
 
 .pixel-anchor-link--active {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-anchor-marker {

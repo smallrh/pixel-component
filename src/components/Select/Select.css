@@ -7,6 +7,17 @@
   letter-spacing: 0.5px;
   image-rendering: pixelated;
   min-width: 140px;
+  color: var(--pixel-text, #000);
+}
+
+.pixel-select--sm .pixel-select-trigger {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.pixel-select--lg .pixel-select-trigger {
+  padding: 10px 14px;
+  font-size: 14px;
 }
 
 .pixel-select-trigger {
@@ -14,65 +25,70 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   cursor: pointer;
   gap: 8px;
+  box-shadow: 4px 4px 0 var(--pixel-shadow, #000);
+  transition: all var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-select-trigger:hover {
-  background: #f5f5f5;
+  background: var(--pixel-bg-hover, #f5f5f5);
 }
 
 .pixel-select-placeholder {
-  color: #999;
+  color: var(--pixel-text-placeholder, #999);
 }
 
 .pixel-select-arrow {
   font-size: 10px;
+  color: var(--pixel-text-secondary, #666);
 }
 
 .pixel-select-clear {
   font-size: 10px;
   cursor: pointer;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   padding: 0 2px;
 }
 
 .pixel-select-clear:hover {
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
 }
 
 .pixel-select-dropdown {
   /* 定位由 utils/popup 的 fixed 样式提供（portal 到 body，避免被裁剪） */
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   max-height: 200px;
   overflow-y: auto;
+  box-shadow: 4px 4px 0 var(--pixel-shadow, #000);
 }
 
 .pixel-select-option {
   padding: 6px 10px;
   cursor: pointer;
-  transition: background 0.05s ease;
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
+  color: var(--pixel-text, #000);
 }
 
 .pixel-select-option:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg-hover, #f0f0f0);
 }
 
 .pixel-select-option--selected {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
 }
 
 .pixel-select-option--highlighted {
-  outline: 2px dashed var(--pixel-color-primary, #000);
+  outline: 2px dashed var(--pixel-focus-ring, #000);
   outline-offset: -2px;
 }
 
 .pixel-select-trigger:focus-visible {
-  outline: 2px solid var(--pixel-color-primary, #000);
+  outline: 2px solid var(--pixel-focus-ring, #000);
   outline-offset: 1px;
 }
 
@@ -82,4 +98,5 @@
 
 .pixel-select--disabled .pixel-select-trigger {
   cursor: not-allowed;
+  background: var(--pixel-bg-disabled, #e8e8e8);
 }

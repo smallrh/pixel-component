@@ -14,12 +14,12 @@
 
 .pixel-table--bordered .pixel-table-th,
 .pixel-table--bordered .pixel-table-td {
-  border: 1px solid var(--pixel-color-primary, #000);
+  border: 1px solid var(--pixel-border, #000);
 }
 
 .pixel-table-th {
   background: var(--pixel-color-primary, #000);
-  color: #fff;
+  color: var(--pixel-text-inverse, #fff);
   padding: 8px 12px;
   text-align: left;
   font-weight: bold;
@@ -28,28 +28,28 @@
 
 .pixel-table-td {
   padding: 8px 12px;
-  color: var(--pixel-color-text, #000);
-  background: var(--pixel-color-bg, #fff);
-  transition: background 0.05s ease;
+  color: var(--pixel-text, #000);
+  background: var(--pixel-bg-odd-row, #fff);
+  transition: background var(--pixel-transition-fast, 0.08s steps(2));
 }
 
 .pixel-table-tr:hover .pixel-table-td {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg-hover, #f0f0f0);
 }
 
 .pixel-table-tr:nth-child(even) .pixel-table-td {
-  background: #fafafa;
+  background: var(--pixel-bg-even-row, #fafafa);
 }
 
 .pixel-table-tr:nth-child(even):hover .pixel-table-td {
-  background: #e8e8e8;
+  background: var(--pixel-bg-hover, #e8e8e8);
 }
 
 .pixel-table-empty {
   text-align: center;
   padding: 24px;
-  color: #999;
-  border: 1px solid var(--pixel-color-primary, #000);
+  color: var(--pixel-text-secondary, #666);
+  border: 1px solid var(--pixel-border, #000);
   border-top: none;
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;

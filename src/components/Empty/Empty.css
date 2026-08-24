@@ -1,4 +1,4 @@
-﻿.pixel-empty {
+.pixel-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   padding: 32px 16px;
   font-family: var(--pixel-font-family, var(--pixel-font));
   image-rendering: pixelated;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
 }
 
 .pixel-empty-image-wrap {
@@ -22,7 +22,7 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   text-align: center;
 }
 

@@ -1,0 +1,49 @@
+.pixel-user-detail-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.pixel-user-detail-header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--pixel-border, #000);
+}
+
+.pixel-user-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pixel-user-detail-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pixel-user-detail-info p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--pixel-text-secondary, #666);
+}
+
+.pixel-user-detail-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pixel-user-detail-card {
+  margin-top: 16px;
+}
+
+.pixel-user-detail-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

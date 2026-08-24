@@ -11,8 +11,8 @@
 
 .pixel-transfer-panel {
   flex: 1;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   min-height: 180px;
   min-width: 160px;
 }
@@ -20,7 +20,7 @@
 .pixel-transfer-header {
   padding: 8px 12px;
   border-bottom: 1px solid #e0e0e0;
-  background: #f5f5f5;
+  background: var(--pixel-bg-inset, #f5f5f5);
   font-weight: bold;
   font-size: 11px;
 }
@@ -40,7 +40,7 @@
 }
 
 .pixel-transfer-item:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg, #f0f0f0);
 }
 
 .pixel-transfer-actions {
@@ -52,6 +52,6 @@
 .pixel-transfer-empty {
   padding: 20px 12px;
   text-align: center;
-  color: #999;
+  color: var(--pixel-text-secondary, #666);
   font-size: 11px;
 }

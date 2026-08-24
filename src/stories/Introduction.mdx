@@ -1,0 +1,77 @@
+import { Meta, Title, Subtitle, Description, Canvas } from "@storybook/blocks";
+import * as ButtonStories from "../components/Button/Button.stories";
+
+<Meta title="Welcome/Introduction" />
+
+<Title>react-ui-pixel · 像素风 React 组件库</Title>
+
+<Subtitle>一套复古像素风格、TypeScript 优先、完全无障碍的 React 19 组件库</Subtitle>
+
+## ✨ 特性一览
+
+- **🎮 像素美学** — 纯色描边 + `image-rendering: pixelated`，搭配等宽像素字体，还原 8-bit 质感
+- **⚡ React 19 & TS 6** — 泛型组件类型推断、`ref-as-prop`（无 forwardRef 类型退化）、ESM 优先
+- **♿ WCAG 2.1 AA** — 触摸目标 ≥ 44×44、ARIA APG 键盘交互、`role="alert"` 错误提示、焦点陷阱
+- **📦 按需引入** — `exports` 按组件拆包 CSS：`import "react-ui-pixel/Button/style.css"`
+- **🧩 受控 + 非受控** — 所有表单组件统一 `isControlled` 模式，`value` / `defaultValue` 双栈
+- **🛡️ ErrorBoundary** — 渲染异常优雅降级，附单元测试
+- **📚 Storybook 文档** — 每个组件独立 story，Controls 实时调参 + Autodocs 自动生成
+
+## 🚀 快速开始
+
+```bash
+npm install react-ui-pixel clsx
+```
+
+```tsx
+import { Theme, LocaleProvider, ConfigProvider, Button, Input } from "react-ui-pixel";
+import "react-ui-pixel/style.css";
+
+export default function App() {
+  return (
+    <LocaleProvider>
+      <ConfigProvider>
+        <Theme>
+          <Button variant="primary">Hello Pixel</Button>
+          <Input placeholder="Type something..." />
+        </Theme>
+      </ConfigProvider>
+    </LocaleProvider>
+  );
+}
+```
+
+## 🎨 组件一瞥
+
+下方即组件真实渲染效果，右侧 **Controls** 面板可实时修改参数。
+
+<Canvas of={ButtonStories.Primary} />
+
+完整组件列表请查阅左侧 **Components** 目录，按分类排布：
+
+| 分类 | 代表组件 |
+| --- | --- |
+| General | Button, Icon, ConfigProvider |
+| Layout | Layout, Grid (Row/Col), Flex, Space, Divider |
+| Navigation | Tabs, Menu, Breadcrumb, Anchor, Pagination |
+| Data Entry | Input, Select, Checkbox, Radio, Switch, Form, DatePicker, Rate, Slider, Upload |
+| Data Display | Table, Card, List, Tag, Badge, Avatar, Descriptions, Timeline, Typography |
+| Feedback | Alert, Modal, Drawer, Message, Notification, Progress, Spin, Result, Popconfirm |
+
+## 🔧 工程脚本
+
+| Script | 说明 |
+| --- | --- |
+| `npm run storybook:dev` | 启动 Storybook 开发服务器（端口 6006） |
+| `npm run storybook:build` | 构建静态站点到 `storybook-static/` |
+| `npm run build:lib` | 生产构建：库产物 + 类型 + 组件级 CSS 拆包 |
+| `npm run test` | Vitest 单测（104 cases） |
+| `npm run lint` | ESLint + TypeScript ESLint 检查 |
+
+## 📖 约定
+
+- 组件使用 **`ref` as prop**（非 `forwardRef`）以保留泛型类型推断
+- 全局 CSS 全部以 `.pixel-*` 前缀作用域，不污染宿主样式
+- 弹层组件必须提供 `open`（受控）+ `onOpenChange`（回调）
+- 列表行项目使用 `React.memo` + 自定义 `areEqual` 优化重渲染
+- 废弃 API 通过 `deprecated()` 工具在开发环境打印警告（如 Tooltip/Popover `visible` → `open`）

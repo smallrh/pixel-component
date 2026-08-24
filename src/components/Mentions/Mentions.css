@@ -11,8 +11,8 @@
 .pixel-mentions-textarea {
   width: 100%;
   padding: 6px 10px;
-  border: 2px solid var(--pixel-color-primary, #000);
-  background: var(--pixel-color-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  background: var(--pixel-bg, #fff);
   font-family: var(--pixel-font-family, var(--pixel-font));
   font-size: 12px;
   outline: none;
@@ -26,8 +26,8 @@
   left: 0;
   right: 0;
   z-index: 920;
-  background: var(--pixel-color-bg, #fff);
-  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
   border-top: none;
   max-height: 140px;
   overflow-y: auto;
@@ -39,5 +39,5 @@
 }
 
 .pixel-mentions-option:hover {
-  background: var(--pixel-color-bg, #f0f0f0);
+  background: var(--pixel-bg, #f0f0f0);
 }

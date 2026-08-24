@@ -1,3 +1,10 @@
+/* Demo 专属：页面背景与默认字体（库的 global.css 不再设置 body 样式，
+   以避免污染宿主应用；此处仅作用于本 demo 站点）。 */
+body {
+  font-family: var(--pixel-font);
+  background: #f0f0f0;
+}
+
 .playground {
   max-width: 800px;
   margin: 0 auto;

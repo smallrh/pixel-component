@@ -2,8 +2,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #e8e8e8;
-  border: 2px solid var(--pixel-color-primary, #000);
+  background: var(--pixel-bg-disabled, #e8e8e8);
+  border: 2px solid var(--pixel-border, #000);
   overflow: hidden;
   image-rendering: pixelated;
   flex-shrink: 0;
@@ -20,6 +20,6 @@
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
-  color: var(--pixel-color-text, #000);
+  color: var(--pixel-text, #000);
   line-height: 1;
 }

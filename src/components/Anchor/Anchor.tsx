@@ -3,19 +3,31 @@ import clsx from "clsx";
 import "./Anchor.css";
 
 interface AnchorItem {
+  /** 锚点项唯一标识 */
   key: string;
-  href: string; // element id with #
+  /** 锚点目标，形如 "#section-id" 的元素选择器 */
+  href: string;
+  /** 锚点显示文本 */
   title: ReactNode;
+  /** 子级锚点，支持嵌套层级 */
   children?: AnchorItem[];
 }
 
 export interface AnchorProps {
+  /** 锚点列表 */
   items: AnchorItem[];
+  /** 距离视口顶部的偏移量（用于高亮计算与平滑滚动定位），默认 80 */
   offsetTop?: number;
+  /** 自定义类名 */
   className?: string;
+  /** 自定义内联样式 */
   style?: CSSProperties;
 }
 
+/**
+ * Anchor 锚点。用于页面滚动时高亮当前所在章节，点击平滑跳转至对应锚点。
+ * 关键特性：监听 scroll 自动高亮；点击平滑滚动并锁定监听避免抖动；支持嵌套层级。
+ */
 export default function Anchor({
   items,
   offsetTop = 80,
