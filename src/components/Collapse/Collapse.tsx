@@ -9,13 +9,19 @@ interface CollapseItem {
   label: ReactNode;
   /** 折叠项展开内容 */
   children: ReactNode;
+  /** 是否禁用该项的展开/收起 */
+  disabled?: boolean;
 }
 
 export interface CollapseProps {
   /** 折叠项列表 */
   items: CollapseItem[];
+  /** 受控：当前展开项 key 列表 */
+  activeKey?: string[];
   /** 非受控：默认展开项 key 列表 */
   defaultActiveKey?: string[];
+  /** 展开项变化回调，参数为最新的展开 key 列表 */
+  onChange?: (keys: string[]) => void;
   /** 是否手风琴模式（同一时刻只展开一项），默认 false */
   accordion?: boolean;
   /** 自定义类名 */
@@ -73,29 +79,39 @@ const CollapsePanel = memo(function CollapsePanel({
 
 /**
  * Collapse 折叠面板。点击标题切换展开/收起，支持手风琴模式。
- * 关键特性：非受控展开态由内部管理；手风琴模式下仅保留一个展开项。
+ * 关键特性：支持受控 activeKey / 非受控 defaultActiveKey；手风琴模式下仅保留一个展开项。
  */
 const Collapse = forwardRef<HTMLDivElement, CollapseProps>(function Collapse({
   items,
+  activeKey,
   defaultActiveKey = [],
+  onChange,
   accordion = false,
   className,
   style,
 }, ref) {
-  const [activeKeys, setActiveKeys] = useState<string[]>(defaultActiveKey);
+  const isControlled = activeKey !== undefined;
+  const [internalActive, setInternalActive] = useState<string[]>(defaultActiveKey);
+  const currentActive = isControlled ? activeKey : internalActive;
 
   // useCallback 稳定引用：函数式更新读取最新 activeKeys，
   // 避免 activeKeys 进入依赖导致引用变化、memo 失效。
   const toggle = useCallback(
     (key: string) => {
-      setActiveKeys((prev) => {
+      setInternalActive((prev) => {
         if (accordion) {
-          return prev.includes(key) ? [] : [key];
+          const next = prev.includes(key) ? [] : [key];
+          if (!isControlled) setInternalActive(next);
+          onChange?.(next);
+          return next;
         }
-        return prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key];
+        const next = prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key];
+        if (!isControlled) setInternalActive(next);
+        onChange?.(next);
+        return next;
       });
     },
-    [accordion]
+    [accordion, isControlled, onChange]
   );
 
   return (
@@ -104,7 +120,7 @@ const Collapse = forwardRef<HTMLDivElement, CollapseProps>(function Collapse({
         <CollapsePanel
           key={item.key}
           item={item}
-          activeKeys={activeKeys}
+          activeKeys={currentActive}
           onToggle={toggle}
         />
       ))}

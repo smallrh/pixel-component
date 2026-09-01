@@ -19,8 +19,8 @@ export interface SelectProps<T = string> {
   value?: T;
   /** 非受控：默认选中值 */
   defaultValue?: T;
-  /** 选中变化回调，参数为最新的选中值 */
-  onChange?: (value: T) => void;
+  /** 选中变化回调，参数为最新的选中值（allowClear 时可能为 undefined） */
+  onChange?: (value: T | undefined) => void;
   /** 是否展开（受控） */
   open?: boolean;
   /** 展开状态变化回调 */
@@ -90,7 +90,7 @@ function Select<T = string>({
 
   const emit = (next: T | undefined) => {
     if (!isControlled) setInternal(next);
-    onChange?.(next as T);
+    onChange?.(next);
   };
 
   useEffect(() => {

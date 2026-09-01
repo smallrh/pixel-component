@@ -1,6 +1,7 @@
-import { type CSSProperties, type ReactNode } from "react";
+import { type CSSProperties, type ReactNode, useCallback, useState } from "react";
 import clsx from "clsx";
 import "./Layout.css";
+import { SiderContext } from "./SiderContext";
 
 export interface LayoutProps {
   /** 自定义类名 */
@@ -66,31 +67,61 @@ export interface SiderProps {
   style?: CSSProperties;
   /** 子节点 */
   children?: ReactNode;
-  /** 侧边栏宽度（px），默认 200 */
+  /** 侧边栏展开宽度（px），默认 200 */
   width?: number;
-  /** 是否收起，收起时宽度变为 48，默认 false */
+  /** 侧边栏折叠宽度（px），默认 48 */
+  collapsedWidth?: number;
+  /** 受控：是否折叠 */
   collapsed?: boolean;
+  /** 非受控：初始是否折叠 */
+  defaultCollapsed?: boolean;
+  /** 是否可折叠（保留 prop 以备未来扩展） */
+  collapsible?: boolean;
+  /** 折叠状态变化回调 */
+  onCollapse?: (collapsed: boolean) => void;
 }
 
-/** Layout.Sider 侧边栏。收起时宽度收窄为 48px 并附加收起类名。 */
+/** Layout.Sider 侧边栏。收起时宽度收窄为 collapsedWidth（默认 48px）并附加收起类名。 */
 export function Sider({
   className,
   style,
   children,
   width = 200,
-  collapsed = false,
+  collapsedWidth = 48,
+  collapsed,
+  defaultCollapsed = false,
+  collapsible = true,
+  onCollapse,
 }: SiderProps) {
+  // 受控/非受控折叠状态
+  const isControlled = collapsed !== undefined;
+  const [internalCollapsed, setInternalCollapsed] = useState(defaultCollapsed);
+  const currentCollapsed = isControlled ? collapsed : internalCollapsed;
+
+  const currentWidth = currentCollapsed ? collapsedWidth : width;
+
+  const emitCollapse = useCallback(
+    (next: boolean) => {
+      if (collapsible === false) return;
+      if (!isControlled) setInternalCollapsed(next);
+      onCollapse?.(next);
+    },
+    [collapsible, isControlled, onCollapse]
+  );
+
   return (
-    <aside
-      className={clsx(
-        "pixel-layout-sider",
-        collapsed && "pixel-layout-sider--collapsed",
-        className
-      )}
-      style={{ ...style, width: collapsed ? 48 : width }}
-    >
-      {children}
-    </aside>
+    <SiderContext.Provider value={{ collapsed: currentCollapsed }}>
+      <aside
+        className={clsx(
+          "pixel-layout-sider",
+          currentCollapsed && "pixel-layout-sider--collapsed",
+          className
+        )}
+        style={{ ...style, width: currentWidth }}
+      >
+        {children}
+      </aside>
+    </SiderContext.Provider>
   );
 }
 

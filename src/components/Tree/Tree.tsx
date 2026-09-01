@@ -16,16 +16,26 @@ export interface TreeNode {
 export interface TreeProps {
   /** 树形数据 */
   treeData: TreeNode[];
+  /** 受控：展开的节点 key */
+  expandedKeys?: string[];
+  /** 非受控：默认展开的节点 key */
+  defaultExpandedKeys?: string[];
   /** 非受控：默认展开所有可展开节点 */
   defaultExpandAll?: boolean;
+  /** 展开状态变化回调 */
+  onExpand?: (keys: string[]) => void;
+  /** 受控：选中的节点 key（单选，取数组第一项） */
+  selectedKeys?: string[];
   /** 非受控：默认选中的节点 key */
   defaultSelectedKeys?: string[];
-  /** 是否显示 checkbox（开启后支持父子联动勾选） */
-  checkable?: boolean;
-  /** 非受控：默认勾选的节点 key */
-  defaultCheckedKeys?: string[];
   /** 节点点击选中回调（selected 为 false 表示取消选中） */
   onSelect?: (key: string, selected: boolean) => void;
+  /** 是否显示 checkbox（开启后支持父子联动勾选） */
+  checkable?: boolean;
+  /** 受控：勾选的节点 key */
+  checkedKeys?: string[];
+  /** 非受控：默认勾选的节点 key */
+  defaultCheckedKeys?: string[];
   /** 勾选变化回调，返回当前所有勾选的 key（含父子联动结果） */
   onCheck?: (checkedKeys: string[]) => void;
   /** 自定义类名 */
@@ -258,27 +268,47 @@ const TreeNodeItem = memo(function TreeNodeItem({
 
 export default function Tree({
   treeData,
+  expandedKeys,
+  defaultExpandedKeys,
   defaultExpandAll = false,
+  onExpand,
+  selectedKeys,
   defaultSelectedKeys = [],
   checkable = false,
+  checkedKeys,
   defaultCheckedKeys = [],
   onSelect,
   onCheck,
   className,
   style,
 }: TreeProps) {
-  const [expandedKeys, setExpandedKeys] = useState<string[]>(
-    defaultExpandAll ? getExpandableKeys(treeData) : []
-  );
-  const [selectedKey, setSelectedKey] = useState<string | undefined>(
+  // 受控/非受控展开状态
+  const isExpandedControlled = expandedKeys !== undefined;
+  const initialExpanded = defaultExpandAll
+    ? getExpandableKeys(treeData)
+    : (defaultExpandedKeys ?? []);
+  const [internalExpanded, setInternalExpanded] = useState<string[]>(initialExpanded);
+  const currentExpanded = isExpandedControlled ? expandedKeys : internalExpanded;
+
+  // 受控/非受控选中状态（单选）
+  const isSelectedControlled = selectedKeys !== undefined;
+  const [internalSelected, setInternalSelected] = useState<string | undefined>(
     defaultSelectedKeys[0]
   );
-  const [checkedKeys, setCheckedKeys] = useState<Set<string>>(
+  const currentSelected = isSelectedControlled ? selectedKeys?.[0] : internalSelected;
+
+  // 受控/非受控勾选状态
+  const isCheckedControlled = checkedKeys !== undefined;
+  const [internalChecked, setInternalChecked] = useState<Set<string>>(
     new Set(defaultCheckedKeys)
   );
+  const currentChecked = isCheckedControlled
+    ? new Set(checkedKeys ?? [])
+    : internalChecked;
+
   // roving tabindex：当前持有 tabIndex=0 的节点 key
   const [focusedKey, setFocusedKey] = useState<string | undefined>(
-    defaultSelectedKeys[0] ?? treeData[0]?.key
+    currentSelected ?? treeData[0]?.key
   );
   const nodeRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   // 在 useEffect 中等待 render 完成、再 focus 真实 DOM，
@@ -287,24 +317,28 @@ export default function Tree({
 
   // useCallback 稳定引用：传给 memo(TreeNodeItem)，避免每次 render 新函数导致 memo 失效
   const handleToggle = useCallback((key: string) => {
-    setExpandedKeys((prev) =>
-      prev.includes(key)
+    setInternalExpanded((prev) => {
+      const next = prev.includes(key)
         ? prev.filter((k) => k !== key)
-        : [...prev, key]
-    );
-  }, []);
+        : [...prev, key];
+      if (!isExpandedControlled) setInternalExpanded(next);
+      onExpand?.(next);
+      return next;
+    });
+  }, [isExpandedControlled, onExpand]);
 
   const handleSelect = useCallback((key: string) => {
-    setSelectedKey((prev) => {
+    setInternalSelected((prev) => {
       const next = key === prev ? undefined : key;
+      if (!isSelectedControlled) setInternalSelected(next);
       onSelect?.(key, next !== undefined);
       return next;
     });
-  }, [onSelect]);
+  }, [isSelectedControlled, onSelect]);
 
   const handleCheckNode = useCallback((node: TreeNode, checked: boolean) => {
     // 函数式更新：读最新 checkedKeys，避免把它加入依赖导致引用变化
-    setCheckedKeys((prevChecked) => {
+    setInternalChecked((prevChecked) => {
       const parentMap = buildParentMap(treeData);
       const next = new Set(prevChecked);
 
@@ -334,10 +368,11 @@ export default function Tree({
         parent = parentMap.get(current.key);
       }
 
+      if (!isCheckedControlled) setInternalChecked(next);
       onCheck?.([...next]);
       return next;
     });
-  }, [treeData, onCheck]);
+  }, [treeData, isCheckedControlled, onCheck]);
 
   const registerNodeRef = useCallback((key: string, el: HTMLDivElement | null) => {
     if (el) nodeRefs.current.set(key, el);
@@ -349,7 +384,7 @@ export default function Tree({
   }, []);
 
   // 计算当前可见节点顺序，供 ArrowUp/Down/Home/End 使用
-  const visibleNodes = getVisibleNodes(treeData, expandedKeys, undefined);
+  const visibleNodes = getVisibleNodes(treeData, currentExpanded, undefined);
 
   const focusNode = useCallback((key: string) => {
     pendingFocusRef.current = key;
@@ -366,7 +401,7 @@ export default function Tree({
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent, node: TreeNode) => {
     const hasCh = hasChildren(node);
-    const expanded = expandedKeys.includes(node.key);
+    const expanded = currentExpanded.includes(node.key);
     const idx = visibleNodes.findIndex((v) => v.node.key === node.key);
 
     switch (e.key) {
@@ -418,7 +453,7 @@ export default function Tree({
       case " ": {
         if (checkable && !node.disabled) {
           e.preventDefault();
-          const { checked } = getCheckState(node, checkedKeys);
+          const { checked } = getCheckState(node, currentChecked);
           handleCheckNode(node, !checked);
         }
         break;
@@ -440,7 +475,7 @@ export default function Tree({
       default:
         break;
     }
-  }, [expandedKeys, visibleNodes, checkable, checkedKeys, handleToggle, handleSelect, handleCheckNode, focusNode]);
+  }, [currentExpanded, visibleNodes, checkable, currentChecked, handleToggle, handleSelect, handleCheckNode, focusNode]);
 
   return (
     <div className={clsx("pixel-tree", className)} style={style} role="tree">
@@ -450,11 +485,11 @@ export default function Tree({
           node={node}
           level={0}
           checkable={checkable}
-          expandedKeys={expandedKeys}
+          expandedKeys={currentExpanded}
           onToggle={handleToggle}
-          selectedKey={selectedKey}
+          selectedKey={currentSelected}
           onSelect={handleSelect}
-          checkedKeys={checkedKeys}
+          checkedKeys={currentChecked}
           onCheckNode={handleCheckNode}
           focusedKey={focusedKey}
           onFocusKey={handleFocusKey}

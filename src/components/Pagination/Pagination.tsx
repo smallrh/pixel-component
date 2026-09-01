@@ -1,10 +1,12 @@
-import { memo, useCallback, type CSSProperties, type KeyboardEvent } from "react";
+import { memo, useCallback, useState, type CSSProperties, type KeyboardEvent } from "react";
 import clsx from "clsx";
 import "./Pagination.css";
 
 export interface PaginationProps {
   /** 受控：当前页码（从 1 开始） */
-  current: number;
+  current?: number;
+  /** 非受控：初始页码（从 1 开始），默认 1 */
+  defaultCurrent?: number;
   /** 数据总条数 */
   total: number;
   /** 每页条数，默认 10 */
@@ -53,11 +55,12 @@ const PageButton = memo(function PageButton({
 });
 
 /**
- * Pagination 分页。受控分页组件，按页码范围展示页码按钮并自动插入省略号。
- * 关键特性：页码超过 7 时折叠中间页码；首末页常驻；前后翻页按钮在边界禁用。
+ * Pagination 分页。支持受控（current）与非受控（defaultCurrent）两种模式，
+ * 页码超过 7 时自动折叠中间页码；首末页常驻；前后翻页按钮在边界禁用。
  */
 export default function Pagination({
   current,
+  defaultCurrent = 1,
   total,
   pageSize = 10,
   showTotal = false,
@@ -68,17 +71,28 @@ export default function Pagination({
 }: PaginationProps) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
+  // 受控/非受控
+  const isControlled = current !== undefined;
+  const [internalPage, setInternalPage] = useState(Math.min(defaultCurrent, totalPages));
+  const currentPage = isControlled ? current : internalPage;
+
+  const emitPageChange = (page: number) => {
+    const clamped = Math.max(1, Math.min(page, totalPages));
+    if (!isControlled) setInternalPage(clamped);
+    onChange?.(clamped);
+  };
+
   const getPageNumbers = (): (number | "...")[] => {
     const pages: (number | "...")[] = [];
     if (totalPages <= 7) {
       for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
       pages.push(1);
-      if (current > 3) pages.push("...");
-      for (let i = Math.max(2, current - 1); i <= Math.min(totalPages - 1, current + 1); i++) {
+      if (currentPage > 3) pages.push("...");
+      for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
         pages.push(i);
       }
-      if (current < totalPages - 2) pages.push("...");
+      if (currentPage < totalPages - 2) pages.push("...");
       pages.push(totalPages);
     }
     return pages;
@@ -88,8 +102,10 @@ export default function Pagination({
 
   // useCallback 稳定引用：传给 memo(PageButton)，避免每次 render 新函数导致 memo 失效
   const handlePageChange = useCallback(
-    (page: number) => onChange?.(page),
-    [onChange]
+    (page: number) => emitPageChange(page),
+    // 不列入依赖：emitPageChange 内部依赖 isControlled/onChange，
+    // 但 onChange 引用稳定，isControlled 在生命周期中不变
+    []
   );
 
   return (
@@ -101,10 +117,10 @@ export default function Pagination({
       onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Home") {
           e.preventDefault();
-          if (current !== 1) onChange?.(1);
+          if (currentPage !== 1) emitPageChange(1);
         } else if (e.key === "End") {
           e.preventDefault();
-          if (current !== totalPages) onChange?.(totalPages);
+          if (currentPage !== totalPages) emitPageChange(totalPages);
         }
       }}
     >
@@ -117,8 +133,8 @@ export default function Pagination({
       <button
         type="button"
         className="pixel-pagination-btn"
-        disabled={current <= 1}
-        onClick={() => onChange?.(current - 1)}
+        disabled={currentPage <= 1}
+        onClick={() => emitPageChange(currentPage - 1)}
         aria-label="Previous page"
       >
         ◀
@@ -133,7 +149,7 @@ export default function Pagination({
           <PageButton
             key={page}
             page={page}
-            active={page === current}
+            active={page === currentPage}
             onClick={handlePageChange}
           />
         )
@@ -142,8 +158,8 @@ export default function Pagination({
       <button
         type="button"
         className="pixel-pagination-btn"
-        disabled={current >= totalPages}
-        onClick={() => onChange?.(current + 1)}
+        disabled={currentPage >= totalPages}
+        onClick={() => emitPageChange(currentPage + 1)}
         aria-label="Next page"
       >
         ▶

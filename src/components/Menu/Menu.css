@@ -118,3 +118,69 @@
   background: var(--pixel-color-primary, #000);
   color: var(--pixel-text-inverse, #fff);
 }
+
+/* ── Collapsed (icon-only) mode ── */
+.pixel-menu--collapsed .pixel-menu-item {
+  position: relative;
+}
+
+.pixel-menu--collapsed .pixel-menu-item-label {
+  display: none;
+}
+
+.pixel-menu--collapsed .pixel-menu-item-btn {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pixel-menu--collapsed .pixel-menu-item-icon {
+  margin: 0;
+}
+
+/* 折叠态子菜单改为悬浮弹出（默认隐藏，hover 父项时显示） */
+.pixel-menu--collapsed .pixel-menu-submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  z-index: 1000;
+  background: var(--pixel-bg, #fff);
+  border: 2px solid var(--pixel-border, #000);
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  min-width: 160px;
+  /* 使用 opacity + visibility 替代 display:none 以支持 transition 防闪烁 */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* 延迟显示、立即隐藏：防止鼠标从父项移到子菜单途中出现闪烁 */
+  transition: opacity 0.12s var(--pixel-transition-timing, steps(2)),
+              visibility 0s linear 0.12s;
+}
+
+/* 给父菜单项加一个不可见的缓冲区（padding-right），鼠标离开图标区域后短暂停留
+   仍能保持父项 hover 状态，为子菜单弹出提供足够时间 */
+.pixel-menu--collapsed .pixel-menu-item {
+  padding-right: 4px;
+}
+
+.pixel-menu--collapsed .pixel-menu-item:hover > .pixel-menu-submenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  /* 显示时立即取消 visibility 延迟 */
+  transition: opacity 0.12s var(--pixel-transition-timing, steps(2)),
+              visibility 0s linear 0s;
+}
+
+/* 弹出层内恢复文字显示与正常缩进 */
+.pixel-menu--collapsed .pixel-menu-submenu .pixel-menu-item-label {
+  display: inline;
+}
+
+.pixel-menu--collapsed .pixel-menu-submenu .pixel-menu-item-btn {
+  justify-content: flex-start;
+  padding-left: 16px;
+  padding-right: 16px;
+}

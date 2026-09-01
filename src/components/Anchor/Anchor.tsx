@@ -18,6 +18,8 @@ export interface AnchorProps {
   items: AnchorItem[];
   /** 距离视口顶部的偏移量（用于高亮计算与平滑滚动定位），默认 80 */
   offsetTop?: number;
+  /** 高亮锚点变化回调，参数为当前高亮项的 key */
+  onChange?: (key: string) => void;
   /** 自定义类名 */
   className?: string;
   /** 自定义内联样式 */
@@ -31,6 +33,7 @@ export interface AnchorProps {
 export default function Anchor({
   items,
   offsetTop = 80,
+  onChange,
   className,
   style,
 }: AnchorProps) {
@@ -55,8 +58,9 @@ export default function Anchor({
         { key: "", top: -Infinity }
       );
 
-      if (active.key) {
+      if (active.key && active.key !== activeKey) {
         setActiveKey(active.key);
+        onChange?.(active.key);
       }
     };
 

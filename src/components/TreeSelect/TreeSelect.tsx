@@ -17,8 +17,12 @@ export interface TreeSelectProps {
   treeData: TreeSelectNode[];
   /** 受控：当前选中值 */
   value?: string;
+  /** 非受控：初始选中值 */
+  defaultValue?: string;
   /** 选中值变化回调 */
   onChange?: (value: string) => void;
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 是否展开（受控） */
   open?: boolean;
   /** 展开状态变化回调 */
@@ -111,7 +115,9 @@ const TreeSelectOptionView = memo(function TreeSelectOptionView({
 export default function TreeSelect({
   treeData,
   value,
+  defaultValue,
   onChange,
+  disabled = false,
   open,
   onOpenChange,
   placeholder,
@@ -122,14 +128,32 @@ export default function TreeSelect({
 }: TreeSelectProps) {
   const { messages } = useLocale();
   const placeholderText = placeholder ?? t("treeselect.placeholder", messages);
-  const isControlled = open !== undefined;
+
+  // 受控/非受控展开状态
+  const isOpenControlled = open !== undefined;
   const [internalOpen, setInternalOpen] = useState(false);
-  const currentOpen = isControlled ? open : internalOpen;
+  const currentOpen = isOpenControlled ? open : internalOpen;
+
+  // 受控/非受控选中值
+  const isValueControlled = value !== undefined;
+  const [internalValue, setInternalValue] = useState<string | undefined>(defaultValue);
+  const currentValue = isValueControlled ? value : internalValue;
+
   // useCallback 稳定引用：供 close/handlePick 复用，避免闭包每次变化导致 memo 失效
   const emitOpenChange = useCallback((next: boolean) => {
-    if (!isControlled) setInternalOpen(next);
+    if (disabled) return;
+    if (!isOpenControlled) setInternalOpen(next);
     onOpenChange?.(next);
-  }, [isControlled, onOpenChange]);
+  }, [disabled, isOpenControlled, onOpenChange]);
+
+  const emitValueChange = useCallback(
+    (next: string) => {
+      if (!isValueControlled) setInternalValue(next);
+      onChange?.(next);
+    },
+    [isValueControlled, onChange]
+  );
+
   const [highlighted, setHighlighted] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const uid = useId();
@@ -149,25 +173,27 @@ export default function TreeSelect({
   // useMemo 稳定 flat 引用：使每个 FlatNode 对象引用在 treeData 不变时保持稳定，
   // 否则每次 render 重新 flatten 会令 memo(TreeSelectOptionView) 全部失效。
   const flat = useMemo(() => flattenTree(treeData), [treeData]);
-  const selected = flat.find((f) => f.value === value);
+  const selected = flat.find((f) => f.value === currentValue);
 
   const openDropdown = useCallback(() => {
-    const idx = flat.findIndex((f) => f.value === value);
+    if (disabled) return;
+    const idx = flat.findIndex((f) => f.value === currentValue);
     setHighlighted(idx >= 0 ? idx : 0);
     emitOpenChange(true);
-  }, [flat, value, emitOpenChange]);
+  }, [disabled, flat, currentValue, emitOpenChange]);
 
   // 稳定引用：onHover 直接复用 useState 的 setter（React 保证稳定）；
   // onPick 仅依赖外部 props，传给 memo(TreeSelectOptionView) 不致每次失效。
   const handlePick = useCallback(
     (nextValue: string) => {
-      onChange?.(nextValue);
+      emitValueChange(nextValue);
       emitOpenChange(false);
     },
-    [onChange, emitOpenChange]
+    [emitValueChange, emitOpenChange]
   );
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    if (disabled) return;
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
@@ -181,7 +207,7 @@ export default function TreeSelect({
       case "Enter":
         e.preventDefault();
         if (currentOpen && flat[highlighted]) {
-          onChange?.(flat[highlighted].value);
+          emitValueChange(flat[highlighted].value);
           close();
         } else if (!currentOpen) {
           openDropdown();
@@ -198,7 +224,16 @@ export default function TreeSelect({
   };
 
   return (
-    <div ref={ref} className={clsx("pixel-treeselect", `pixel-treeselect--${size}`, className)} style={style}>
+    <div
+      ref={ref}
+      className={clsx(
+        "pixel-treeselect",
+        `pixel-treeselect--${size}`,
+        disabled && "pixel-treeselect--disabled",
+        className
+      )}
+      style={style}
+    >
       <div
         className="pixel-treeselect-trigger"
         role="combobox"
@@ -207,7 +242,8 @@ export default function TreeSelect({
         aria-controls={currentOpen ? listboxId : undefined}
         aria-activedescendant={currentOpen && flat[highlighted] ? optionId(highlighted) : undefined}
         aria-label={ariaLabel}
-        tabIndex={0}
+        aria-disabled={disabled}
+        tabIndex={disabled ? -1 : 0}
         onClick={() => (currentOpen ? close() : openDropdown())}
         onKeyDown={handleKeyDown}
       >
@@ -224,7 +260,7 @@ export default function TreeSelect({
               opt={opt}
               index={i}
               optionId={optionId(i)}
-              selected={opt.value === value}
+              selected={opt.value === currentValue}
               highlighted={i === highlighted}
               onHover={setHighlighted}
               onPick={handlePick}

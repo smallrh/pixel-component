@@ -110,6 +110,28 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(function DatePick
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
 
+  /** 上一月：在 setState 回调中根据当前 month 判断是否需要同步调整 year */
+  const goPrevMonth = useCallback(() => {
+    setMonth((m) => {
+      if (m === 0) {
+        setYear((y) => y - 1);
+        return 11;
+      }
+      return m - 1;
+    });
+  }, []);
+
+  /** 下一月：在 setState 回调中根据当前 month 判断是否需要同步调整 year */
+  const goNextMonth = useCallback(() => {
+    setMonth((m) => {
+      if (m === 11) {
+        setYear((y) => y + 1);
+        return 0;
+      }
+      return m + 1;
+    });
+  }, []);
+
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDay = new Date(year, month, 1).getDay();
 
@@ -193,9 +215,9 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(function DatePick
             style={popupStyle(pos)}
           >
             <div className="pixel-datepicker-header">
-              <button type="button" onClick={() => setMonth((m) => (m === 0 ? (setYear((y) => y - 1), 11) : m - 1))} aria-label="Previous month">◀</button>
+              <button type="button" onClick={goPrevMonth} aria-label="Previous month">◀</button>
               <span>{year}-{String(month + 1).padStart(2, "0")}</span>
-              <button type="button" onClick={() => setMonth((m) => (m === 11 ? (setYear((y) => y + 1), 0) : m + 1))} aria-label="Next month">▶</button>
+              <button type="button" onClick={goNextMonth} aria-label="Next month">▶</button>
             </div>
             <div className="pixel-datepicker-grid" role="grid">
               {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (

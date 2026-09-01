@@ -1,6 +1,7 @@
-import { type CSSProperties, type ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import "./Menu.css";
+import { SiderContext } from "../Layout/SiderContext";
 
 export interface MenuItem {
   /** 菜单项唯一标识 */
@@ -24,6 +25,11 @@ export interface MenuProps {
   defaultSelectedKey?: string;
   /** 受控：当前选中项（传入后由外部管理） */
   selectedKey?: string;
+  /**
+   * 内联折叠（图标模式）。未显式传入时自动跟随外层 Sider 的 collapsed 状态。
+   * 折叠后菜单仅显示图标、隐藏文字，子菜单改为悬浮弹出。
+   */
+  inlineCollapsed?: boolean;
   /** 自定义类名 */
   className?: string;
   /** 自定义内联样式 */
@@ -74,6 +80,8 @@ interface MenuItemViewProps {
   focusedKey?: string;
   onKeyDown: (e: React.KeyboardEvent, item: MenuItem, isSub: boolean) => void;
   registerButtonRef: (key: string, el: HTMLButtonElement | null) => void;
+  /** 是否处于折叠（图标）模式 */
+  collapsed: boolean;
 }
 
 /**
@@ -88,6 +96,7 @@ function areEqual(prev: MenuItemViewProps, next: MenuItemViewProps): boolean {
   if (prev.focusedKey !== next.focusedKey) return false;
   if (prev.onKeyDown !== next.onKeyDown) return false;
   if (prev.registerButtonRef !== next.registerButtonRef) return false;
+  if (prev.collapsed !== next.collapsed) return false;
   // 是否有子菜单（决定选中态是否生效）
   const prevHasChildren = !!(prev.item.children && prev.item.children.length > 0);
   const nextHasChildren = !!(next.item.children && next.item.children.length > 0);
@@ -117,10 +126,13 @@ const MenuItemView = memo(function MenuItemView({
   focusedKey,
   onKeyDown,
   registerButtonRef,
+  collapsed,
 }: MenuItemViewProps) {
   const hasChildren = !!(item.children && item.children.length > 0);
   const isOpen = openKeys.includes(item.key);
   const isFocused = focusedKey === item.key;
+  // 折叠模式下子菜单改为悬浮弹出，因此始终渲染（由 CSS 控制显隐）
+  const showSubmenu = hasChildren && (collapsed || isOpen);
 
   return (
     <li
@@ -150,16 +162,17 @@ const MenuItemView = memo(function MenuItemView({
         aria-haspopup={hasChildren ? "menu" : undefined}
         aria-expanded={hasChildren ? isOpen : undefined}
         aria-disabled={item.disabled}
+        title={collapsed && typeof item.label === "string" ? item.label : undefined}
       >
         {item.icon && <span className="pixel-menu-item-icon">{item.icon}</span>}
         <span className="pixel-menu-item-label">{item.label}</span>
-        {hasChildren && (
+        {hasChildren && !collapsed && (
           <span className={clsx("pixel-menu-arrow", isOpen && "pixel-menu-arrow--open")}>
             ▸
           </span>
         )}
       </button>
-      {hasChildren && isOpen && (
+      {showSubmenu && (
         <ul className="pixel-menu-submenu" role="menu">
           {item.children!.map((child) => (
             <MenuItemView
@@ -173,6 +186,7 @@ const MenuItemView = memo(function MenuItemView({
               focusedKey={focusedKey}
               onKeyDown={onKeyDown}
               registerButtonRef={registerButtonRef}
+              collapsed={collapsed}
             />
           ))}
         </ul>
@@ -196,6 +210,7 @@ export default function Menu({
   mode = "horizontal",
   defaultSelectedKey,
   selectedKey: selectedKeyProp,
+  inlineCollapsed,
   className,
   style,
   onSelect,
@@ -203,6 +218,11 @@ export default function Menu({
   const [innerSelectedKey, setInnerSelectedKey] = useState(defaultSelectedKey ?? "");
   const isControlled = selectedKeyProp !== undefined;
   const selectedKey = isControlled ? (selectedKeyProp as string) : innerSelectedKey;
+  // 自动跟随外层 Sider 的折叠状态；显式传入 inlineCollapsed 时以它为准
+  const sider = useContext(SiderContext);
+  const collapsed = inlineCollapsed ?? sider?.collapsed ?? false;
+  // 折叠态下菜单强制为垂直内联模式
+  const effectiveMode = collapsed ? "vertical" : mode;
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   // roving tabindex：当前持有 tabIndex=0 的菜单项 key
   const [focusedKey, setFocusedKey] = useState<string>(
@@ -271,7 +291,7 @@ export default function Menu({
     const info = menuIndex.byKey.get(item.key);
     if (!info) return;
     const hasChildren = !!(item.children && item.children.length > 0);
-    const isHorizontalTopLevel = mode === "horizontal" && !isSub;
+    const isHorizontalTopLevel = effectiveMode === "horizontal" && !isSub;
 
     switch (e.key) {
       case "ArrowRight": {
@@ -347,14 +367,19 @@ export default function Menu({
       default:
         break;
     }
-  }, [menuIndex, mode, openSubmenu, closeSubmenu, focusItem, moveWithinSiblings]);
+  }, [menuIndex, effectiveMode, openSubmenu, closeSubmenu, focusItem, moveWithinSiblings]);
 
   return (
     <nav
-      className={clsx("pixel-menu", `pixel-menu--${mode}`, className)}
+      className={clsx(
+        "pixel-menu",
+        `pixel-menu--${effectiveMode}`,
+        collapsed && "pixel-menu--collapsed",
+        className
+      )}
       style={style}
     >
-      <ul className="pixel-menu-list" role={mode === "horizontal" ? "menubar" : "menu"}>
+      <ul className="pixel-menu-list" role={effectiveMode === "horizontal" ? "menubar" : "menu"}>
         {items.map((item) => (
           <MenuItemView
             key={item.key}
@@ -367,6 +392,7 @@ export default function Menu({
             focusedKey={focusedKey}
             onKeyDown={handleKeyDown}
             registerButtonRef={registerButtonRef}
+            collapsed={collapsed}
           />
         ))}
       </ul>

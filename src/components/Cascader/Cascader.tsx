@@ -17,8 +17,12 @@ export interface CascaderProps {
   options: CascaderOption[];
   /** 当前选中路径（受控，由每列选中 value 组成的数组） */
   value?: string[];
+  /** 非受控：初始选中路径 */
+  defaultValue?: string[];
   /** 选中叶子节点时回调，回传 value 路径与 label 路径 */
   onChange?: (value: string[], labels: string[]) => void;
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 是否展开（受控） */
   open?: boolean;
   /** 展开状态变化回调 */
@@ -113,12 +117,14 @@ const CascaderOptionView = memo(function CascaderOptionView({
 
 /**
  * Cascader 级联选择器。点击触发器展开多列下拉，逐列选中直至叶子节点提交路径，
- * 支持受控 value、外部点击关闭、占位文案国际化。
+ * 支持受控/非受控 value、外部点击关闭、占位文案国际化。
  */
 export default function Cascader({
   options,
   value,
+  defaultValue,
   onChange,
+  disabled = false,
   open,
   onOpenChange,
   placeholder,
@@ -129,18 +135,46 @@ export default function Cascader({
 }: CascaderProps) {
   const { messages } = useLocale();
   const placeholderText = placeholder ?? t("cascader.placeholder", messages);
-  const isControlled = open !== undefined;
+
+  // 受控/非受控展开状态
+  const isOpenControlled = open !== undefined;
   const [internalOpen, setInternalOpen] = useState(false);
-  const currentOpen = isControlled ? open : internalOpen;
+  const currentOpen = isOpenControlled ? open : internalOpen;
+
+  // 受控/非受控选中路径
+  const isValueControlled = value !== undefined;
+  const [internalPath, setInternalPath] = useState<string[]>(defaultValue ?? []);
+  const currentValue = isValueControlled ? value : internalPath;
+
   // useCallback 稳定引用：供 useEffect 与 selectNode 复用，避免闭包每次变化导致 memo 失效
   const emitOpenChange = useCallback((next: boolean) => {
-    if (!isControlled) setInternalOpen(next);
+    if (disabled) return;
+    if (!isOpenControlled) setInternalOpen(next);
     onOpenChange?.(next);
-  }, [isControlled, onOpenChange]);
-  const [path, setPath] = useState<string[]>(value ?? []); // 当前展开路径（每列选中项）
+  }, [disabled, isOpenControlled, onOpenChange]);
+
+  const emitValueChange = useCallback(
+    (nextPath: string[], nextLabels: string[]) => {
+      if (!isValueControlled) setInternalPath(nextPath);
+      onChange?.(nextPath, nextLabels);
+    },
+    [isValueControlled, onChange]
+  );
+
+  // 内部展开路径（与 currentValue 同步，用于构建多列）
+  const [path, setPath] = useState<string[]>(currentValue);
+
+  // 外部受控 value 变化时同步内部路径（渲染期间调整，React 官方推荐模式）
+  const [prevValue, setPrevValue] = useState(currentValue);
+  if (currentValue !== prevValue) {
+    setPrevValue(currentValue);
+    setPath(currentValue);
+  }
+
   // 用 ref 持有最新 path，使 selectNode 不必把 path 列入依赖，从而保持引用稳定
   const pathRef = useRef(path);
   pathRef.current = path;
+
   const ref = useRef<HTMLDivElement>(null);
   // 键盘焦点单元格 {col, row}；为 null 表示尚未通过键盘导航定位
   const [activeCell, setActiveCell] = useState<{ col: number; row: number } | null>(null);
@@ -162,14 +196,6 @@ export default function Cascader({
     if (!currentOpen) setActiveCell(null);
   }, [currentOpen]);
 
-  // 外部受控 value 变化时同步内部路径（渲染期间调整，React 官方推荐模式）
-  // 注意：value 通常由父组件受控传入；此处用引用比较，undefined 稳定为 []
-  const [prevValue, setPrevValue] = useState(value);
-  if (value !== prevValue) {
-    setPrevValue(value);
-    setPath(value ?? []);
-  }
-
   const columns = buildColumns(options, path);
 
   // aria-activedescendant 关联：键盘焦点优先；无键盘焦点时回退到当前展开路径最深一列的选中项
@@ -188,6 +214,7 @@ export default function Cascader({
   // selectNode 引用稳定（仅依赖外部 props），传给 memo(CascaderOptionView) 不致每次失效
   const selectNode = useCallback(
     (node: CascaderOption, columnIndex: number) => {
+      if (disabled) return;
       const nextPath = [...pathRef.current.slice(0, columnIndex), node.value];
       if (node.children && node.children.length > 0) {
         // 有子级：仅展开下一列，不提交
@@ -195,18 +222,19 @@ export default function Cascader({
       } else {
         // 叶子节点：提交完整路径
         const fullLabels = collectLabels(options, nextPath);
-        onChange?.(nextPath, fullLabels);
+        emitValueChange(nextPath, fullLabels);
         setPath(nextPath);
         emitOpenChange(false);
       }
     },
-    [options, onChange, emitOpenChange]
+    [disabled, options, emitValueChange, emitOpenChange]
   );
 
   // 键盘交互（ARIA APG combobox 模式）：
   // ArrowDown/Up 打开或当前列内移动；ArrowRight 展开子级并进入下一列；ArrowLeft 回到上一列；
   // Enter 选择当前高亮项；Escape 关闭下拉。
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (disabled) return;
     switch (e.key) {
       case "ArrowDown": {
         e.preventDefault();
@@ -275,21 +303,31 @@ export default function Cascader({
   };
 
   return (
-    <div ref={ref} className={clsx("pixel-cascader", `pixel-cascader--${size}`, className)} style={style}>
+    <div
+      ref={ref}
+      className={clsx(
+        "pixel-cascader",
+        `pixel-cascader--${size}`,
+        disabled && "pixel-cascader--disabled",
+        className
+      )}
+      style={style}
+    >
       <div
         className="pixel-cascader-trigger"
         onClick={() => emitOpenChange(!currentOpen)}
         onKeyDown={handleKeyDown}
-        tabIndex={0}
+        tabIndex={disabled ? -1 : 0}
         role="combobox"
         aria-expanded={currentOpen}
         aria-haspopup="listbox"
         aria-controls={currentOpen ? listboxId : undefined}
         aria-activedescendant={activeOptionId}
         aria-label={ariaLabel}
+        aria-disabled={disabled}
       >
-        <span className={clsx((value?.length ?? 0) === 0 && "pixel-cascader-placeholder")}>
-          {value && value.length > 0 ? collectLabels(options, value).join(" / ") : placeholderText}
+        <span className={clsx(currentValue.length === 0 && "pixel-cascader-placeholder")}>
+          {currentValue.length > 0 ? collectLabels(options, currentValue).join(" / ") : placeholderText}
         </span>
         <span className="pixel-cascader-arrow">{currentOpen ? "▴" : "▾"}</span>
       </div>

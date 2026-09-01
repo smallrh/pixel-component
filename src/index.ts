@@ -71,7 +71,9 @@ export type {
 export { default as InputNumber } from "./components/InputNumber";
 export type { InputNumberProps } from "./components/InputNumber";
 export { default as Layout, Header, Sider, Content, Footer } from "./components/Layout";
+export { useSider, SiderContext } from "./components/Layout/SiderContext";
 export type { LayoutProps, SiderProps } from "./components/Layout";
+export type { SiderContextValue } from "./components/Layout/SiderContext";
 export { default as List } from "./components/List";
 export type { ListProps, ItemProps, ItemMetaProps } from "./components/List";
 export { default as LocaleProvider, useLocale, t } from "./components/LocaleProvider";

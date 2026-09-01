@@ -38,7 +38,7 @@
 }
 
 .pixel-layout-sider--collapsed {
-  width: 48px !important;
+  /* 宽度由 inline style 的 width 属性动态控制（collapsedWidth），此处仅附加状态类名，无固定值 */
 }
 
 /* 鈹€鈹€ Content 鈹€鈹€ */

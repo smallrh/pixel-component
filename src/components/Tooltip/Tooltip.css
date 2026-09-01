@@ -1,7 +1,6 @@
 .pixel-tooltip {
   position: relative;
   display: inline-flex;
-  cursor: pointer;
   image-rendering: pixelated;
 }
 

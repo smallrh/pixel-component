@@ -57,3 +57,16 @@
   outline: 2px solid var(--pixel-border, #000);
   outline-offset: 2px;
 }
+
+.pixel-radio--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pixel-radio--disabled .pixel-radio-inner {
+  background: var(--pixel-bg-disabled, #f5f5f5);
+}
+
+.pixel-radio--disabled .pixel-radio-dot {
+  background: var(--pixel-color-disabled, #999);
+}

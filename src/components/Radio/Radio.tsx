@@ -5,6 +5,8 @@ import "./Radio.css";
 interface RadioOption {
   label: string;
   value: string;
+  /** 单项禁用 */
+  disabled?: boolean;
 }
 
 export interface RadioProps {
@@ -15,6 +17,8 @@ export interface RadioProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   direction?: "horizontal" | "vertical";
+  /** 整体禁用（单项 disabled 优先级更高） */
+  disabled?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -25,6 +29,7 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>(function Radio({
   defaultValue,
   onChange,
   direction = "horizontal",
+  disabled = false,
   className,
   style,
 }, ref) {
@@ -57,22 +62,31 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>(function Radio({
         className
       )}
       style={style}
+      role="radiogroup"
     >
-      {options.map((opt) => (
-        <label key={opt.value} className="pixel-radio">
-          <input
-            type="radio"
-            value={opt.value}
-            className="pixel-radio-input"
-            checked={current === opt.value}
-            onChange={handleChange}
-          />
-          <span className="pixel-radio-inner">
-            {current === opt.value && <span className="pixel-radio-dot" />}
-          </span>
-          <span className="pixel-radio-label">{opt.label}</span>
-        </label>
-      ))}
+      {options.map((opt) => {
+        const itemDisabled = disabled || opt.disabled;
+        return (
+          <label
+            key={opt.value}
+            className={clsx("pixel-radio", itemDisabled && "pixel-radio--disabled")}
+          >
+            <input
+              type="radio"
+              value={opt.value}
+              className="pixel-radio-input"
+              checked={current === opt.value}
+              disabled={itemDisabled}
+              aria-disabled={itemDisabled}
+              onChange={handleChange}
+            />
+            <span className="pixel-radio-inner">
+              {current === opt.value && !itemDisabled && <span className="pixel-radio-dot" />}
+            </span>
+            <span className="pixel-radio-label">{opt.label}</span>
+          </label>
+        );
+      })}
     </div>
   );
 });

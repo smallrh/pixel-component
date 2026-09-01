@@ -9,11 +9,9 @@
 }
 
 /* ── Menu ── */
+/* 弹层由 popup.ts 以 fixed 定位渲染到 body，此处仅声明外观；
+   z-index 由 popupStyle(pos, DROPDOWN_Z_INDEX) 统一注入 */
 .pixel-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 930;
   min-width: 160px;
   margin: 4px 0 0 0;
   padding: 4px 0;
